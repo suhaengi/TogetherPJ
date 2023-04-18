@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.together.togetherpj.dao.SampleDAO">
+
+    <insert id="insert" parameterType="com.together.togetherpj.dto.SampleDTO">
+        insert into sample (name, id) values ('name', 'id');
+    </insert>
+
+
+</mapper>
