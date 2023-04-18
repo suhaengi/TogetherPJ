@@ -5,6 +5,7 @@ import com.together.togetherpj.dto.SampleDTO;
 import com.together.togetherpj.service.SampleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,17 +16,13 @@ public class SampleController {
     @Autowired
     SampleService sampleService;
 
+    @GetMapping("/")
+    public String registerget(){
+        return "hello";
+    }
+
     @PostMapping("/register")
-    public String registerPost(HttpServletRequest httpServletRequest){
-
-        SampleDTO sampleDTO1 = SampleDTO.builder()
-                .name(httpServletRequest.getParameter("name"))
-                .id(httpServletRequest.getParameter("id"))
-                .build();
-
-        System.out.println(httpServletRequest.getParameter("name"));
-        System.out.println(httpServletRequest.getParameter("id"));
-        sampleService.register(sampleDTO1);
-        return "";
+    public void registerPost(SampleDTO dto){
+        sampleService.register(dto);
     }
 }
