@@ -5,7 +5,7 @@
 <mapper namespace="com.together.togetherpj.dao.SampleDAO">
 
     <insert id="insert" parameterType="com.together.togetherpj.dto.SampleDTO">
-        insert into sample (name, id) values ('name', 'id');
+        insert into sample (name, id) values (#{name} , #{id});
     </insert>
 
 
