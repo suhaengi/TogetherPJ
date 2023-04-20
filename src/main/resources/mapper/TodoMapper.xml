@@ -8,5 +8,7 @@
         insert into sample (name, id) values (#{name} , #{id});
     </insert>
 
-
+    <select id="getList" resultType="com.together.togetherpj.dto.SampleDTO">
+        SELECT * FROM SAMPLE;
+    </select>
 </mapper>
