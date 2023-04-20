@@ -1,0 +1,98 @@
+* {
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.star {
+  position: relative;
+  font-size: 2rem;
+  color: #ddd;
+}
+
+.star input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.star span {
+  width: 0;
+  position: absolute;
+  left: 0;
+  color: rgb(255, 221, 0);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#sub {
+  color: rgb(255, 255, 255);
+  background-color: rgb(13, 48, 247);
+  border-radius: 5px;
+  width: 80px;
+  height: 40px;
+  float: left;
+  margin-right: 20px;
+}
+
+.filebox .upload-name {
+  display: inline-block;
+  height: 40px;
+  padding: 0 10px;
+  vertical-align: middle;
+  border: 1px solid #0c0c0c;
+  width: 25%;
+  color: #040404;
+  border-radius: 5px;
+}
+
+.filebox label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: black;
+  vertical-align: middle;
+  background-color: #f7f7f7;
+  cursor: pointer;
+  height: 40px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+.filebox input[type="file"] {
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+.filebox {
+  padding-bottom: 10px;
+}
+
+#form1 {
+  border-radius: 5px;
+}
+
+#cancel {
+  color: rgb(255, 255, 255);
+  background-color: rgb(13, 48, 247);
+  border-radius: 5px;
+  width: 80px;
+  height: 40px;
+  float: left;
+  margin-right: 20px;
+}
+
+.container1 {
+  padding-left: 9%;
+}
+
+#choose {
+  color: rgb(0, 0, 0);
+  background-color: #f7f7f7;
+  border-radius: 5px;
+  width: 80px;
+  height: 30px;
+  border: 0px;
+}
