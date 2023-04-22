@@ -8,18 +8,18 @@
 
 <body>
     <!-- Bootstrap core JavaScript-->
-    <script defer src="/assets/sb/vendor/jquery/jquery.min.js"></script>
-    <script defer src="/assets/sb/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script defer src="../static/assets/sb/vendor/jquery/jquery.min.js"></script>
+    <script defer src="../static/assets/sb/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script defer src="/assets/sb/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script defer src="../static/assets/sb/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script defer src="/assets/sb/js/sb-admin-2.min.js"></script>
+    <script defer src="../static/assets/sb/js/sb-admin-2.min.js"></script>
 
   <!-- ======= Hero Section ======= -->
   <!-- <section id="hero" class="hero d-flex align-items-center"> -->
-  <section style="width:100%;min-height:50vh;background-color:var(--color-secondary);background-image:url('/assets/img/hero-bg.png');background-size:cover;background-position:center;position:relative;padding:120px 0 60px 0;"
+  <section style="width:100%;min-height:50vh;background-color:var(--color-secondary);background-image:url('../static/assets/img/hero-bg.png');background-size:cover;background-position:center;position:relative;padding:120px 0 60px 0;"
   id="hero" class="d-flex align-items-center">
     <!-- <div class="container">
       <div class="row gy-4 d-flex justify-content-between">
@@ -78,15 +78,15 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="/forgot-password.html">Forgot Password?</a>
+                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="/register.html">Create an Account!</a>
+                                        <a class="small" href="register.html">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 order-1 order-lg-2 hero-img">
-                                <img src="/assets/sb/img/login.svg" class="img-fluid mb-3 mb-lg-0" alt="">
+                                <img th:src="@{/assets/sb/img/login.svg}" src="../static/assets/sb/img/login.svg" class="img-fluid mb-3 mb-lg-0" alt="">
                             </div>
                         </div>
                     </div>
