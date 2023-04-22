@@ -1,0 +1,31 @@
+<!-- ======= Header ======= -->
+<header id="header" class="header d-flex align-items-center fixed-top">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+
+        <a href="mainpage.html" th:href="@{/main}" class="logo d-flex align-items-center">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="/assets/img/logo.png" alt=""> -->
+            <h1>Together</h1>
+        </a>
+
+        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">동행 게시판</a></li>
+                <li class="dropdown"><a href="#"><span>커뮤니티 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                    <ul>
+                        <li><a href="#">Q&A</a></li>
+                        <li><a href="#">정보 공유</a></li>
+                        <li><a href="#">자유 게시판</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">마이 페이지</a></li>
+                <li><a class="get-a-quote" th:href="@{/login}" href="get-a-quote.html">로그인</a></li>
+            </ul>
+        </nav><!-- .navbar -->
+
+    </div>
+</header><!-- End Header -->
+<!-- End Header -->

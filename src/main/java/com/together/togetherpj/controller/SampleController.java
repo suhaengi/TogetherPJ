@@ -20,14 +20,9 @@ public class SampleController {
     @Autowired
     SampleService sampleService;
 
-    @GetMapping({"/", "/index"})
+    @GetMapping({"/", "/main"})
     public String registerget(){
-        return "index";
-    }
-
-    @GetMapping({"/index2"})
-    public String registerget2(){
-        return "index2";
+        return "mainpage";
     }
 
     @GetMapping("/login")
