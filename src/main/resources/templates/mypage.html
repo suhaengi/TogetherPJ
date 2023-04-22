@@ -7,100 +7,6 @@
     <!-- Viewport-->
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- Page loading styles-->
-    <style>
-      .page-loading {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        -webkit-transition: all 0.4s 0.2s ease-in-out;
-        transition: all 0.4s 0.2s ease-in-out;
-        background-color: #ffffff;
-        opacity: 0;
-        visibility: hidden;
-        z-index: 9999;
-      }
-      .page-loading.active {
-        opacity: 1;
-        visibility: visible;
-      }
-      .page-loading-inner {
-        position: absolute;
-        top: 50%;
-        left: 0;
-        width: 100%;
-        text-align: center;
-        -webkit-transform: translateY(-50%);
-        transform: translateY(-50%);
-        -webkit-transition: opacity 0.2s ease-in-out;
-        transition: opacity 0.2s ease-in-out;
-        opacity: 0;
-      }
-      .page-loading.active > .page-loading-inner {
-        opacity: 1;
-      }
-      .page-loading-inner > span {
-        display: block;
-        font-family: "Inter", sans-serif;
-        font-size: 1rem;
-        font-weight: normal;
-        color: #6f788b;
-      }
-
-      .page-spinner {
-        display: inline-block;
-        width: 2.75rem;
-        height: 2.75rem;
-        margin-bottom: 0.75rem;
-        vertical-align: text-bottom;
-        background-color: #d7dde2;
-        border-radius: 50%;
-        opacity: 0;
-        -webkit-animation: spinner 0.75s linear infinite;
-        animation: spinner 0.75s linear infinite;
-      }
-
-      @-webkit-keyframes spinner {
-        0% {
-          -webkit-transform: scale(0);
-          transform: scale(0);
-        }
-        50% {
-          opacity: 1;
-          -webkit-transform: none;
-          transform: none;
-        }
-      }
-      @keyframes spinner {
-        0% {
-          -webkit-transform: scale(0);
-          transform: scale(0);
-        }
-        50% {
-          opacity: 1;
-          -webkit-transform: none;
-          transform: none;
-        }
-      }
-    </style>
-
-    <!-- Page loading scripts-->
-    <script>
-      (function () {
-        window.onload = function () {
-          const preloader = document.querySelector(".page-loading");
-          preloader.classList.remove("active");
-          setTimeout(function () {
-            preloader.remove();
-          }, 1500);
-        };
-      })();
-    </script>
-
     <!-- Import Google Font-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -111,152 +17,20 @@
     />
     <!-- Main Theme Styles + Bootstrap-->
     <link rel="stylesheet" media="screen" href="../static/css/mypage.css" />
+    <!--네비바삽입-->
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready( function() {
+        $("#headers").load("navbar.html");  // 원하는 파일 경로를 삽입하면 된다
+      });
+    </script>
+
   </head>
   <!-- Body-->
   <body class="bg-secondary">
-    <!-- Page loading spinner-->
-    <div class="page-loading active">
-      <div class="page-loading-inner">
-        <div class="page-spinner"></div>
-        <span>Loading...</span>
-      </div>
-    </div>
+  <header id="headers"></header>
     <!-- Page wrapper-->
     <main class="page-wrapper">
-      <!-- Navbar. Remove 'fixed-top' class to make the navigation bar scrollable with the page-->
-      <header class="navbar navbar-expand-lg fixed-top">
-        <div class="container">
-          <a class="navbar-brand pe-sm-3" href="index.html">Together</a>
-
-          <nav class="collapse navbar-collapse" id="navbarNav">
-            <ul
-              class="navbar-nav navbar-nav-scroll me-auto"
-              style="--ar-scroll-height: 520px"
-            >
-
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="outside"
-                  aria-expanded="false"
-                  >동행모집</a
-                >
-                <ul class="dropdown-menu">
-                  <li class="dropdown">
-                    <a
-                      class="dropdown-item dropdown-toggle"
-                      href="#"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      >모집글보기</a
-                    >
-                  </li>
-                  <li class="dropdown">
-                    <a
-                      class="dropdown-item dropdown-toggle"
-                      href="#"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      >모집글 작성</a
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="outside"
-                  aria-expanded="false"
-                  >커뮤니티</a
-                >
-                <ul class="dropdown-menu">
-                  <li class="dropdown">
-                    <a
-                      class="dropdown-item dropdown-toggle"
-                      href="#"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      >자유게시판</a
-                    >
-                  </li>
-                  <li class="dropdown">
-                    <a
-                      class="dropdown-item dropdown-toggle"
-                      href="#"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      >정보게시판</a
-                    >
-                  </li>
-                  <li class="dropdown">
-                    <a
-                      class="dropdown-item dropdown-toggle"
-                      href="#"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                      >Q&A게시판</a
-                    >
-                  </li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a
-                  class="nav-link dropdown-toggle active"
-                  href="#"
-                  data-bs-toggle="dropdown"
-                  data-bs-auto-close="outside"
-                  aria-expanded="false"
-                  >계정관련</a
-                >
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item" href="account-signin.html"
-                      >Sign In</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="account-signup.html"
-                      >Sign Up</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="account-signinup.html"
-                      >Sign In / Up</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item"
-                      href="account-password-recovery.html"
-                      >Password Recovery</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="account-overview.html"
-                      >Overview</a
-                    >
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="account-settings.html"
-                      >Settings</a
-                    >
-                  </li>
-
-                  <li>
-                    <a class="dropdown-item" href="account-chat.html"
-                      >Chat (Messages)</a
-                    >
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </header>
       <!-- Page content-->
       <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
         <div class="row pt-sm-2 pt-lg-0">
