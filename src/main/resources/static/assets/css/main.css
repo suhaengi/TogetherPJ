@@ -804,7 +804,7 @@ section {
 # Call To Action Section
 --------------------------------------------------------------*/
 .call-to-action {
-  background: linear-gradient(rgba(14, 29, 52, 0.6), rgba(14, 29, 52, 0.8)), url("../img/cta-bg.jpg") center center;
+  background: linear-gradient(rgba(14, 29, 52, 0.6), rgba(14, 29, 52, 0.8)), url("../img/travel-items-assortment-view.jpg") center center;
   background-size: cover;
   padding: 100px 0;
 }
@@ -1923,4 +1923,25 @@ section {
   max-height: 100%;
 }
 
-.category-slider
+.category-slider {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 20%; /* 한 줄에 5개의 슬라이드가 나오도록 */
+  float: left;
+}
+
+.main_accompany_high {
+  width : 200px;
+  height : 200px;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.main_accompany_slider {
+  width : 200px;
+  height : 200px;
+  max-width: 100%;
+  max-height: 100%;
+}

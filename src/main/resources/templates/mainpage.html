@@ -28,6 +28,20 @@
 
   <!-- Template Main CSS File -->
   <link href="../static/assets/css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css">
+  <style>
+    /* 슬라이드 영역 스타일 */
+    .slider {
+      width: 80%;
+      margin: 0 auto;
+    }
+    /* 슬라이드 내부 이미지 스타일 */
+    .slider img {
+      width: 100%;
+      height: auto;
+    }
+  </style>
 
 </head>
 
@@ -37,7 +51,7 @@
 <header id="header" class="header d-flex align-items-center fixed-top">
   <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
-    <a href="index.html" class="logo d-flex align-items-center">
+    <a href="mainpage.html" class="logo d-flex align-items-center">
       <!-- Uncomment the line below if you also wish to use an image logo -->
       <!-- <img src="assets/img/logo.png" alt=""> -->
       <h1>Together</h1>
@@ -47,8 +61,8 @@
     <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
     <nav id="navbar" class="navbar">
       <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="about.html">동행 게시판</a></li>
+        <li><a href="mainpage.html" class="active">Home</a></li>
+        <li><a href="recruit_board.html">동행 게시판</a></li>
         <li class="dropdown"><a href="#"><span>커뮤니티 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
           <ul>
             <li><a href="#">Q&A</a></li>
@@ -56,8 +70,8 @@
             <li><a href="#">자유 게시판</a></li>
           </ul>
         </li>
-        <li><a href="contact.html">마이 페이지</a></li>
-        <li><a class="get-a-quote" href="get-a-quote.html">로그인</a></li>
+        <li><a href="mypage.html">마이 페이지</a></li>
+        <li><a class="get-a-quote" href="login.html">로그인</a></li>
       </ul>
     </nav><!-- .navbar -->
 
@@ -108,7 +122,7 @@
       </div>
 
       <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-        <img src="assets/img/hero-img.svg" class="img-fluid mb-3 mb-lg-0" alt="">
+        <img src="../static/assets/img/hero-img.svg" class="img-fluid mb-3 mb-lg-0" alt="">
       </div>
 
     </div>
@@ -123,16 +137,16 @@
     <div class="row">
       <div class="col-12 mb-6">
 
-        <h2 class="mb-0">여행 등급이 높은 Together</h2>
+        <h2 class="mb-0">Lv5 동행 모집</h2>
 
       </div>
     </div>
-    <div class="category-slider ">
+    <div class="category-slider " style="width:100%">
 
       <div class="item">
-        <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
+        <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
           <div class="card card-product mb-lg-4">
-            <div class="card-body text-center py-8">
+            <div class="main_accompany_slider">
               <img src="../static/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
               <div class="text-truncate">로마 가실분</div>
             </div>
@@ -140,10 +154,77 @@
         </a>
       </div>
 
-      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
+      <div class="item">
+        <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+          <div class="card card-product mb-lg-4">
+            <div class="main_accompany_slider">
+              <img src="../static/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+              <div class="text-truncate">로마 가실분</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="item">
+        <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+          <div class="card card-product mb-lg-4">
+            <div class="main_accompany_slider">
+              <img src="../static/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+              <div class="text-truncate">홍콩 가실분</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="item">
+        <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+          <div class="card card-product mb-lg-4">
+            <div class="main_accompany_slider">
+              <img src="../static/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+              <div class="text-truncate">일본 가실분</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="item">
+        <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+          <div class="card card-product mb-lg-4">
+            <div class="main_accompany_slider">
+              <img src="../static/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+              <div class="text-truncate">중국 가실분</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="item">
+        <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+          <div class="card card-product mb-lg-4">
+            <div class="main_accompany_slider">
+              <img src="../static/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+              <div class="text-truncate">베네치아 가실분</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+      <div class="item">
+        <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+          <div class="card card-product mb-lg-4">
+            <div class="main_accompany_slider">
+              <img src="../static/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+              <div class="text-truncate">파리 가실분</div>
+            </div>
+          </div>
+        </a>
+      </div>
+
+
+<!--      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
         <div class="card card-product mb-lg-4">
           <div class="card-body text-center py-8">
-            <img src="../static/assets/images/category/category-snack-munchies.jpg" alt="Grocery Ecommerce Template"
+            <img src="../static/assets/img/pari_ex.jpg" alt="Grocery Ecommerce Template"
                  class="mb-3">
             <div class="text-truncate">Snack & Munchies</div>
           </div>
@@ -163,71 +244,11 @@
       <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
         <div class="card card-product mb-lg-4">
           <div class="card-body text-center py-8">
-            <img src="../static/assets/images/category/category-instant-food.jpg" alt="Grocery Ecommerce Template"
-                 class="mb-3">
+            <img src="../static/assets/images/category/category-instant-food.jpg" class="slider_img">
             <div class="text-truncate">Instant Food</div>
           </div>
         </div>
-      </a></div>
-
-      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
-        <div class="card card-product mb-lg-4">
-          <div class="card-body text-center py-8">
-            <img src="../static/assets/images/category/category-tea-coffee-drinks.jpg" alt="Grocery Ecommerce Template"
-                 class="mb-3">
-            <div class="text-truncate">Tea, Coffee & Drinks</div>
-          </div>
-        </div>
-      </a></div>
-
-      <div class="item"><a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
-        <div class="card card-product mb-lg-4">
-          <div class="card-body text-center py-8">
-            <img src="../static/assets/images/category/category-atta-rice-dal.jpg" alt="Grocery Ecommerce Template"
-                 class="mb-3">
-            <div class="text-truncate">Atta, Rice & Dal</div>
-          </div>
-        </div>
-      </a></div>
-
-      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
-        <div class="card card-product mb-lg-4">
-          <div class="card-body text-center py-8">
-            <img src="../static/assets/images/category/category-baby-care.jpg" alt="Grocery Ecommerce Template"
-                 class="mb-3">
-            <div class="text-truncate">Baby Care</div>
-          </div>
-        </div>
-      </a></div>
-
-      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
-        <div class="card card-product mb-lg-4">
-          <div class="card-body text-center py-8">
-            <img src="../static/assets/images/category/category-chicken-meat-fish.jpg" alt="Grocery Ecommerce Template"
-                 class="mb-3">
-            <div class="text-truncate">Chicken, Meat & Fish</div>
-          </div>
-        </div>
-      </a></div>
-
-      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
-        <div class="card card-product mb-lg-4">
-          <div class="card-body text-center py-8">
-            <img src="../static/assets/images/category/category-cleaning-essentials.jpg" alt="Grocery Ecommerce Template"
-                 class="mb-3">
-            <div class="text-truncate">Cleaning Essentials</div>
-          </div>
-        </div>
-      </a></div>
-
-      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
-        <div class="card card-product mb-lg-4">
-          <div class="card-body text-center py-8">
-            <img src="../static/assets/images/category/category-pet-care.jpg" alt="Grocery Ecommerce Template" class="mb-3">
-            <div class="text-truncate">Pet Care</div>
-          </div>
-        </div>
-      </a></div>
+      </a></div>-->
 
     </div>
   </div>
@@ -501,70 +522,50 @@
         <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
 
           <div class="col-md-5">
-            <img src="assets/img/features-1.jpg" class="img-fluid" alt="">
+            <img src="../static/assets/img/features-1.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-md-7">
-            <h3>Voluptatem dignissimos provident quasi corporis voluptates sit assumenda.</h3>
+            <a href=""><h3>커뮤니티 Q&A 게시판</h3>
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              여행을 준비하면서, 혹은 여행을 다니시면서 궁금한 점이 있다면 지금 바로 Q&A 게시판을 이용해 보세요. 여러 여행자 분들이 해답을 말 해 주실거에요.
             </p>
             <ul>
-              <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check"></i> Ullam est qui quos consequatur eos accusamus.</li>
+              <li><i class="bi bi-check"></i> 조회수가 높은 Q&A 게시글 12</li>
+              <li><i class="bi bi-check"></i> 조회수가 높은 Q&A 게시글 2</li>
+              <li><i class="bi bi-check"></i> 조회수가 높은 Q&A 게시글 3</li>
             </ul>
           </div>
         </div><!-- Features Item -->
 
         <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
           <div class="col-md-5 order-1 order-md-2">
-            <img src="assets/img/features-2.jpg" class="img-fluid" alt="">
+            <img src="../static/assets/img/features-2.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-md-7 order-2 order-md-1">
-            <h3>Corporis temporibus maiores provident</h3>
+            <h3>커뮤니티 정보 게시판</h3>
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              여행지와 관련된 나만의 꿀팁 혹은 명소를 공유하거나 다른 사람들과 여행 정보를 공유하는 공간이에요.
             </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
+            <ul>
+              <li><i class="bi bi-check"></i> 조회수가 높은 정보 게시글 1</li>
+              <li><i class="bi bi-check"></i> 조회수가 높은 정보 게시글 2</li>
+              <li><i class="bi bi-check"></i> 조회수가 높은 정보 게시글 3</li>
+            </ul>
           </div>
         </div><!-- Features Item -->
 
         <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
           <div class="col-md-5">
-            <img src="assets/img/features-3.jpg" class="img-fluid" alt="">
+            <img src="../static/assets/img/features-3.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-md-7">
-            <h3>Sunt consequatur ad ut est nulla consectetur reiciendis animi voluptas</h3>
-            <p>Cupiditate placeat cupiditate placeat est ipsam culpa. Delectus quia minima quod. Sunt saepe odit aut quia voluptatem hic voluptas dolor doloremque.</p>
+            <h3>커뮤니티 자유 게시판</h3>
+            <p>여행과 관련되지 않아도 좋아요. 소소한 일상 공유, 여행후기 등 회원 여러분의 이야기를 공유해 주세요.</p>
             <ul>
-              <li><i class="bi bi-check"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat.</li>
-              <li><i class="bi bi-check"></i> Duis aute irure dolor in reprehenderit in voluptate velit.</li>
-              <li><i class="bi bi-check"></i> Facilis ut et voluptatem aperiam. Autem soluta ad fugiat.</li>
+              <li><i class="bi bi-check"></i> 조회수가 높은 자유게시판 게시글 1</li>
+              <li><i class="bi bi-check"></i> 조회수가 높은 자유게시판 게시글 2</li>
+              <li><i class="bi bi-check"></i> 조회수가 높은 자유게시판 게시글 3</li>
             </ul>
-          </div>
-        </div><!-- Features Item -->
-
-        <div class="row gy-4 align-items-center features-item" data-aos="fade-up">
-          <div class="col-md-5 order-1 order-md-2">
-            <img src="assets/img/features-4.jpg" class="img-fluid" alt="">
-          </div>
-          <div class="col-md-7 order-2 order-md-1">
-            <h3>Quas et necessitatibus eaque impedit ipsum animi consequatur incidunt in</h3>
-            <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
-            </p>
-            <p>
-              Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-              velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-              culpa qui officia deserunt mollit anim id est laborum
-            </p>
           </div>
         </div><!-- Features Item -->
 
@@ -580,8 +581,8 @@
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-5 col-md-12 footer-info">
-          <a href="index.html" class="logo d-flex align-items-center">
-            <span>Logis</span>
+          <a href="mainpage.html" class="logo d-flex align-items-center">
+            <span>Together</span>
           </a>
           <p>Cras fermentum odio eu feugiat lide par naso tierra. Justo eget nada terra videa magna derita valies darta donna mare fermentum iaculis eu non diam phasellus.</p>
           <div class="social-links d-flex mt-4">
