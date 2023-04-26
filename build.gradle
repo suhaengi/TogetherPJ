@@ -23,7 +23,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
     implementation 'mysql:mysql-connector-java:8.0.32'
-    implementation 'com.ncloud:chat-sdk:1.0.0' // NCloudCaht API 의존성 추가
+    //implementation 'com.ncloud:chat-sdk:1.0.0' // NCloudCaht API 의존성 추가
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
