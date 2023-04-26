@@ -1,0 +1,40 @@
+@import url(https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap&subset=latin-ext);
+@import url(../../vendor/bootstrap/bootstrap.min.css);
+@import url(../../dist/icons/themify/themify-icons.css);
+@import url(../../dist/icons/font-awesome/css/font-awesome.min.css);
+@import "vars";
+@import "color";
+@import "button";
+@import "typography";
+@import "dropdown-menu";
+@import "avatar";
+@import "modal";
+@import "navigation";
+@import "rtl";
+@import "dark";
+@import "membership";
+@import "responsive";
+
+.tab-content {
+	padding-top: 30px;
+
+	.form-item {
+		margin-bottom: .8rem;
+	}
+}
+
+.layout {
+	height: 100vh;
+	height: calc(var(--vh, 1vh) * 100);
+	display: flex;
+
+	.content {
+		padding: 30px;
+		display: flex;
+		flex: 1;
+
+		@import "sidebar";
+
+		@import "chat";
+	}
+}
