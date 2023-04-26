@@ -81,17 +81,6 @@
           <ul>
             <li><a href="mainpage.html" class="active">Home</a></li>
             <li><a href="recruit_board.html">동행 게시판</a></li>
-            <li class="dropdown">
-              <a href="#"
-                ><span>커뮤니티 게시판</span>
-                <i class="bi bi-chevron-down dropdown-indicator"></i
-              ></a>
-              <ul>
-                <li><a href="#">Q&A</a></li>
-                <li><a href="#">정보 공유</a></li>
-                <li><a href="#">자유 게시판</a></li>
-              </ul>
-            </li>
             <li><a href="user/mypage.html">마이 페이지</a></li>
             <li><a class="get-a-quote" href="login.html">로그인</a></li>
           </ul>
@@ -132,9 +121,9 @@
         <section class="s1" >
           <div class="con1" >
           <div class="search_box">
-            <p><br><b> 여행할 나라를 선택해주세요!</b>
+            <p><br><b> 여행지를 선택해주세요!</b>
             <select name="" id="" onchange="categoryChange(this)">
-              <option value>대륙 선택</option>
+              <option value>지역 선택</option>
               <option value="asia">아시아</option>
               <option value="africa">아프리카</option>
               <option value="europe">유럽</option>
@@ -144,7 +133,7 @@
             </select>
 
             <select name="" id="state">
-              <option>나라 선택</option>
+              <option>장소 선택</option>
             </select>
 
           </div> <!--여기-->
@@ -157,7 +146,7 @@
       </section>
 
       <section class = "write_section">
-        <div class="container" ">
+        <div class="container">
         <p><b> 모집 글을 작성해주세요 </b></p>
         <form>
           <p><textarea cols="170" rows="20"></textarea></p>
