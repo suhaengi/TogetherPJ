@@ -1,0 +1,208 @@
+$dark-mode: #272935;
+$dark-mode-light: #464852;
+
+body.dark {
+	background-color: $dark-mode;
+	color: rgba(white, .75);
+
+	.text-muted {
+		color: rgba(white, .40) !important;
+	}
+
+	nav.navigation {
+		background-color: $dark-mode-light;
+
+		ul {
+			li {
+				a {
+					color: rgba(white, .70);
+
+					&:hover, &:focus {
+						background-color: $dark-mode-light + 20;
+					}
+				}
+			}
+		}
+	}
+
+	.layout {
+		.content {
+			.sidebar-group {
+				.sidebar {
+					background-color: $dark-mode-light;
+
+					.list-group-item .users-list-body {
+						p {
+							color: rgba(white, .40);
+						}
+						.users-list-action {
+							background-color: $dark-mode-light;
+							box-shadow: -8px 1px 10px 5px $dark-mode-light;
+						}
+					}
+
+					& > form {
+						input[type=text] {
+							background-color: $dark-mode-light + 20;
+							color: rgba(white, .70);
+
+							&::placeholder {
+								color: rgba(white, .50);
+							}
+						}
+					}
+				}
+			}
+
+			.chat {
+				.chat-header {
+					border-bottom-color: $dark-mode-light - 20;
+				}
+
+				.chat-body {
+					.messages {
+						.message-item {
+							.message-content {
+								background-color: $dark-mode-light;
+							}
+
+							&.outgoing-message .message-content {
+								background-color: rgba($color-primary, .3);
+							}
+						}
+					}
+				}
+
+				.chat-footer {
+					border-top-color: $dark-mode-light - 20;
+
+					form {
+						background-color: $dark-mode-light;
+
+						input[type=text] {
+							color: rgba(white, .70);
+
+							&::placeholder {
+								color: rgba(white, .50);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	&.rtl {
+		.layout {
+			.content {
+				.sidebar-group {
+					.sidebar {
+						.list-group-item .users-list-body {
+							.users-list-action {
+								box-shadow: 8px 1px 10px 5px $dark-mode-light !important;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.modal-content {
+		background-color: $dark-mode-light;
+
+		.modal-header {
+			background-color: $dark-mode-light + 20;
+		}
+	}
+
+	.list-group-item {
+		border-color: $dark-mode-light + 20;
+	}
+
+	.dropdown-menu {
+		background-color: $dark-mode-light + 20;
+		border-color: transparent;
+
+		.dropdown-item {
+			color: rgba(white, .70);
+
+			&:focus, &:hover, &:active, &.active {
+				background-color: $dark-mode-light;
+			}
+		}
+	}
+
+	input[type=text], textarea, select {
+		background-color: $dark-mode-light + 20;
+		color: rgba(white, .70);
+		border-color: $dark-mode-light + 40;
+
+		&:focus {
+			color: rgba(white, .70);
+			background-color: $dark-mode-light + 20;
+			border-color: $dark-mode-light + 100;
+		}
+
+		&::placeholder {
+			color: rgba(white, .50);
+		}
+	}
+
+	.custom-control-label::before {
+		background-color: $dark-mode-light + 20;
+		border-color: $dark-mode-light + 40
+	}
+
+	.input-group-text {
+		background-color: $dark-mode-light;
+		color: rgba(white, .70);
+		border-color: $dark-mode-light + 40;
+	}
+
+	.nav-tabs .nav-link.active {
+		border-color: $dark-mode-light + 20;
+		border-bottom-color: $dark-mode-light;
+		background-color: $dark-mode-light;
+		color: rgba(white, .70);
+	}
+
+	.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+		border-color: $dark-mode-light + 20;
+		border-bottom-color: $dark-mode-light;
+	}
+
+	.nav-tabs {
+		border-bottom-color: $dark-mode-light + 20;
+	}
+
+	.custom-file-label {
+		background-color: $dark-mode-light + 20;
+		border-color: $dark-mode-light + 40;
+		color: rgba(white, .70);
+
+		&:after {
+			background-color: $dark-mode-light;
+			color: rgba(white, .70);
+		}
+	}
+
+	.btn {
+		&.btn-light {
+			background-color: $dark-mode-light + 20;
+			border-color: transparent;
+			color: rgba(white, .70);
+
+			&:focus, &:hover {
+				border-color: transparent !important;
+				background-color: $dark-mode-light + 20 !important;
+				color: rgba(white, .80) !important;
+				box-shadow: 0 0 0 .2rem rgba($dark-mode-light + 20, .6) !important;
+			}
+		}
+	}
+
+	figure.avatar.avatar-state-danger:before, figure.avatar.avatar-state-dark:before, figure.avatar.avatar-state-info:before, figure.avatar.avatar-state-light:before, figure.avatar.avatar-state-primary:before, figure.avatar.avatar-state-secondary:before, figure.avatar.avatar-state-success:before, figure.avatar.avatar-state-warning:before {
+		border-color: $dark-mode-light
+	}
+}
