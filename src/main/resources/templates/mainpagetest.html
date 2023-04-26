@@ -42,41 +42,28 @@
       height: auto;
     }
   </style>
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready( function() {
+      $("#headers").load("test.html");  // 원하는 파일 경로를 삽입하면 된다
+    });
+  </script>
+
+  <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready( function() {
+      $("#footer").load("testfooter.html");  // 원하는 파일 경로를 삽입하면 된다
+    });
+  </script>
+
+
 </head>
 
 <body>
 
-<!-- ======= start header ======= -->
-<header id="header" class="header d-flex align-items-center fixed-top">
-  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+<header id="headers"></header>
 
-    <a href="mainpage.html" class="logo d-flex align-items-center">
-      <!-- Uncomment the line below if you also wish to use an image logo -->
-      <!-- <img src="assets/img/logo.png" alt=""> -->
-      <h1>Together</h1>
-    </a>
-
-    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-    <nav id="navbar" class="navbar">
-      <ul>
-        <li><a href="mainpage.html" class="active">Home</a></li>
-        <li><a href="recruit_board.html">동행 게시판</a></li>
-        <li class="dropdown"><a href="#"><span>커뮤니티 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-          <ul>
-            <li><a href="#">Q&A</a></li>
-            <li><a href="#">정보 공유</a></li>
-            <li><a href="#">자유 게시판</a></li>
-          </ul>
-        </li>
-        <li><a href="user/mypage.html">마이 페이지</a></li>
-        <li><a class="get-a-quote" href="login.html">로그인</a></li>
-      </ul>
-    </nav><!-- .navbar -->
-
-  </div>
-</header>
-<!-- ================= End Header =============== -->
 <!-- ======= Main Section ======= -->
 <section id="hero" class="hero d-flex align-items-center">
   <div class="container">
@@ -572,10 +559,13 @@
     </section><!-- End Features Section -->
 
   </main>
+
+<footer id="footer"></footer>
+
   <!-- ================== End main =================================== -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+<!--  <footer id="footer" class="footer">
 
     <div class="container">
       <div class="row gy-4">
@@ -634,15 +624,15 @@
         &copy; Copyright <strong><span>Logis</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ -->
+        &lt;!&ndash; All the links in the footer should remain intact. &ndash;&gt;
+        &lt;!&ndash; You can delete the links only if you purchased the pro version. &ndash;&gt;
+        &lt;!&ndash; Licensing information: https://bootstrapmade.com/license/ &ndash;&gt;
+        &lt;!&ndash; Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/logis-bootstrap-logistics-website-template/ &ndash;&gt;
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
 
-  </footer><!-- End Footer -->
+  </footer>--><!-- End Footer -->
   <!-- End Footer -->
 
   <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
