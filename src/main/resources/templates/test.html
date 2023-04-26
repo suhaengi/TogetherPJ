@@ -1,33 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+  <head>
+    <meta charset="utf-8" />
+    <!-- Import Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+      rel="stylesheet"
+      id="google-font"
+    />
+    <!-- Main Theme Styles + Bootstrap-->
+    <link rel="stylesheet" media="screen" href="../static/css/mypage.css" />
+  </head>
 
-<div class="col">
-    <div class="card card-product">
-        <div class="card-body">
-
-            <div class="text-center position-relative">
-                <div class=" position-absolute top-0 start-0"> </div>
-                <a href="#!"> <img src="../static/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
-
-            </div>
-            <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>맛집/관광지</small></a></div>
-            <h2 class="fs-6"><a href="../static/assets/img/pari_ex.jpg" class="text-inherit text-decoration-none">파리 맛집도 가고 에펠탑도 구경해요</a></h2>
-            <div>
-
-                <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-fill"></i>
-                    <i class="bi bi-star-half"></i></small> <span class="text-muted small">4.5(149)</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-</body>
+  <body>
+    <header class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+      <div class="container">
+        <a href="#" class="navbar-brand">
+          <span class="text-primary flex-shrink-0 me-2"> </span>
+          Together
+        </a>
+        <button
+          type="button"
+          class="navbar-toggler"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse1"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <nav class="collapse navbar-collapse" id="navbarCollapse1">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item active">
+              <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">동행게시판</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link">커뮤니티 게시판 ▽</a>
+              <ul class="dropdown-menu">
+                <li><a href="#" class="dropdown-item">Q&A</a></li>
+                <li><a href="#" class="dropdown-item">정보공유</a></li>
+                <li><a href="#" class="dropdown-item">자유게시판</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a
+                href="#"
+                class="nav-link disabled"
+                tabindex="-1"
+                aria-disabled="true"
+                >설레는 여행을 함께, 'together'</a
+              >
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary btn-sm fs-sm ms-3 mb-4 mb-lg-0">
+            로그인
+          </a>
+        </nav>
+      </div>
+    </header>
+  </body>
 </html>
