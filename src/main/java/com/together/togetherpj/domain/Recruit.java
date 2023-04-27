@@ -1,13 +1,10 @@
 package com.together.togetherpj.domain;
 
-import com.together.togetherpj.member.entity.Member;
+import com.together.togetherpj.constant.State;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Setter
 @Getter
@@ -52,7 +49,7 @@ public class Recruit {
 
     @Column(name="C_STATE")
     @Enumerated(EnumType.STRING)
-    private String state;
+    private State state;
 
     @Column(name="C_VIEWCOUNT", nullable = false)
     @ColumnDefault("0")
