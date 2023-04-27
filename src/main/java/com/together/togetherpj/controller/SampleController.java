@@ -20,20 +20,20 @@ public class SampleController {
     @Autowired
     SampleService sampleService;
 
-    @GetMapping({"/", "/main"})
-    public String registerget(){
-        return "mainpage";
-    }
+//    @GetMapping({"/", "/main"})
+//    public String registerget(){
+//        return "mainpage";
+//    }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
+//    @GetMapping("/login")
+//    public String login() {
+//        return "login";
+//    }
 
-    @PostMapping("/register")
-    public void registerPost(SampleDTO dto){
-        sampleService.register(dto);
-    }
+//    @PostMapping("/register")
+//    public void registerPost(SampleDTO dto){
+//        sampleService.register(dto);
+//    }
 
     @GetMapping("/sample")
     public String sample(Model model){
