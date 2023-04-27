@@ -65,9 +65,6 @@ dependencies {
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
     implementation 'org.modelmapper:modelmapper:3.1.0'
 
-    // NCloudCaht API 의존성 추가
-//    implementation 'com.ncloud:chat-sdk:1.0.0'
-
 }
 
 tasks.named('test') {
