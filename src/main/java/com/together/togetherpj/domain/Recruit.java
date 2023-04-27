@@ -61,10 +61,13 @@ public class Recruit extends BaseEntity{
     private long viewcount;
 
     @ManyToOne
-    @JoinColumn(name = "M_ID")
-    private Member member;
+    @JoinColumn(name = "C_WRITER_ID")
+    private Member recruitWriter;
 
-    @OneToMany
-    @JoinColumn(name = "CC_ID")
+    @OneToMany(mappedBy = "recruit")
+//    @JoinColumn(name = "CC_ID")
     private List<Comment> commentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "recruit")
+    private List<Applying>  applyingList = new ArrayList<>();
 }

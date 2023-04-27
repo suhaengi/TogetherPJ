@@ -16,7 +16,7 @@ import java.io.Serializable;
 @Embeddable
 public class CommentId implements Serializable {
 
-  private Long memberId;
+  private Long commentWriterId;
 
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "CC_ID")
