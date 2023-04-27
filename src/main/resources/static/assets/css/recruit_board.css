@@ -1,0 +1,21 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+.w-btn {
+  color: rgb(255, 255, 255);
+  background: rgb(5, 41, 244);
+  border-radius: 9px;
+  width: 70px;
+  height: 40px;
+  float: right;
+}
+
+.buttonC {
+  padding-right: 10%;
+}
+
