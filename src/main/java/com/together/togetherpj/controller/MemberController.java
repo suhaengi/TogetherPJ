@@ -69,7 +69,7 @@ public class MemberController {
   @GetMapping("/mypage")
   public String myPage(){
     log.info("MemberController - myPage()");
-    return "user/mypage";
+    return "member/mypage_test";
   }
 
 }
