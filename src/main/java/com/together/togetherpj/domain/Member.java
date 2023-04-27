@@ -1,14 +1,16 @@
-package com.together.togetherpj.member.entity;
+package com.together.togetherpj.domain;
 
-import com.together.togetherpj.member.constant.Gender;
-import com.together.togetherpj.member.constant.Role;
-import com.together.togetherpj.member.dto.MemberFormDto;
+import com.together.togetherpj.constant.Gender;
+import com.together.togetherpj.constant.Role;
+import com.together.togetherpj.dto.MemberFormDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter @Getter @ToString
 @NoArgsConstructor @AllArgsConstructor
@@ -23,7 +25,7 @@ public class Member {
   private String password;
   @Column(name = "M_NAME", nullable = false, length = 10)
   private String Name;
-  @Column(name = "M_GENDER", nullable = false, length = 5)
+  @Column(name = "M_GENDER", nullable = false, length = 10)
   @Enumerated(EnumType.STRING)
   private Gender gender;
   @Column(name = "M_PHONE", nullable = false, length = 11)
@@ -48,6 +50,12 @@ public class Member {
   @Column(name = "M_LIKE")
   @ColumnDefault("0")
   private long like;
+
+  @OneToMany
+  @JoinColumn(name = "C_ID")
+  List<Recruit> list=new ArrayList<>();
+
+
 
   public static Member createMember(
       MemberFormDto memberFormDto,

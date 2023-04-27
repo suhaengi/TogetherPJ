@@ -1,8 +1,8 @@
-package com.together.togetherpj.member.controller;
+package com.together.togetherpj.controller;
 
-import com.together.togetherpj.member.dto.MemberFormDto;
-import com.together.togetherpj.member.entity.Member;
-import com.together.togetherpj.member.service.MemberService;
+import com.together.togetherpj.dto.MemberFormDto;
+import com.together.togetherpj.domain.Member;
+import com.together.togetherpj.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
