@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Setter @Getter @ToString
 @NoArgsConstructor @AllArgsConstructor
@@ -23,7 +24,7 @@ public class Member {
   private String password;
   @Column(name = "M_NAME", nullable = false, length = 10)
   private String Name;
-  @Column(name = "M_GENDER", nullable = false, length = 5)
+  @Column(name = "M_GENDER", nullable = false, length = 10)
   @Enumerated(EnumType.STRING)
   private Gender gender;
   @Column(name = "M_PHONE", nullable = false, length = 11)
