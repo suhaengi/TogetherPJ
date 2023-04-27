@@ -53,11 +53,11 @@ public class Member {
 
   @OneToMany
   @JoinColumn(name = "C_ID")
-  List<Recruit> recruitList = new ArrayList<>();
+  private List<Recruit> recruitList = new ArrayList<>();
 
   @OneToMany
   @JoinColumn(name = "CC_ID")
-  List<Comment> commentList = new ArrayList<>();
+  private List<Comment> commentList = new ArrayList<>();
 
 
 

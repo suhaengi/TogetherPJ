@@ -5,7 +5,9 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Setter
 @Getter
@@ -62,4 +64,7 @@ public class Recruit extends BaseEntity{
     @JoinColumn(name = "M_ID")
     private Member member;
 
+    @OneToMany
+    @JoinColumn(name = "CC_ID")
+    private List<Comment> commentList = new ArrayList<>();
 }
