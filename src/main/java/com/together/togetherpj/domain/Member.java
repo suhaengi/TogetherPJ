@@ -1,15 +1,16 @@
-package com.together.togetherpj.member.entity;
+package com.together.togetherpj.domain;
 
-import com.together.togetherpj.member.constant.Gender;
-import com.together.togetherpj.member.constant.Role;
-import com.together.togetherpj.member.dto.MemberFormDto;
+import com.together.togetherpj.constant.Gender;
+import com.together.togetherpj.constant.Role;
+import com.together.togetherpj.dto.MemberFormDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter @Getter @ToString
 @NoArgsConstructor @AllArgsConstructor
@@ -49,6 +50,12 @@ public class Member {
   @Column(name = "M_LIKE")
   @ColumnDefault("0")
   private long like;
+
+  @OneToMany
+  @JoinColumn(name = "C_ID")
+  List<Recruit> list=new ArrayList<>();
+
+
 
   public static Member createMember(
       MemberFormDto memberFormDto,

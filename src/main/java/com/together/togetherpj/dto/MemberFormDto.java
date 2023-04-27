@@ -1,6 +1,6 @@
-package com.together.togetherpj.member.dto;
+package com.together.togetherpj.dto;
 
-import com.together.togetherpj.member.constant.Gender;
+import com.together.togetherpj.constant.Gender;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

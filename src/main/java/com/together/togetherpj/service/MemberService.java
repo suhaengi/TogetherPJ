@@ -1,7 +1,7 @@
-package com.together.togetherpj.member.service;
+package com.together.togetherpj.service;
 
-import com.together.togetherpj.member.entity.Member;
-import com.together.togetherpj.member.repository.MemberRepository;
+import com.together.togetherpj.domain.Member;
+import com.together.togetherpj.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.User;
