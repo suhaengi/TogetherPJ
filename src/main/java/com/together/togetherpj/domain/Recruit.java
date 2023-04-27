@@ -3,6 +3,7 @@ package com.together.togetherpj.domain;
 import com.together.togetherpj.constant.State;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,7 +13,11 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Recruit {
+
+
+
+public class Recruit extends BaseEntity{
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "C_ID")
@@ -47,7 +52,8 @@ public class Recruit {
     @Column(name="C_TRAVEL_END", nullable = false)
     private Date enddate;
 
-    @Column(name="C_STATE")
+    @Column(name="C_STATE", nullable = false, length = 20)
+
     @Enumerated(EnumType.STRING)
     private State state;
 
@@ -58,10 +64,5 @@ public class Recruit {
     @ManyToOne
     @JoinColumn(name = "M_ID")
     private Member member;
-
-
-
-
-
 
 }
