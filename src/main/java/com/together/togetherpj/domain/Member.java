@@ -51,16 +51,17 @@ public class Member {
   @ColumnDefault("0")
   private long like;
 
-  /*
-  @OneToMany
-  @JoinColumn(name = "C_ID")
+  @OneToMany(mappedBy = "recruitWriter")
   private List<Recruit> recruitList = new ArrayList<>();
-*/
-  @OneToMany
-  @JoinColumn(name = "CC_ID")
+
+  @OneToMany(mappedBy = "commentWriter")
   private List<Comment> commentList = new ArrayList<>();
 
+  @OneToMany(mappedBy = "applier")
+  private List<Applying>  applyingList = new ArrayList<>();
 
+  @OneToMany(mappedBy = "reviewer")
+  private List<Review> reviewList = new ArrayList<>();
 
   public static Member createMember(
       MemberFormDto memberFormDto,

@@ -46,7 +46,7 @@ public class MemberService implements UserDetailsService {
       throw new UsernameNotFoundException("해당 사용자가 없습니다." + email);
     }
 
-    log.info("service loadUserByUserName member={}", member);
+//    log.info("service loadUserByUserName member={}", member);
 
     return User.builder()
         .username(member.getEmail())

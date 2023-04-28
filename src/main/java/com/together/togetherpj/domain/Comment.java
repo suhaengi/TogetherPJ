@@ -18,10 +18,10 @@ public class Comment extends BaseEntity{
   @Column(name="CC_CONTENT", nullable = false, length=500)
   private String content;
 
-  @MapsId("memberId")
+  @MapsId("commentWriterId")
   @ManyToOne
-  @JoinColumn(name = "M_ID")
-  private Member member;
+  @JoinColumn(name = "CC_WRITER_ID")
+  private Member commentWriter;
 
   /*
   @ManyToOne
