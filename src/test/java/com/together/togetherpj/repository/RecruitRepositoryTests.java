@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.text.ParseException;
+import java.util.Optional;
 
 @SpringBootTest
 @Log4j2
@@ -41,4 +42,14 @@ public class RecruitRepositoryTests {
 
         Recruit result = recruitRepository.save(recruit);
     }
+
+    @Test
+    public void testSelect(){
+        Long cno = 1L;
+        Optional<Recruit> result = recruitRepository.findById(cno);
+        Recruit recruit = result.orElseThrow();
+        log.info(recruit);
+    }
+
+
 }

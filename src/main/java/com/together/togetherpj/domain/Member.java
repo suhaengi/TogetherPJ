@@ -51,8 +51,8 @@ public class Member {
   @ColumnDefault("0")
   private long like;
 
-  @OneToMany(mappedBy = "recruitWriter")
-  private List<Recruit> recruitList = new ArrayList<>();
+/*  @OneToMany(mappedBy = "recruitWriter")
+  private List<Recruit> recruitList = new ArrayList<>();*/
 
   @OneToMany(mappedBy = "commentWriter")
   private List<Comment> commentList = new ArrayList<>();
