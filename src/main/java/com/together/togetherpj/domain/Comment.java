@@ -1,5 +1,6 @@
 package com.together.togetherpj.domain;
 
+import com.together.togetherpj.domain.id.CommentId;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,23 +12,19 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity
 public class Comment extends BaseEntity{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CC_NUM")
-    private Long id;
+  @EmbeddedId
+  private CommentId id;
 
-    @Column(name="CC_CONTENT", nullable = false, length=500)
-    private String content;
+  @Column(name="CC_CONTENT", nullable = false, length=500)
+  private String content;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "M_ID")
-    private Member member;
+  @MapsId("commentWriterId")
+  @ManyToOne
+  @JoinColumn(name = "CC_WRITER_ID")
+  private Member commentWriter;
 
-    @ManyToOne
-    @JoinColumn(name = "C_ID")
-    private Recruit recruit;
+  @ManyToOne
+  @JoinColumn(name = "C_ID")
+  private Recruit recruit;
 
 }
-
-
