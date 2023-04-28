@@ -10,6 +10,6 @@ import java.io.Serializable;
 @Embeddable
 @EqualsAndHashCode
 public class ApplyingId implements Serializable  {
-  private Long applierId;
-  private Long recruitId;
+  private Long applierId; //신청자
+  private Long recruitId; //게시글작성자
 }

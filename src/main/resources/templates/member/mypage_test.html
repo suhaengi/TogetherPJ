@@ -101,13 +101,16 @@
                         background-image: url(../../static/images/profile.PNG);
                       "
                                 ></div>
+                                <script th:inline="javascript">
+                                    var user = [[${user.username}]];
+                                </script>
                                 <div class="pt-3 pt-sm-0 ps-sm-3">
                                     <div th:with="user=${#authentication.principal}">
                                         <span class="input-group-text">email</span>
                                         <input type="text" class="form-control" th:value="${user.username}"readonly>
                                     </div>
-                                        <input type="text"  class="form-control"
-                                               th:value="${#authentication.principal.username}" readonly>
+                                        <input type="text"  class="form-control" var username
+                                               readonly>
                                     <div
                                             class="text-muted fw-medium d-flex flex-wrap flex-sm-nowrap align-iteems-center"
                                     >
