@@ -23,8 +23,9 @@ public class Comment extends BaseEntity{
   @JoinColumn(name = "M_ID")
   private Member member;
 
+  /*
   @ManyToOne
   @JoinColumn(name = "C_ID")
   private Recruit recruit;
-
+*/
 }

@@ -51,10 +51,11 @@ public class Member {
   @ColumnDefault("0")
   private long like;
 
+  /*
   @OneToMany
   @JoinColumn(name = "C_ID")
   private List<Recruit> recruitList = new ArrayList<>();
-
+*/
   @OneToMany
   @JoinColumn(name = "CC_ID")
   private List<Comment> commentList = new ArrayList<>();

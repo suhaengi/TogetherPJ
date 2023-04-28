@@ -3,14 +3,19 @@ package com.together.togetherpj.domain;
 import com.together.togetherpj.constant.State;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Setter
 @Getter
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
@@ -42,17 +47,17 @@ public class Recruit extends BaseEntity{
     private long per_num;
 
     @Column(name="C_CUR_NUM", nullable = false)
-    @ColumnDefault("1")
     private long cur_num;
 
+    @Temporal(TemporalType.DATE)
     @Column(name="C_TRAVEL_START", nullable = false)
     private Date startdate;
 
+    @Temporal(TemporalType.DATE)
     @Column(name="C_TRAVEL_END", nullable = false)
     private Date enddate;
 
     @Column(name="C_STATE", nullable = false, length = 20)
-
     @Enumerated(EnumType.STRING)
     private State state;
 
@@ -60,11 +65,17 @@ public class Recruit extends BaseEntity{
     @ColumnDefault("0")
     private long viewcount;
 
-    @ManyToOne
-    @JoinColumn(name = "M_ID")
-    private Member member;
-
+    @Column(name="C_NICK", nullable = false)
+    private String writer;
+/*
     @OneToMany
     @JoinColumn(name = "CC_ID")
     private List<Comment> commentList = new ArrayList<>();
+
+*/
+    @PrePersist
+    public void prePersist(){
+        this.state= this.state == null ? State.RECRUITING : this.state;
+        this.cur_num = this.cur_num == 0 ? 1 : this.cur_num;
+    }
 }
