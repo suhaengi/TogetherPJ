@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}"
-      lang="en">
+      layout:decorate="~{layouts/layout1}">
 
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
@@ -55,11 +54,11 @@
       <input type="text" th:field="*{phone}" class="form-control" placeholder="전화번호를 입력해주세요">
       <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError">Incorrect phone</p>
     </div>
-<!--    <div class="form-group">-->
-<!--      <label th:for="phone">생일</label>-->
-<!--      <input type="date" th:field="*{birth}" class="form-control" placeholder="생일을 입력해주세요">-->
-<!--      <p th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}" class="fieldError">Incorrect birth</p>-->
-<!--    </div>-->
+    <div class="form-group">
+      <label th:for="phone">생일</label>
+      <input type="date" th:field="*{birth}" class="form-control" placeholder="생일을 입력해주세요">
+      <p th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}" class="fieldError">Incorrect birth</p>
+    </div>
     <div class="form-group">
       <label th:for="nickname">닉네임</label>
       <input type="text" th:field="*{nickname}" class="form-control" placeholder="닉네임을 입력해주세요">

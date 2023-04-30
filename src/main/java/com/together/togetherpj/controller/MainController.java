@@ -11,10 +11,4 @@ public class MainController {
   public String mainPage(){
     return "demo-main";
   }
-
-  @GetMapping("/recruit")
-  public String recruit(){
-    log.info("MemberController - recruit()");
-    return "recruit";
-  }
 }

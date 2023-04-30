@@ -35,7 +35,7 @@ public class MemberFormDto {
   private String email;
 
 //  @Past(message = "생일은 필수 항목 입니다.")
-//  private Date birth;
+  private String birth;
 
   @NotEmpty(message = "닉네임은 필수 항목 입니다.")
   private String nickname;
