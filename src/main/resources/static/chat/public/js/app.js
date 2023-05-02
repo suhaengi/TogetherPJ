@@ -1,10 +1,10 @@
 const socket = io("http://localhost:8085", { path: "/socket.io", transports: ["websocket"] });
 
 const welcome = document.getElementById("welcome");
-const form = welcome.querySelector("form");
+/*const form = welcome.querySelector("form");*/
 const room = document.getElementById("room");
 
-room.hidden = true;
+/*room.hidden = true;*/
 
 let roomName;
 
@@ -13,6 +13,12 @@ function addMessage(message) {
     const li = document.createElement("li");
     li.innerText = message;
     ul.appendChild(li);
+}
+
+function handleNickSubmit(event) {
+    event.preventDefault();
+    const input = nickForm.querySelector("input");
+    socket.send(makeMessage("nickname", input.value));
 }
 
 function handleMessageSubmit(event) {
@@ -42,13 +48,13 @@ function handleRoomSubmit(event) {
     input.value = "";
 }
 
-form.addEventListener("submit", handleRoomSubmit);
+/*form.addEventListener("submit", handleRoomSubmit);
 
 socket.on("welcome", (user, newCount) => {
     const h3 = room.querySelector("h3");
     h3.innerText = `Room ${roomName} (${newCount})`;
     addMessage(`${user} arrived!`);
-});
+});*/
 
 socket.on("bye", (left, newCount) => {
     const h3 = room.querySelector("h3");
@@ -57,6 +63,7 @@ socket.on("bye", (left, newCount) => {
 });
 
 socket.on("new_message", addMessage);
+socket.on("submit", handleNickSubmit);
 
 socket.on("room_change", (rooms) => {
     const roomList = welcome.querySelector("ul");
