@@ -16,6 +16,7 @@
   "dependencies": {
     "@socket.io/admin-ui": "^0.5.1",
     "express": "^4.18.2",
+    "jsdom": "^21.1.2",
     "mysql": "^2.18.1",
     "mysql2": "^3.2.4",
     "pug": "^3.0.2",
