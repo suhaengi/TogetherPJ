@@ -1,10 +1,12 @@
 // 소켓 객체 생성 및 서버 연결
-const socket = io("http://localhost:8085", { path: "/socket.io", transports: ["websocket"] });
+const socket = io("http://localhost:3036", { path: "/socket.io", transports: ["websocket"] });
 
 // HTML 문서 내의 요소들을 가져와 변수에 저장
 const welcome = document.getElementById("welcome");
 const form = welcome.querySelector("form");
 const room = document.getElementById("room");
+
+
 
 // 채팅방 요소는 화면에서 숨김처리
 room.hidden = true;

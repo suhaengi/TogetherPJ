@@ -9,6 +9,15 @@
     <h1>Chat test</h1>
 </header>
 <main>
+    <input type="text" id="chat-input" placeholder="Type your message..." value="<%= nickname %>">
+
+    <script>
+        window.onload = function() {
+            document.getElementById("chat-input").value = "<%= nickname %>";
+        }
+    </script>
+
+
     <div id="nick">
         <h3></h3>
         <ul></ul>
