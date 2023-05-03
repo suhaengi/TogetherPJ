@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -69,19 +70,20 @@ public class ProfileService {
         return editForm;
     }
 
-   /* public void change(Authentication authentication, EditForm editForm){
+    @Transactional
+   public void change(Authentication authentication, EditForm editForm){
         Member member = memberRepository.findByEmail(authentication.getName());
         member.setNickname(editForm.getNickname());
         member.setIntro(editForm.getIntro());
         member.setPhone(editForm.getPhone());
         member.setPassword(passwordEncoder.encode(editForm.getPassword()));
-    }*/
-
+    }
+/*
    public void modify(EditForm editForm, Authentication authentication){
         Member member=memberRepository.findByEmail(authentication.getName());
         member.change(editForm.getNickname(),editForm.getIntro(),editForm.getPhone(),
                 editForm.getPassword(),passwordEncoder);
         memberRepository.save(member);
-    }
+    }*/
 
 }

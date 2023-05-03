@@ -99,14 +99,14 @@ public class Member {
     return member;
 
   }
-
+/*
   public void change(String nickname, String intro,String phone, String password,PasswordEncoder passwordEncoder){
     this.nickname=nickname;
     this.intro=intro;
     this.phone=phone;
     String secret = passwordEncoder.encode(password);
     this.password=secret;
-  }
+  }*/
 
 }
 

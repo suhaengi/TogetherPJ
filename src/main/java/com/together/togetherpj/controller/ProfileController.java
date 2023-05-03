@@ -50,7 +50,8 @@ public class ProfileController {
         log.info("PROFILE CONTROLLER - POST EDITPROFILE");
 
         String email = authentication.getName();
-        profileService.modify(editForm,authentication);
+        profileService.change(authentication,editForm);
+        //profileService.modify(editForm,authentication);
         EditForm dto = profileService.readForEdit(email);
         //redirectAttributes.addAttribute("dto",dto);
         redirectAttributes.addFlashAttribute("dto","dto");
