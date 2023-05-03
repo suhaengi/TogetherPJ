@@ -3,14 +3,8 @@ const socket = io("http://localhost:3036", { path: "/socket.io", transports: ["w
 
 // HTML 문서 내의 요소들을 가져와 변수에 저장
 const welcome = document.getElementById("welcome");
-const form = welcome.querySelector("form");
+/*const form = welcome.querySelector("form");*/
 const room = document.getElementById("room");
-
-
-
-// 채팅방 요소는 화면에서 숨김처리
-room.hidden = true;
-let roomName;
 
 // 채팅방 메세지 함수
 function addMessage(message) {
@@ -19,29 +13,61 @@ function addMessage(message) {
     li.innerText = message;
     ul.appendChild(li);
 }
-/*
-// 저장된 닉네임이 있는지 확인하고 있으면 그 값을 가져오기
-function loadNickname() {
-    const savedNickname = localStorage.getItem("nickname");
-    if (savedNickname) {
-        socket.send(makeMessage("nickname", savedNickname));
-    }
+
+socket.on('connect', function() {
+    // get logged in user's nickname
+    const nickname = document.getElementById('nickname-input').value;
+
+    // emit 'nickname' event to server with logged in user's nickname
+    socket.emit('nickname', nickname);
+
+    // update the 'nickname-display' element with logged in user's nickname
+    document.getElementById('nickname-display').textContent = nickname;
+});
+
+// app.js
+let nickname;
+
+function setNickname(newNickname) {
+    nickname = newNickname;
+    document.getElementById("nickname-display").textContent = nickname;
+    socket.emit("login", nickname);
 }
 
-loadNickname();
-
-// 새로 입력된 닉네임을 로컬 스토리지에 저장
-function handleNickSubmit(event) {
+document.getElementById("nickname-form").addEventListener("submit", (event) => {
     event.preventDefault();
-    const input = nickForm.querySelector("input");
-    const nickname = input.value;
-    socket.send(makeMessage("nickname", nickname));
-    localStorage.setItem("nickname", nickname);
-}*/
+    const input = document.getElementById("nickname-input");
+    const newNickname = input.value;
+    setNickname(newNickname);
+    input.value = "";
+});
 
-const nickNameDiv = document.getElementById("nick");
-const nickNameH3 = nickNameDiv.querySelector("h3");
-nickNameH3.textContent = nickname;
+document.getElementById("nickname-display").textContent = nickname;
+document.addEventListener('DOMContentLoaded', () => {
+    // Your code here
+    const nicknameForm = document.querySelector('#nickname-form');
+    const nicknameInput = document.querySelector('#nickname-input');
+    const nicknameDisplay = document.querySelector('#nickname-display');
+
+    nicknameForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nickname = nicknameInput.value.trim();
+        nicknameDisplay.textContent = `Nickname: ${nickname}`;
+        socket.emit('login', nickname);
+    });
+});
+
+
+document.querySelector("#nickname").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const nickname = document.querySelector("#nickname input").value;
+    socket.emit("change_nickname", nickname, () => {
+        document.querySelector("#nick h3").textContent = nickname;
+        document.querySelector("#nickname input").value = "";
+    });
+    document.querySelector("#nick").style.display = "none";
+    document.querySelector("#welcome").style.display = "block";
+});
 
 
 // 메시지 입력 폼에서 입력을 받아와 서버로 새로운 메시지를 전송하는 함수
@@ -57,13 +83,10 @@ function handleMessageSubmit(event) {
 }
 
 function showWelcome() {
-    welcome.hidden = false;
-    room.hidden = true;
-    const nickForm = welcome.querySelector("#nick");
-    nickForm.addEventListener("submit", handleNickSubmit);
+/*    const nickForm = welcome.querySelector("#nick");
+    nickForm.addEventListener("submit", handleNickSubmit);*/
     const roomForm = welcome.querySelector("#room");
     roomForm.addEventListener("submit", handleRoomSubmit);
-    loadNickname(); // 추가
 }
 
 
@@ -90,7 +113,7 @@ function handleRoomSubmit(event) {
     input.value = "";
 }
 
-form.addEventListener("submit", handleRoomSubmit);
+/*form.addEventListener("submit", handleRoomSubmit);*/
 
 socket.on("welcome", (user, newCount) => {
     const h3 = room.querySelector("h3");

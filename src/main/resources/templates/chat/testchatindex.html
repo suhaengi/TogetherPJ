@@ -52,67 +52,6 @@
 </div>
 <!-- ./ disconnected modal -->
 
-<!-- new group modal -->
-<div class="modal fade" id="newGroup" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">
-                    <i class="fa fa-users"></i> New Group
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i class="ti-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="group_name" class="col-form-label">Group name</label>
-                        <input type="text" class="form-control" id="group_name">
-                    </div>
-                    <div class="form-group">
-                        <label for="users" class="col-form-label">Users</label>
-                        <input type="text" class="form-control" id="users" placeholder="Find user">
-                    </div>
-                    <div class="form-group">
-                        <div class="avatar-group">
-                            <figure class="avatar">
-                                <span class="avatar-title bg-success rounded-circle">E</span>
-                            </figure>
-                            <figure class="avatar">
-                                <img src="https://via.placeholder.com/150" class="rounded-circle">
-                            </figure>
-                            <figure class="avatar">
-                                <span class="avatar-title bg-danger rounded-circle">S</span>
-                            </figure>
-                            <figure class="avatar">
-                                <img src="https://via.placeholder.com/150" class="rounded-circle">
-                            </figure>
-                            <figure class="avatar">
-                                <span class="avatar-title bg-info rounded-circle">C</span>
-                            </figure>
-                            <a href="#">
-                                <figure class="avatar">
-                                    <span class="avatar-title bg-primary rounded-circle">+</span>
-                                </figure>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="col-form-label">Description</label>
-                        <textarea class="form-control" id="description"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Create Group</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ./ new group modal -->
-
 <!-- layout -->
 <div class="layout">
     <!-- navigation 채팅방 왼쪽 네비게이션-->
@@ -147,12 +86,6 @@
                 <li>
                     <a data-navigation-target="friends" href="#" class="notifiy_badge">
                         <i class="ti-user"></i>
-                    </a>
-                </li>
-                <!-- 별표, 즐겨찾기 기능인듯 제거하면 로그인 하는게 위로 올라옴-->
-                <li data-navigation-target="favorites" class="brackets">
-                    <a href="#">
-                        <i class=""></i>
                     </a>
                 </li>
                 <li>
@@ -328,11 +261,11 @@
 <script src="../../static/chat/js/soho.min.js"></script>
 
 <!-- Examples -->
-<!--<script src="../../static/chat/js/examples.js"></script>-->
+<script src="../../static/chat/js/examples.js"></script>
 
 <!-- 채팅 스크립트-->
 <script src="../../node_modules/socket.io/client-dist/socket.io.js"></script>
-<!--<script src="../../static/chat/public/js/app.js"></script>-->
+<script src="../../static/chat/public/js/app.js"></script>
 
 </body>
 </html>

@@ -106,6 +106,15 @@ wsServer.on("connection", (socket) => {
         done();
     });
 
+    socket.on("get_nickname", (memberId, done) => {
+        const query = `SELECT nickname FROM member WHERE id = ${memberId}`;
+        connection.query(query, (error, results, fields) => {
+            if (error) throw error;
+            const nickname = results[0].nickname;
+            done(nickname);
+        });
+    });
+
     socket.on("nickname", (nickname) => (socket["nickname"] = nickname));
 });
 

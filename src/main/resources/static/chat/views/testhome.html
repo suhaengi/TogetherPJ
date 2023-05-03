@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <style>
+        .ml-auto {
+            margin-left: auto !important;
+        }
+        .form-control {
+            height: calc(2.25rem + 2px) !important;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Together</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../templates/mainpage.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../templates/mainpage.html">mypage</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../../../templates/mainpage.html">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h3>최근 대화내용</h3>
+            <ul class="list-group" id="user-list">
+                <li class="list-group-item">User A</li>
+                <li class="list-group-item">User B</li>
+                <li class="list-group-item">User C</li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div class="row">
+                <div class="col">
+                    <h3 id="room-name"></h3>
+                    <ul class="list-group" id="message-list">
+                    </ul>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <ul class="list-group" id="message-list">
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <form id="msg">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" placeholder="메세지를 입력하세요."></textarea>
+                        </div>
+                        <div class="form-group justify-content-end">
+                            <button type="submit" class="btn btn-primary">보내기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <form id="msg">
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3" placeholder="메세지를 입력하세요."></textarea>
+                        </div>
+                        <div class="form-group d-flex">
+                            <button type="submit" class="btn btn-primary ml-auto">보내기</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+<script src="../../../node_modules/socket.io/client-dist/socket.io.js"></script>
+<script src="../public/js/app.js"></script>
