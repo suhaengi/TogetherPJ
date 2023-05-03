@@ -8,11 +8,8 @@ import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Setter @Getter @ToString
@@ -35,8 +32,8 @@ public class Member {
   private String phone;
   @Column(name = "M_EMAIL", nullable = false, length = 30, unique = true)
   private String email;
-  @Column(name = "M_BIRTH", nullable = false)
-  private Date birth;
+//  @Column(name = "M_BIRTH", nullable = false)
+//  private Date birth;
   @Column(name = "M_NICK", nullable = false, length = 20, unique = true)
   private String nickname;
   @Column(name = "M_IMG")
@@ -70,26 +67,20 @@ public class Member {
       MemberFormDto memberFormDto,
       PasswordEncoder passwordEncoder
   ) {
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     Member member = new Member();
     member.setName(memberFormDto.getName());
     member.setGender(memberFormDto.getGender());
     member.setPhone(memberFormDto.getPhone());
     member.setEmail(memberFormDto.getEmail());
-    try {
-      member.setBirth(sdf.parse(memberFormDto.getBirth()));
-    } catch (ParseException e) {
-      throw new RuntimeException(e);
-    }
+//    member.setBirth(memberFormDto.getBirth());
     member.setNickname(memberFormDto.getNickname());
     member.setJoinDate(LocalDateTime.now());
     member.setSocial(false);
     member.setRole(Role.MEMBER);
-
     String password = passwordEncoder.encode(memberFormDto.getPassword());
     member.setPassword(password);
-
     return member;
+
   }
 }
 

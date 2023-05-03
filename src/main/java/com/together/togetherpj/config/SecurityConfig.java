@@ -29,11 +29,11 @@ public class SecurityConfig {
         .logoutSuccessUrl("/");
 
     http.authorizeHttpRequests()
-        .antMatchers("/css/**", "/assets/**", "/forms/**", "/images/**").permitAll()  // static
-        .antMatchers("/", "/recruit/**", "/member/**").permitAll()  // permit all templates
-        .antMatchers("/user/mypage").hasRole("MEMBER")
-//        .antMatchers("/member/**", "/recruit").hasRole("MEMBER")  // permit user templates
-        .antMatchers("/admin").hasRole("ADMIN")  // permit admin templates
+        .mvcMatchers("/css/**", "/assets/**", "/forms/**", "/images/**").permitAll()  // static
+        .mvcMatchers("/", "/recruit/**", "/member/login", "/member/register").permitAll()  // permit all templates
+        .mvcMatchers("/user/mypage").hasRole("MEMBER")
+//        .mvcMatchers("/member/**", "/recruit").hasRole("MEMBER")  // permit user templates
+        .mvcMatchers("/admin").hasRole("ADMIN")  // permit admin templates
         .anyRequest().authenticated();
 //
 //    http.exceptionHandling()

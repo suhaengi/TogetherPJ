@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
-
+      layout:decorate="~{layouts/layout1}"
+      lang="en">
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
   <style>
@@ -11,8 +11,6 @@
       }
   </style>
 </th:block>
-<!-- 사용자 JS 추가 -->
-<th:block layout:fragment="script"></th:block>
 
 <div layout:fragment="content">
   <form role="form" method="post" action="/member/login">
