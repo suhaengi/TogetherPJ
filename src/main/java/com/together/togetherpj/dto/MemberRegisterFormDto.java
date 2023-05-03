@@ -11,9 +11,12 @@ import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 @Getter @Setter @ToString
-public class MemberFormDto {
+public class MemberRegisterFormDto {
   @NotBlank(message = "패스워드는 필수 항목 입니다.")
   // @Length(min = 10, max=20, message = "최소 10자, 최대 20자를 입력하세요")
   @Length(min = 4, max=12, message = "최소 4자, 최대 12자를 입력하세요")
@@ -34,8 +37,8 @@ public class MemberFormDto {
   @Email(message = "이메일 형식으로 입력하세요.")
   private String email;
 
-//  @Past(message = "생일은 필수 항목 입니다.")
-//  private Date birth;
+  @NotEmpty(message = "생일은 필수 항목 입니다.")
+  private String birth;
 
   @NotEmpty(message = "닉네임은 필수 항목 입니다.")
   private String nickname;

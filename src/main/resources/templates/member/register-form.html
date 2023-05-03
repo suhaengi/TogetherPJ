@@ -29,16 +29,19 @@
 
 
 <div layout:fragment="content">
-  <form action="/member/register" role="form" method="post"  th:object="${memberFormDto}">
+  <form action="/member/register" role="form" method="post"  th:object="${memberRegisterFormDto}">
     <div class="form-group">
       <label th:for="email">이메일주소</label>
-      <input type="email" th:field="*{email}" class="form-control" placeholder="이메일을 입력해주세요">
+      <input th:field="*{email}"
+          type="email" class="form-control" placeholder="이메일을 입력해주세요">
       <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect email</p>
     </div>
     <div class="form-group">
       <label th:for="password">비밀번호</label>
-      <input type="password" th:field="*{password}" class="form-control" placeholder="비밀번호 입력">
-      <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect password</p>
+      <input th:field="*{password}"
+          type="password" class="form-control" placeholder="비밀번호 입력">
+      <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+         class="fieldError">Incorrect password</p>
     </div>
     <div class="form-group">
       <label th:for="name">이름</label>
@@ -47,7 +50,8 @@
     </div>
     <div class="form-group">
       <label th:for="gender">성별</label>
-      <input type="text" th:field="*{gender}" class="form-control" placeholder="성별을 입력해주세요">
+      <input th:field="*{gender}"
+             type="text" class="form-control" placeholder="성별을 입력해주세요">
       <p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="fieldError">Incorrect gender</p>
     </div>
     <div class="form-group">
@@ -55,11 +59,11 @@
       <input type="text" th:field="*{phone}" class="form-control" placeholder="전화번호를 입력해주세요">
       <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError">Incorrect phone</p>
     </div>
-<!--    <div class="form-group">-->
-<!--      <label th:for="phone">생일</label>-->
-<!--      <input type="date" th:field="*{birth}" class="form-control" placeholder="생일을 입력해주세요">-->
-<!--      <p th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}" class="fieldError">Incorrect birth</p>-->
-<!--    </div>-->
+    <div class="form-group">
+      <label th:for="phone">생일</label>
+      <input type="date" th:field="*{birth}" class="form-control" placeholder="생일을 입력해주세요">
+      <p th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}" class="fieldError">Incorrect birth</p>
+    </div>
     <div class="form-group">
       <label th:for="nickname">닉네임</label>
       <input type="text" th:field="*{nickname}" class="form-control" placeholder="닉네임을 입력해주세요">

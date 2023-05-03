@@ -1,6 +1,6 @@
 package com.together.togetherpj.controller;
 
-import com.together.togetherpj.dto.MemberFormDto;
+import com.together.togetherpj.dto.MemberRegisterFormDto;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +25,13 @@ public class MemberController {
 
   @GetMapping("/register")
   public String register(Model model) {
-    model.addAttribute("memberFormDto", new MemberFormDto());
+    model.addAttribute("memberRegisterFormDto", new MemberRegisterFormDto());
     return "member/register-form";
   }
 
   @PostMapping("/register")
   public String memberForm(
-      @Valid MemberFormDto memberFormDto,
+      @Valid MemberRegisterFormDto memberRegisterFormDto,
 //      @RequestParam("birth") @DateTimeFormat (iso = DateTimeFormat.ISO.DATE_TIME) Date birth,
       BindingResult bindingResult,
       Model model) {
@@ -41,7 +41,7 @@ public class MemberController {
     }
 
     try {
-      Member member = Member.createMember(memberFormDto, passwordEncoder);
+      Member member = Member.createMember(memberRegisterFormDto, passwordEncoder);
       memberService.saveMember(member);
       log.info("saved member={}", member);
     } catch (IllegalStateException e) {
