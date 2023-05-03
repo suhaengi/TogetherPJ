@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns="http://www.w3.org/1999/html"
+      layout:decorate="~{layouts/layout1}"
+      lang="en">
+<meta charset="UTF-8">
+
+<th:block layout:fragment="css">
+  <style>
+    header {
+      text-align: center;
+    }
+
+    header .profile {
+      display: block;
+    }
+
+    header .userImg {
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    body {
+      font-family: "Open Sans", Arial, sans-serif;
+      min-height: 100vh;
+      background-color: #ffffff;
+      color: #000000;
+      padding-bottom: 3rem;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 500rem;
+      padding: 0 3rem;
+      display: inline-block;
+    }
+
+    button {
+      color: rgb(255, 255, 255);
+      background-color: #1b3b4d;
+      padding: 8px 22px 10px 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-sizing: border-box;
+      display: inline-block;
+    }
+
+/*    .list {
+      display: flex;
+      justify-content: space-between;
+    }*/
+
+    button:focus {
+      outline: 1rem auto hsl(0, 100%, 50%);
+    }
+
+  </style>
+</th:block>
+
+
+<div layout:fragment="content">
+<body>
+    <header>
+        <div class="row pt-sm-2 pt-lg-0">
+            <div class="intro">
+                <h2><b>[[ ${dto.name} ]]님의 상세 정보</b></h2>
+            </div>
+        </div>
+    </header>
+    <p/>   <p/>
+    <main>
+        <!--<div class="input-group mb-3">
+            <span class="input-group-text">Images</span>
+            <div class="float-end uploadHidden">
+                <button type="button" class="btn btn-primary uploadFileBtn">ADD Files</button>
+            </div>
+        </div>
+        <!—- 첨부 파일 섬네일을 보여줄 부분 &ndash;&gt;
+        <div class="row mt-3">
+            <div class="col ">
+                <div class="container-fluid d-flex uploadResult" style="flex-wrap: wrap;">
+                </div>
+            </div>
+        </div>-->
+
+        <form role="form" method="post" th:action="@{/member/editProfile}" th:object="${editForm}">
+        <div class="row pt-sm-2 pt-lg-0">
+          <ul>
+              <div><h5><b>이름</b></h5></div>
+              <div>[[ ${dto.name} ]]</div>
+          </ul>
+          <ul>
+              <div><h5><b>성별</b></h5></div>
+              <div>[[ ${dto.gender} ]]</div>
+          </ul>
+          <ul>
+              <div><h5><b>생년월일</b></h5></div>
+              <div>---아직---</div>
+          </ul>
+          <ul>
+              <div><h5><b>이메일</b></h5></div>
+              <div>[[ ${dto.email} ]]</div>
+          </ul>
+          <ul>
+              <div><h5><b>닉네임</b></h5></div>
+              <div class>
+                  <input type="text" name="nickname"
+                         th:value="${dto.nickname}"/>
+              </div>
+          </ul>
+          <ul>
+              <div><h5><b>소개글</b></h5></div>
+              <div>
+                  <input type="textarea" name="intro"
+                         th:value="${dto.intro}"/>
+              </div>
+          </ul>
+          <ul>
+              <div><h5><b>전화번호</b></h5></div>
+              <div>
+                  <input type="text" name="phone"
+                         th:value="${dto.phone}"/>
+              </div>
+          </ul>
+
+          <ul>
+              <div><h5><b>비밀번호</b></h5></div>
+              <div>
+                <input type="password"
+                  name="password"
+                /></div>
+          </ul>
+        </div>
+            <div>
+                <button class="btn-primary" type="submit">회원정보 수정</button>
+            </div>
+        </form>
+        <p/>
+        <button class="btn-delete" id="btn-delete">회원 탈퇴</button>
+    </main>
+
+    <!—- 첨부파일 추가를 위한 모달창 -->
+    <div class="modal uploadModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Upload File</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="file" name="files" class="form-control" multiple >
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary uploadBtn">Upload</button>
+                    <button type="button" class="btn btn-outline-dark closeUploadBtn" >Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</div><!--
+<script>
+    //업로드 모달
+    const uploadModal = new bootstrap.Modal(document.querySelector(".uploadModal"))
+
+    document.querySelector(".uploadFileBtn").addEventListener("click", function(e){
+
+        e.stopPropagation()
+        e.preventDefault()
+        uploadModal.show()
+
+    }, false)
+
+
+    document.querySelector(".uploadBtn").addEventListener("click", function(e){
+
+        const formObj = new FormData();
+        const fileInput = document.querySelector("input[name='file']")
+        console.log(fileInput.file)
+        const file = fileInput.file
+        formObj.append("file", file)
+
+        uploadToServer(formObj).then(result => {
+            console.log(result)
+            for (const uploadResult of result) {
+                showUploadFile(uploadResult)
+            }
+            uploadModal.hide()
+        }).catch(e => {
+            uploadModal.hide()
+        })
+    },false)
+
+    const uploadResult = document.querySelector(".uploadResult")
+
+    function showUploadFile({uuid, fileName, link}){
+
+        const str =`<div class="card col-4">
+            <div class="card-header d-flex justify-content-center">
+                ${fileName}
+                <button class="btn-sm btn-danger" onclick="javascript:removeFile('${uuid}', '${fileName}', this)" >X</button>
+            </div>
+            <div class="card-body">
+                 <img src="/member/editProfile" data-src="${uuid+"_"+fileName}" >
+            </div>
+        </div>&lt;!&ndash; card &ndash;&gt;`
+
+        uploadResult.innerHTML += str
+    }
+
+</script>
+--><!--
+<script>
+    const formObj = document.querySelector("#f1")
+    document.querySelector(".modBtn").addEventListener("click",function (e){
+        e.preventDefault()
+        e.stopPropagation()
+        formObj.action = `/member/modify`
+        formObj.method='post'
+        formObj.submit()
+
+    },false)
+</script>
+-->
+</html>

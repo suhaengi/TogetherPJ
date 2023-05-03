@@ -35,7 +35,7 @@ public class RecruitRepositoryTests {
                 .city("yangyang")
                 .content("양양갈사람")
                 .per_num(3)
-                .writer(memberRepository.findByEmail("pw1234@pw").getNickname())
+                .recruitWriter(memberRepository.findByEmail("pw1234@pw"))
                 .startdate(formatter.parse("2023-04-29"))
                 .enddate(formatter.parse("2023-04-30"))
                 .build();

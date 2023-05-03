@@ -64,12 +64,4 @@ public class MemberController {
     return "member/login";
   }
 
-
-
-  @GetMapping("/mypage")
-  public String myPage(){
-    log.info("MemberController - myPage()");
-    return "member/mypage_test";
-  }
-
 }

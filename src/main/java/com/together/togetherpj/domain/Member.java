@@ -4,10 +4,12 @@ import com.together.togetherpj.constant.Gender;
 import com.together.togetherpj.constant.Role;
 import com.together.togetherpj.dto.MemberFormDto;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,11 +38,8 @@ public class Member {
 //  private Date birth;
   @Column(name = "M_NICK", nullable = false, length = 20, unique = true)
   private String nickname;
-  @Column(name = "M_IMG")
-  @Lob
-  private byte[] img;
   @Column(name = "M_JOINDATE")
-  private LocalDateTime joinDate;
+  private LocalDate joinDate;
   @Column(name = "M_SOCIAL")
   @ColumnDefault("0")
   private boolean social;
@@ -51,8 +50,11 @@ public class Member {
   @ColumnDefault("0")
   private long like;
 
-/*  @OneToMany(mappedBy = "recruitWriter")
-  private List<Recruit> recruitList = new ArrayList<>();*/
+  @Column(name="introduce", length=500)
+  private String intro;
+
+  @OneToMany(mappedBy = "recruitWriter")
+  private List<Recruit> recruitList = new ArrayList<>();
 
   @OneToMany(mappedBy = "commentWriter")
   private List<Comment> commentList = new ArrayList<>();
@@ -62,6 +64,21 @@ public class Member {
 
   @OneToMany(mappedBy = "reviewer")
   private List<Review> reviewList = new ArrayList<>();
+
+  /*@OneToOne(mappedBy = "member",
+          cascade = {CascadeType.ALL},
+          fetch = FetchType.LAZY,
+          orphanRemoval = true)
+  @Builder.Default
+  private ProfileImg profileImg;
+
+  public void addImg(String uuid,String fimeName){
+    ProfileImg profileImg = ProfileImg.builder()
+            .uuid(uuid)
+            .fileName(fimeName)
+            .member(this)
+            .build();
+  }*/
 
   public static Member createMember(
       MemberFormDto memberFormDto,
@@ -74,7 +91,7 @@ public class Member {
     member.setEmail(memberFormDto.getEmail());
 //    member.setBirth(memberFormDto.getBirth());
     member.setNickname(memberFormDto.getNickname());
-    member.setJoinDate(LocalDateTime.now());
+    member.setJoinDate(LocalDate.now());
     member.setSocial(false);
     member.setRole(Role.MEMBER);
     String password = passwordEncoder.encode(memberFormDto.getPassword());
@@ -82,6 +99,15 @@ public class Member {
     return member;
 
   }
+
+  public void change(String nickname, String intro,String phone, String password,PasswordEncoder passwordEncoder){
+    this.nickname=nickname;
+    this.intro=intro;
+    this.phone=phone;
+    String secret = passwordEncoder.encode(password);
+    this.password=secret;
+  }
+
 }
 
 //  CREATE TABLE `MEMBER` (

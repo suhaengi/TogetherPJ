@@ -4,7 +4,9 @@ import com.together.togetherpj.constant.State;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Setter
@@ -59,14 +61,14 @@ public class Recruit extends BaseEntity{
     @ColumnDefault("0")
     private long viewcount;
 
-    @Column(name="C_NICK", nullable = false)
-    private String writer;
-/*
     @OneToMany
     @JoinColumn(name = "CC_ID")
     private List<Comment> commentList = new ArrayList<>();
 
-*/
+    @ManyToOne
+    @JoinColumn(name = "M_ID")
+    private Member recruitWriter;
+
     @PrePersist
     public void prePersist(){
         this.state= this.state == null ? State.RECRUITING : this.state;
