@@ -10,7 +10,4 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Long> {
   Member findByEmail(String email);
 
-  @EntityGraph(attributePaths = {"profileImg"})
-  @Query("select m from Member m where m.email =:email")
-  Optional<Member> findByIdWithImages(String email);
 }

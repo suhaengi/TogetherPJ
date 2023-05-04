@@ -3,18 +3,22 @@ package com.together.togetherpj.controller;
 import com.together.togetherpj.dto.EditForm;
 import com.together.togetherpj.dto.ProfileDto;
 import com.together.togetherpj.service.ProfileService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/member")
@@ -58,4 +62,11 @@ public class ProfileController {
         return "redirect:/member/editProfile";
     }
 
+    @PostMapping("/image")
+    public String imageUpload(@RequestPart(value = "imgFile") MultipartFile imgFile, Authentication authentication)
+            throws IOException {
+        profileService.saveImg(authentication,imgFile);
+
+        return "/member/mypage";
+    }
 }

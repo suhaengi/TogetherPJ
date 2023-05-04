@@ -5,18 +5,18 @@ import com.together.togetherpj.dto.EditForm;
 import com.together.togetherpj.dto.ProfileDto;
 import com.together.togetherpj.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class ProfileService {
@@ -40,22 +40,6 @@ public class ProfileService {
         return profileDto;
     }
 
-/*    private ProfileDto entityToDTO(Member member) {
-        ProfileDto profileDto= ProfileDto.builder()
-                .nickname(member.getNickname())
-                .intro(member.getIntro())
-                .gender(member.getGender())
-                .regDate(member.getJoinDate())
-                .like(member.getLike())
-                .build();
-        String fileName = member.getProfileImg().getUuid()+"_"
-                            + member.getProfileImg().getFileName();
-
-        profileDto.setFileName(fileName);
-
-        return profileDto;
-    };*/
-
     public EditForm readForEdit(String email){
         Member member = memberRepository.findByEmail(email);
         EditForm editForm = EditForm.builder()
@@ -70,7 +54,6 @@ public class ProfileService {
         return editForm;
     }
 
-    @Transactional
    public void change(Authentication authentication, EditForm editForm){
         Member member = memberRepository.findByEmail(authentication.getName());
         member.setNickname(editForm.getNickname());
@@ -78,12 +61,19 @@ public class ProfileService {
         member.setPhone(editForm.getPhone());
         member.setPassword(passwordEncoder.encode(editForm.getPassword()));
     }
-/*
-   public void modify(EditForm editForm, Authentication authentication){
-        Member member=memberRepository.findByEmail(authentication.getName());
-        member.change(editForm.getNickname(),editForm.getIntro(),editForm.getPhone(),
-                editForm.getPassword(),passwordEncoder);
-        memberRepository.save(member);
-    }*/
+
+    @Value("c://upload")
+    private String uploadPath;
+    public void saveImg(Authentication authentication, MultipartFile imgFile) throws IOException {
+
+        Member member = memberRepository.findByEmail(authentication.getName());
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid.toString() + "_" + imgFile.getOriginalFilename();
+        File profileImg=  new File(uploadPath,fileName);
+        imgFile.transferTo(profileImg);
+        member.setProfileImgName(fileName);
+        member.setProfileImgPath(uploadPath+"/"+fileName);
+    }
+
 
 }

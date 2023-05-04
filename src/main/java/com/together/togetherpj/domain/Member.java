@@ -3,6 +3,7 @@ package com.together.togetherpj.domain;
 import com.together.togetherpj.constant.Gender;
 import com.together.togetherpj.constant.Role;
 import com.together.togetherpj.dto.MemberFormDto;
+import com.together.togetherpj.dto.ProfileDto;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
@@ -65,6 +66,9 @@ public class Member {
   @OneToMany(mappedBy = "reviewer")
   private List<Review> reviewList = new ArrayList<>();
 
+  @Setter private String profileImgName;
+  @Setter private String profileImgPath;
+
   /*@OneToOne(mappedBy = "member",
           cascade = {CascadeType.ALL},
           fetch = FetchType.LAZY,
@@ -98,7 +102,9 @@ public class Member {
     member.setPassword(password);
     return member;
 
+
   }
+
 /*
   public void change(String nickname, String intro,String phone, String password,PasswordEncoder passwordEncoder){
     this.nickname=nickname;
