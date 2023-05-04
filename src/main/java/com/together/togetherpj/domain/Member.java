@@ -2,14 +2,13 @@ package com.together.togetherpj.domain;
 
 import com.together.togetherpj.constant.Gender;
 import com.together.togetherpj.constant.Role;
-import com.together.togetherpj.dto.MemberFormDto;
+import com.together.togetherpj.dto.MemberRegisterFormDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,20 +64,20 @@ public class Member {
   private List<Review> reviewList = new ArrayList<>();
 
   public static Member createMember(
-      MemberFormDto memberFormDto,
+      MemberRegisterFormDto memberRegisterFormDto,
       PasswordEncoder passwordEncoder
   ) {
     Member member = new Member();
-    member.setName(memberFormDto.getName());
-    member.setGender(memberFormDto.getGender());
-    member.setPhone(memberFormDto.getPhone());
-    member.setEmail(memberFormDto.getEmail());
-    member.setBirth(LocalDate.parse(memberFormDto.getBirth()));
-    member.setNickname(memberFormDto.getNickname());
+    member.setName(memberRegisterFormDto.getName());
+    member.setGender(memberRegisterFormDto.getGender());
+    member.setPhone(memberRegisterFormDto.getPhone());
+    member.setEmail(memberRegisterFormDto.getEmail());
+    member.setBirth(LocalDate.parse(memberRegisterFormDto.getBirth()));
+    member.setNickname(memberRegisterFormDto.getNickname());
     member.setJoinDate(LocalDate.now());
     member.setSocial(false);
     member.setRole(Role.MEMBER);
-    String password = passwordEncoder.encode(memberFormDto.getPassword());
+    String password = passwordEncoder.encode(memberRegisterFormDto.getPassword());
     member.setPassword(password);
     return member;
 

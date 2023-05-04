@@ -20,6 +20,9 @@
             <li class="nav-item" sec:authorize="permitAll()">
               <a class="nav-link active" aria-current="page" href="/recruit">동행</a>
             </li>
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_MEMBER')">
+              <a class="nav-link active" aria-current="page" href="/recruit/write-form">동행 글 작성</a>
+            </li>
           </ul>
         </div>
         <div>
@@ -30,7 +33,7 @@
             <li class="nav-item" sec:authorize="isAnonymous()">
               <a class="nav-link active" aria-current="page" href="/member/login">로그인</a>
             </li>
-            <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MEMBER')">
+            <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_MEMBER')">
               <a class="nav-link active" aria-current="page" href="/member/mypage">마이페이지</a>
             </li>
             <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MEMBER')">

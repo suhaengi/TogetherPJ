@@ -5,6 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 public class Recruit extends BaseEntity{
 
@@ -35,21 +37,22 @@ public class Recruit extends BaseEntity{
     /*@Column(name = "C_TOUR", nullable = true, length = 10)
     private String tour;*/
 
-    @Column(name = "C_CONTENT", nullable = false, length = 1000)
+    @Column(name = "C_CONTENT", nullable = false)
+    @Lob
     private String content;
 
     @Column(name="C_PER_NUM", nullable = false)
-    private long per_num;
+    private long perNum;
 
     @Column(name="C_CUR_NUM", nullable = false)
     @ColumnDefault("1")
-    private long cur_num;
+    private long curNum;
 
     @Column(name="C_TRAVEL_START", nullable = false)
-    private Date startdate;
+    private LocalDate startdate;
 
     @Column(name="C_TRAVEL_END", nullable = false)
-    private Date enddate;
+    private LocalDate enddate;
 
     @Column(name="C_STATE", nullable = false, length = 20)
 

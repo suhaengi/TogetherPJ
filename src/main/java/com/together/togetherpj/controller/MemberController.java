@@ -1,7 +1,7 @@
 package com.together.togetherpj.controller;
 
 import com.together.togetherpj.constant.Gender;
-import com.together.togetherpj.dto.MemberFormDto;
+import com.together.togetherpj.dto.MemberRegisterFormDto;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.Arrays;
 
 @Controller
 @RequestMapping("/member")
@@ -23,18 +22,17 @@ import java.util.Arrays;
 @RequiredArgsConstructor
 public class MemberController {
   private final MemberService memberService;
-  private final PasswordEncoder passwordEncoder;
 
   @GetMapping("/register")
   public String register(Model model) {
     model.addAttribute("genderTypes", Gender.values());
-    model.addAttribute("memberFormDto", new MemberFormDto());
+    model.addAttribute("memberRegisterFormDto", new MemberRegisterFormDto());
     return "member/register-form";
   }
 
   @PostMapping("/register")
   public String memberForm(
-      @Valid MemberFormDto memberFormDto,
+      @Valid MemberRegisterFormDto registerFormDto,
       BindingResult bindingResult,
       Model model) {
 
@@ -43,11 +41,8 @@ public class MemberController {
     }
 
     try {
-      Member member = Member.createMember(memberFormDto, passwordEncoder);
-      memberService.saveMember(member);
-      log.info("saved member={}", member);
+      memberService.saveMember(registerFormDto);
     } catch (IllegalStateException e) {
-      log.error("IllegalStateException={}", e.getMessage());
       model.addAttribute("errorMessage", e.getMessage());
       return "member/register-form";
     }
