@@ -19,7 +19,7 @@ public class SecurityConfig {
 //
     http.formLogin()
         .loginPage("/member/login")
-        .defaultSuccessUrl("/")
+        .defaultSuccessUrl("/", true)
         .usernameParameter("email")
 //        .passwordParameter("pw")
         .failureUrl("/member/login/error")

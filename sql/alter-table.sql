@@ -11,6 +11,9 @@ alter table recruit
     add constraint FK_RECRUIT_C_WRITER_ID
         foreign key (c_writer_id) references member (m_id);
 
+ALTER TABLE test_woon.recruit MODIFY COLUMN c_content LONGTEXT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL;
+
+
 -- COMMENT
 
 alter table comment

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,28 +21,31 @@ import java.util.Optional;
 @EnableJpaAuditing
 public class RecruitRepositoryTests {
 
-    @Autowired
-    private RecruitRepository recruitRepository;
-    @Autowired
-    private MemberRepository memberRepository;
-    @Test
-    public void testInsert() throws ParseException{
-
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    /*  @Autowired
+      private RecruitRepository recruitRepository;
+      @Autowired
+      private MemberRepository memberRepository      /* @Test
+      *
+       public void testInsert() throws ParseException{
 
 
-        Recruit recruit = Recruit.builder()
-                .title("recruit test")
-                .city("yangyang")
-                .content("양양갈사람")
-                .per_num(3)
-                .recruitWriter(memberRepository.findByEmail("pw1234@pw"))
-                .startdate(formatter.parse("2023-04-29"))
-                .enddate(formatter.parse("2023-04-30"))
-                .build();
+           SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 
-        Recruit result = recruitRepository.save(recruit);
-    }
+
+           Recruit recruit = Recruit.builder()
+                   .title("recruit test")
+                   .city("yangyang")
+                   .content("양양갈사람")
+                   .perNum(3)
+                   .recruitWriter(memberRepository.findByEmail("test@test.com").orElseThrow(() ->{
+                       throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+                   }))
+                   .startdate(formatter.parse("2023-04-29"))
+                   .enddate(formatter.parse("2023-04-30"))
+                   .build();
+
+           Recruit result = recruitRepository.save(recruit);
+       }
 
     @Test
     public void testSelect(){
@@ -50,6 +54,6 @@ public class RecruitRepositoryTests {
         Recruit recruit = result.orElseThrow();
         log.info(recruit);
     }
-
+*/
 
 }

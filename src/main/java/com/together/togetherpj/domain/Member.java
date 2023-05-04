@@ -2,16 +2,13 @@ package com.together.togetherpj.domain;
 
 import com.together.togetherpj.constant.Gender;
 import com.together.togetherpj.constant.Role;
-import com.together.togetherpj.dto.MemberFormDto;
-import com.together.togetherpj.dto.ProfileDto;
+import com.together.togetherpj.dto.MemberRegisterFormDto;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +32,13 @@ public class Member {
   private String phone;
   @Column(name = "M_EMAIL", nullable = false, length = 30, unique = true)
   private String email;
-//  @Column(name = "M_BIRTH", nullable = false)
-//  private Date birth;
+  @Column(name = "M_BIRTH", nullable = false)
+  private LocalDate birth;
   @Column(name = "M_NICK", nullable = false, length = 20, unique = true)
   private String nickname;
+  @Column(name = "M_IMG")
+  @Lob
+  private byte[] img;
   @Column(name = "M_JOINDATE")
   private LocalDate joinDate;
   @Column(name = "M_SOCIAL")
@@ -50,9 +50,11 @@ public class Member {
   @Column(name = "M_LIKE")
   @ColumnDefault("0")
   private long like;
-
-  @Column(name="introduce", length=500)
+  @Column(name = "intro")
   private String intro;
+
+  @Setter private String profileImgName;
+  @Setter private String profileImgPath;
 
   @OneToMany(mappedBy = "recruitWriter")
   private List<Recruit> recruitList = new ArrayList<>();
@@ -66,54 +68,25 @@ public class Member {
   @OneToMany(mappedBy = "reviewer")
   private List<Review> reviewList = new ArrayList<>();
 
-  @Setter private String profileImgName;
-  @Setter private String profileImgPath;
-
-  /*@OneToOne(mappedBy = "member",
-          cascade = {CascadeType.ALL},
-          fetch = FetchType.LAZY,
-          orphanRemoval = true)
-  @Builder.Default
-  private ProfileImg profileImg;
-
-  public void addImg(String uuid,String fimeName){
-    ProfileImg profileImg = ProfileImg.builder()
-            .uuid(uuid)
-            .fileName(fimeName)
-            .member(this)
-            .build();
-  }*/
-
   public static Member createMember(
-      MemberFormDto memberFormDto,
+      MemberRegisterFormDto memberRegisterFormDto,
       PasswordEncoder passwordEncoder
   ) {
     Member member = new Member();
-    member.setName(memberFormDto.getName());
-    member.setGender(memberFormDto.getGender());
-    member.setPhone(memberFormDto.getPhone());
-    member.setEmail(memberFormDto.getEmail());
-//    member.setBirth(memberFormDto.getBirth());
-    member.setNickname(memberFormDto.getNickname());
+    member.setName(memberRegisterFormDto.getName());
+    member.setGender(memberRegisterFormDto.getGender());
+    member.setPhone(memberRegisterFormDto.getPhone());
+    member.setEmail(memberRegisterFormDto.getEmail());
+    member.setBirth(LocalDate.parse(memberRegisterFormDto.getBirth()));
+    member.setNickname(memberRegisterFormDto.getNickname());
     member.setJoinDate(LocalDate.now());
     member.setSocial(false);
     member.setRole(Role.MEMBER);
-    String password = passwordEncoder.encode(memberFormDto.getPassword());
+    String password = passwordEncoder.encode(memberRegisterFormDto.getPassword());
     member.setPassword(password);
     return member;
 
-
   }
-
-/*
-  public void change(String nickname, String intro,String phone, String password,PasswordEncoder passwordEncoder){
-    this.nickname=nickname;
-    this.intro=intro;
-    this.phone=phone;
-    String secret = passwordEncoder.encode(password);
-    this.password=secret;
-  }*/
-
 }
 
 //  CREATE TABLE `MEMBER` (
