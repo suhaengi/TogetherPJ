@@ -56,15 +56,19 @@ public class Member {
   @Setter private String profileImgName;
   @Setter private String profileImgPath;
 
+  //동행게시글과의 연관관계
   @OneToMany(mappedBy = "recruitWriter")
   private List<Recruit> recruitList = new ArrayList<>();
 
+  //댓글과의 연관관계
   @OneToMany(mappedBy = "commentWriter")
   private List<Comment> commentList = new ArrayList<>();
 
+  //동행그룹과의 연관관계
   @OneToMany(mappedBy = "applier")
   private List<Applying>  applyingList = new ArrayList<>();
 
+  //후기
   @OneToMany(mappedBy = "reviewer")
   private List<Review> reviewList = new ArrayList<>();
 
@@ -89,18 +93,3 @@ public class Member {
   }
 }
 
-//  CREATE TABLE `MEMBER` (
-//    `M_ID`	VARCHAR(30)	NOT NULL,
-//    `M_PW`	VARCHAR(20)	NOT NULL,
-//    `M_NAME`	VARCHAR(10)	NOT NULL,
-//    `M_GENDER`	VARCHAR(5)	NOT NULL,
-//    `M_PHONE`	VARCHAR(11)	NOT NULL,
-//    `M_EMAIL`	VARCHAR(30)	NOT NULL,
-//    `M_BIRTHDAY`	Date	NOT NULL,
-//    `M_NICK`	VARCHAR(20)	NOT NULL,
-//    `M_IMG`	BLOB	NULL,
-//    `M_JOINDATE`	DATETIME	NOT NULL,
-//    `M_SOCIAL`	BOOLEAN	NOT NULL,
-//    `Role`	VARCHAR(20)	NOT NULL,
-//    `M_LIKE`	NUMBER	NOT NULL	DEFAULT 0
-//    );
