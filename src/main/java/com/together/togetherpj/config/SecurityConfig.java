@@ -15,11 +15,11 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 //
-//    http.csrf().disable();
+    http.csrf().disable();
 //
     http.formLogin()
         .loginPage("/member/login")
-        .defaultSuccessUrl("/")
+        .defaultSuccessUrl("/", true)
         .usernameParameter("email")
 //        .passwordParameter("pw")
         .failureUrl("/member/login/error")
@@ -31,7 +31,7 @@ public class SecurityConfig {
     http.authorizeHttpRequests()
         .mvcMatchers("/css/**", "/assets/**", "/forms/**", "/images/**").permitAll()  // static
         .mvcMatchers("/", "/recruit/**", "/member/login", "/member/register").permitAll()  // permit all templates
-        .mvcMatchers("/user/mypage").hasRole("MEMBER")
+        .mvcMatchers("/member/**").hasRole("MEMBER")
 //        .mvcMatchers("/member/**", "/recruit").hasRole("MEMBER")  // permit user templates
         .mvcMatchers("/admin").hasRole("ADMIN")  // permit admin templates
         .anyRequest().authenticated();
