@@ -4,7 +4,9 @@ import com.together.togetherpj.constant.State;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 @Setter
@@ -59,8 +61,17 @@ public class Recruit extends BaseEntity{
     @ColumnDefault("0")
     private long viewcount;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="C_WRITER_ID")
+    private Member recruitWriter;
+
+   /* //작성자닉네임
     @Column(name="C_NICK", nullable = false)
-    private String writer;
+    private String writerNick;*/
+
+    //동행그룹과의관계
+    @OneToMany(mappedBy = "recruit")
+    private List<Applying>  applyingList = new ArrayList<>();
 /*
     @OneToMany
     @JoinColumn(name = "CC_ID")

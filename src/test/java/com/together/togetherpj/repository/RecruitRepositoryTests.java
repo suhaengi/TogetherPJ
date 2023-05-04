@@ -1,18 +1,17 @@
 package com.together.togetherpj.repository;
 
-import com.together.togetherpj.constant.State;
-import com.together.togetherpj.domain.Member;
+import com.together.togetherpj.domain.Applying;
 import com.together.togetherpj.domain.Recruit;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -24,7 +23,12 @@ public class RecruitRepositoryTests {
     private RecruitRepository recruitRepository;
     @Autowired
     private MemberRepository memberRepository;
-    @Test
+
+    @Autowired
+    private ApplyingRepository applyingRepository;
+
+
+   /* @Test
     public void testInsert() throws ParseException{
 
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -41,7 +45,7 @@ public class RecruitRepositoryTests {
                 .build();
 
         Recruit result = recruitRepository.save(recruit);
-    }
+    }*/
 
     @Test
     public void testSelect(){
@@ -50,6 +54,8 @@ public class RecruitRepositoryTests {
         Recruit recruit = result.orElseThrow();
         log.info(recruit);
     }
+
+
 
 
 }

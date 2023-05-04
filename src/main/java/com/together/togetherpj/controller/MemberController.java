@@ -3,6 +3,7 @@ package com.together.togetherpj.controller;
 import com.together.togetherpj.dto.MemberFormDto;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.service.MemberService;
+import com.together.togetherpj.service.ManageRecruitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,7 @@ import javax.validation.Valid;
 public class MemberController {
   private final MemberService memberService;
   private final PasswordEncoder passwordEncoder;
+  private final ManageRecruitService recruitService;
 
   @GetMapping("/register")
   public String register(Model model) {
@@ -71,5 +73,10 @@ public class MemberController {
     log.info("MemberController - myPage()");
     return "member/mypage_test";
   }
+
+
+
+
+
 
 }

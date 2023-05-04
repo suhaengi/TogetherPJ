@@ -156,20 +156,18 @@
                 <th>
                     동행게시글 제목
                 </th>
-                <th>날짜</th>
+                <th>동행게시글 모집자닉네임</th>
                 <th>현재상태(참여됨or미정)</th>
                 </thead>
-                <tr>
-                    <td>부산여행1(동행상세게시글링크)</td>
-                    <td>5/24-5/25</td>
-                    <td>미정</td>
+                <tbody>
+                <tr th:each="dto:${applyingDTO}">
+                    <td>[[${dto.getIsOk()}]]</td>
+                    <td>[[${dto.getNickname()}]]</td>
+                    <td>[[${dto.getTitle()}]]</td>
 
                 </tr>
-                <tr>
-                    <td>부산여행2(동행상세게시글링크)</td>
-                    <td>5/27-5/28</td>
-                    <td>참여됨</td>
-               </tr>
+                </tbody>
+
 
             </table>
 
@@ -272,7 +270,7 @@
             <button
                     class="btn btn-primary"
                     type="button"
-                    onclick="location.href='accom_list.html'"
+                    onclick="location.href='./user/accom_list.html'"
             >
                 <b>지난 동행모집완료내역 가기</b>
             </button>
