@@ -40,6 +40,10 @@
                         >
                             <h2 class="h4 mb-0">내프로필</h2>
                         </div>
+                        <div th:if="${profileDTO.image != null && dto.boardImages.size() > 0}">
+                            <img style="width:100px" th:each="boarImage: ${dto.boardImages}" th:src="|/view/s_${boarImage.uuid}_${boarImage.fileName}|">
+                        </div>
+
                         <form action="/member/image" method="post" style="width:700px"  enctype="multipart/form-data">
                             <label for="imgFile">프로필 사진</label>
                             <input type="file" name="imgFile" id="imgFile"  accept=".jpg, .png" class="form-control">
