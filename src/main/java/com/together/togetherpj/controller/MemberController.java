@@ -1,6 +1,7 @@
 package com.together.togetherpj.controller;
 
-import com.together.togetherpj.dto.MemberRegisterFormDto;
+import com.together.togetherpj.constant.Gender;
+import com.together.togetherpj.dto.MemberFormDto;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 
 @Controller
 @RequestMapping("/member")
@@ -25,14 +27,14 @@ public class MemberController {
 
   @GetMapping("/register")
   public String register(Model model) {
-    model.addAttribute("memberRegisterFormDto", new MemberRegisterFormDto());
+    model.addAttribute("genderTypes", Gender.values());
+    model.addAttribute("memberFormDto", new MemberFormDto());
     return "member/register-form";
   }
 
   @PostMapping("/register")
   public String memberForm(
-      @Valid MemberRegisterFormDto memberRegisterFormDto,
-//      @RequestParam("birth") @DateTimeFormat (iso = DateTimeFormat.ISO.DATE_TIME) Date birth,
+      @Valid MemberFormDto memberFormDto,
       BindingResult bindingResult,
       Model model) {
 
@@ -41,7 +43,7 @@ public class MemberController {
     }
 
     try {
-      Member member = Member.createMember(memberRegisterFormDto, passwordEncoder);
+      Member member = Member.createMember(memberFormDto, passwordEncoder);
       memberService.saveMember(member);
       log.info("saved member={}", member);
     } catch (IllegalStateException e) {
@@ -64,12 +66,9 @@ public class MemberController {
     return "member/login";
   }
 
-
-
   @GetMapping("/mypage")
   public String myPage(){
     log.info("MemberController - myPage()");
     return "member/mypage_test";
   }
-
 }

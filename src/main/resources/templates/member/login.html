@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
+      layout:decorate="~{layouts/layout1}"
+      lang="en">
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
   <style>
@@ -20,6 +21,7 @@
     <div class="form-group">
       <label th:for="password">비밀번호</label>
       <input type="password" name="password" id="password" class="form-control" placeholder="비밀번호 입력">
+<!--      <input type="password" name="pw" id="password" class="form-control" placeholder="비밀번호 입력">-->
     </div>
     <p th:if="${loginErrorMsg}" class="error" th:text="${loginErrorMsg}"></p>
     <button class="btn btn-primary">로그인</button>

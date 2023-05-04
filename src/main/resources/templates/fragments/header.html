@@ -14,16 +14,16 @@
       <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
+              <a class="nav-link active" aria-current="page" href="/admin">관리</a>
+            </li>
+            <li class="nav-item" sec:authorize="permitAll()">
               <a class="nav-link active" aria-current="page" href="/recruit">동행</a>
             </li>
           </ul>
         </div>
         <div>
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
-              <a class="nav-link active" aria-current="page" href="/admin">관리</a>
-            </li>
             <li class="nav-item" sec:authorize="isAnonymous()">
               <a class="nav-link active" aria-current="page" href="/member/register">회원가입</a>
             </li>
@@ -36,7 +36,7 @@
             <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MEMBER')">
               <a class="nav-link active" aria-current="page" href="/member/logout">로그아웃</a>
             </li>
-            <li class="nav-item">
+            <li>
               <form class="d-flex" role="search">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>

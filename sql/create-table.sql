@@ -1,17 +1,16 @@
 create table member (
                         m_id bigint not null auto_increment,
                         m_name varchar(10) not null,
-                        m_email varchar(50) not null,
+                        m_email varchar(30) not null,
                         m_gender varchar(10) not null,
                         m_img longblob,
-                        m_joindate date not null,
+                        m_joindate datetime(6),
                         m_like bigint default 0,
                         m_nick varchar(20) not null,
                         m_pw varchar(100) not null,
                         m_phone varchar(11) not null,
                         m_role varchar(255),
                         m_social bit default 0,
-                        m_birth date not null,
                         primary key (m_id)
 ) engine=InnoDB;
 
