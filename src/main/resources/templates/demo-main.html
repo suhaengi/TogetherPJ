@@ -13,59 +13,6 @@
       </div>
     </div>
   </th:block>
-<!--  <nav aria-label="pagination">-->
-<!--    <ul class="pagination justify-content-center"-->
-<!--        th:with="start=${(boards.number/5)*5 + 1},-->
-<!--         end=(${(boards.totalPages == 0) ? 1 :-->
-<!--         (start + (5 - 1) < boards.totalPages ? start + (5 - 1) : boards.totalPages)})">-->
-
-<!--      &lt;!&ndash; << button &ndash;&gt;-->
-<!--      <li class="page-item" th:if="${start > 1} or ${boards.number != 0}">-->
-<!--        <a class="page-link" th:href="@{/(page=0)}" th:text="'<<'"></a>-->
-<!--      </li>-->
-
-<!--      &lt;!&ndash; Previous button &ndash;&gt;-->
-<!--      <th:block th:if="${boards.first}">-->
-<!--        <li class="page-item disabled">-->
-<!--          <span class="page-link">Previous</span>-->
-<!--        </li>-->
-<!--      </th:block>-->
-<!--      <th:block th:if="not ${boards.first}">-->
-<!--        <li class="page-item">-->
-<!--          <a class="page-link" th:href="@{/(page=${boards.number - 1})}">Previous</a>-->
-<!--        </li>-->
-<!--      </th:block>-->
-
-<!--      &lt;!&ndash; Board List &ndash;&gt;-->
-<!--      <th:block th:each="p: ${#numbers.sequence(start, end)}">-->
-<!--        <th:block th:if="${boards.number + 1 != p}">-->
-<!--          <li class="page-item">-->
-<!--        </th:block>-->
-<!--        <th:block th:if="${boards.number + 1 == p}">-->
-<!--          <li class="page-item active" >-->
-<!--        </th:block>-->
-<!--        <a class="page-link" th:text="${p}" th:href="@{/(page=${p - 1})}"></a>-->
-<!--        </li>-->
-<!--      </th:block>-->
-
-<!--      &lt;!&ndash; Next button &ndash;&gt;-->
-<!--      <th:block th:if="${boards.last}">-->
-<!--        <li class="page-item disabled">-->
-<!--          <span class="page-link">Next</span>-->
-<!--        </li>-->
-<!--      </th:block>-->
-<!--      <th:block th:if="not ${boards.last}">-->
-<!--        <li class="page-item">-->
-<!--          <a class="page-link" th:href="@{/(page=${boards.number + 1})}">Next</a>-->
-<!--        </li>-->
-<!--      </th:block>-->
-
-<!--      &lt;!&ndash; >> button &ndash;&gt;-->
-<!--      <li class="page-item" th:if="not ${boards.last}">-->
-<!--        <a class="page-link" th:href="@{/(page=${boards.totalPages - 1})}" th:text="'>>'"></a>-->
-<!--      </li>-->
-<!--    </ul>-->
-<!--  </nav>-->
 </div>
 
 </html>
