@@ -42,10 +42,15 @@
                         </div>
                         <!--
                             <div th:if="${profileDTO.image != null && dto.boardImages.size() > 0}">
-                                <img style="width:100px" th:each="boarImage: ${dto.boardImages}" th:src="|/view/s_${boarImage.uuid}_${boarImage.fileName}|">
+                                <img style="width:100px" th:each="boarImage: ${dto.boardImages}"
+                                th:src="|/view/s_${boarImage.uuid}_${boarImage.fileName}|">
                             </div>
     -->
-                            <form action="/member/image" method="post" style="width:700px"  enctype="multipart/form-data">
+
+                        <img id="imgId" th:src="@{/member/image}"
+                             width="100" height="100"  alt="첨부이미지" />
+
+                        <form action="/member/image" method="post" style="width:700px"  enctype="multipart/form-data">
                                 <label for="imgFile">프로필 사진</label>
                                 <input type="file" name="imgFile" id="imgFile"  accept=".jpg, .png" class="form-control">
                                 <button type="submit">변경하기</button>
@@ -116,7 +121,7 @@
 
                             <a
                                     class="btn btn-sm btn-secondary ms-auto"
-                                    href="accom_list.html"
+                                    href="/manage/myParticipate"
                             >내 동행 관리하기</a
                             >
                         </div>

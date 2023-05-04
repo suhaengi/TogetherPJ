@@ -1,6 +1,7 @@
 package com.together.togetherpj.service;
 
 import com.together.togetherpj.domain.Applying;
+import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.dto.ApplyingResponseDTO;
 import com.together.togetherpj.dto.MyApplyResponseDTO;
 import com.together.togetherpj.dto.PastAppliedDTO;
@@ -10,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,8 +30,13 @@ public class ManageRecruitService {
 
     //내가 참여하는 동행게시글 내역
     public List<ApplyingResponseDTO> selectApplying(Authentication authentication){
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });
 
-        List<ApplyingResponseDTO> list=repository.selectApplyingMember(memberRepository.findByEmail(authentication.getName()).getId());
+        List<ApplyingResponseDTO> list
+                =repository.selectApplyingMember(member.getId());
         /*Member member = memberRepository.findByEmail(authentication.getName());
         List<Applying> list=member.getApplyingList();
 
@@ -41,8 +48,12 @@ public class ManageRecruitService {
     }
     //내가 모집장인 현재 동행게시글 내역
     public List<MyApplyResponseDTO> selectMyApply(Authentication authentication){
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });
 
-        List<Applying> list=repository.myApplyingMember(memberRepository.findByEmail(authentication.getName()).getId());
+        List<Applying> list=repository.myApplyingMember(member.getId());
         List<MyApplyResponseDTO> dtoList=list.stream().map(applying-> modelMapper
                 .map(applying, MyApplyResponseDTO.class)).collect(Collectors.toList());
 
@@ -51,7 +62,11 @@ public class ManageRecruitService {
 
     //모집 완료된 동행게시글 내역
     public List<PastAppliedDTO> selectPastApply(Authentication authentication){
-        List<PastAppliedDTO> list=repository.pastApply(memberRepository.findByEmail(authentication.getName()).getId());
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });
+        List<PastAppliedDTO> list=repository.pastApply(member.getId());
 
         return list;
     }

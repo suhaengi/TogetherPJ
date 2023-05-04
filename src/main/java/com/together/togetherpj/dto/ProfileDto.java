@@ -2,10 +2,7 @@ package com.together.togetherpj.dto;
 
 import com.together.togetherpj.constant.Gender;
 import com.together.togetherpj.domain.Member;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
@@ -18,20 +15,25 @@ import java.util.Optional;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProfileDto {
-    private Long fileId;
+
+    //private byte[] profileImg;
+
+    public String profileImgName;
+    public String profileImgPath;
 
     private String name;
     private Gender gender;
     //private Date birth;
     private String email;
+    private LocalDate regDate;
+    private Long like;
 
     private String nickname;
     private String intro;
     private String phone;
 
 
-    private LocalDate regDate;
-    private Long like;
+
 
     /*
     public static ProfileDto from(Member member){

@@ -3,19 +3,21 @@ package com.together.togetherpj.domain;
 import com.together.togetherpj.constant.State;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import java.util.List;
+
 @Setter
 @Getter
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 public class Recruit extends BaseEntity{
 
@@ -63,14 +65,26 @@ public class Recruit extends BaseEntity{
     @ColumnDefault("0")
     private long viewcount;
 
-    @ManyToOne
-    @JoinColumn(name = "C_WRITER_ID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="C_WRITER_ID")
     private Member recruitWriter;
 
-    @OneToMany(mappedBy = "recruit")
-//    @JoinColumn(name = "CC_ID")
-    private List<Comment> commentList = new ArrayList<>();
+   /* //작성자닉네임
+    @Column(name="C_NICK", nullable = false)
+    private String writerNick;*/
 
+    //동행그룹과의관계
     @OneToMany(mappedBy = "recruit")
     private List<Applying>  applyingList = new ArrayList<>();
+/*
+    @OneToMany
+    @JoinColumn(name = "CC_ID")
+    private List<Comment> commentList = new ArrayList<>();
+
+*/
+    @PrePersist
+    public void prePersist(){
+        this.state= this.state == null ? State.RECRUITING : this.state;
+        this.curNum = this.curNum == 0 ? 1 : this.curNum;
+    }
 }

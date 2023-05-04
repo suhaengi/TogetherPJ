@@ -5,6 +5,7 @@ import com.together.togetherpj.dto.EditForm;
 import com.together.togetherpj.dto.ProfileDto;
 import com.together.togetherpj.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.UUID;
 
 @Transactional
@@ -24,24 +27,27 @@ public class ProfileService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public ProfileDto readOne(String email){
-        //board_image까지 조인 처리되는 findByWithImages()를 이용
-        //Optional<Member> result = memberRepository.findByIdWithImages(email);
-        //Member member = result.orElseThrow();
+    //mypage불러올때
+    public ProfileDto readOne(String email) throws IOException{
+
         Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
             throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-        });        //ProfileDto profileDto =entityToDTO(member);
+        });
+
         ProfileDto profileDto= ProfileDto.builder()
                 .nickname(member.getNickname())
                 .intro(member.getIntro())
                 .gender(member.getGender())
                 .regDate(member.getJoinDate())
                 .like(member.getLike())
+                .profileImgPath(member.getProfileImgPath())
+                .profileImgName(member.getProfileImgName())
                 .build();
 
         return profileDto;
     }
 
+    //프로필편집 페이지 불러올 때
     public EditForm readForEdit(String email){
         Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
             throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
@@ -57,6 +63,7 @@ public class ProfileService {
         return editForm;
     }
 
+    //프로필 편집할때
    public void change(Authentication authentication, EditForm editForm){
         String email = authentication.getName();
        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
@@ -68,6 +75,7 @@ public class ProfileService {
         member.setPassword(passwordEncoder.encode(editForm.getPassword()));
     }
 
+    //이미지 업로드할 때
     @Value("c://upload")
     private String uploadPath;
     public void saveImg(Authentication authentication, MultipartFile imgFile) throws IOException {
