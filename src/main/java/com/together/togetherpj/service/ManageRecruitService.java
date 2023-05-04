@@ -3,6 +3,7 @@ package com.together.togetherpj.service;
 import com.together.togetherpj.domain.Applying;
 import com.together.togetherpj.dto.ApplyingResponseDTO;
 import com.together.togetherpj.dto.MyApplyResponseDTO;
+import com.together.togetherpj.dto.PastAppliedDTO;
 import com.together.togetherpj.repository.ApplyingRepository;
 import com.together.togetherpj.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class ManageRecruitService {
     private final ApplyingRepository  repository;
     private final MemberRepository memberRepository;
 
-
+    //내가 참여하는 동행게시글 내역
     public List<ApplyingResponseDTO> selectApplying(Authentication authentication){
 
         List<ApplyingResponseDTO> list=repository.selectApplyingMember(memberRepository.findByEmail(authentication.getName()).getId());
@@ -38,7 +39,7 @@ public class ManageRecruitService {
 
         return list;
     }
-
+    //내가 모집장인 현재 동행게시글 내역
     public List<MyApplyResponseDTO> selectMyApply(Authentication authentication){
 
         List<Applying> list=repository.myApplyingMember(memberRepository.findByEmail(authentication.getName()).getId());
@@ -47,5 +48,13 @@ public class ManageRecruitService {
 
         return dtoList;
     }
+
+    //모집 완료된 동행게시글 내역
+    public List<PastAppliedDTO> selectPastApply(Authentication authentication){
+        List<PastAppliedDTO> list=repository.pastApply(memberRepository.findByEmail(authentication.getName()).getId());
+
+        return list;
+    }
+
 
 }

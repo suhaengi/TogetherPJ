@@ -25,10 +25,16 @@ public interface ApplyingRepository extends JpaRepository<Applying, Long> {
 
     //모집이 완료된 지난 동행참여 및 모집글
     @Query("select r.recruitWriter.nickname as nickname, r.city as city " +
-            ", r.enddate as enddate from Applying a, Recruit r, Member m" +
+            ", r.enddate as enddate, r.id as id from Applying a, Recruit r, Member m" +
             " where (a.applier.id=:m_id or r.recruitWriter.id=:m_id) " +
             "and m.id=a.applier.id and r.id=a.recruit.id  and r.state='FINISHED'")
     List<PastAppliedDTO> pastApply(@Param("m_id")Long id);
+
+    @Query("select r.recruitWriter.nickname as nickname,a.applier.nickname " +
+            " from Applying a, Recruit r, Member m" +
+            " where (a.applier.id=:m_id or r.recruitWriter.id=:m_id) " +
+            "and m.id=a.applier.id and r.id=a.recruit.id  and r.state='FINISHED'")
+    List<PastAppliedDTO> pastApplyw(@Param("m_id")Long id);
 
 
 }

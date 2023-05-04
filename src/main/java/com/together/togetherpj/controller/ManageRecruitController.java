@@ -1,6 +1,8 @@
 package com.together.togetherpj.controller;
 
 import com.together.togetherpj.dto.ApplyingResponseDTO;
+import com.together.togetherpj.dto.MyApplyResponseDTO;
+import com.together.togetherpj.dto.PastAppliedDTO;
 import com.together.togetherpj.service.MemberService;
 import com.together.togetherpj.service.ManageRecruitService;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +29,27 @@ public class ManageRecruitController {
 
     //내가 참여하는 현재진행중인 동행목록
     @GetMapping("/myParticipate")
-    public String plist(Model model,  Authentication authentication){
+    public String todayList(Model model,  Authentication authentication){
         List<ApplyingResponseDTO> applyingResponseDTOList=recruitService.selectApplying(authentication);
         model.addAttribute("applyingDTO", applyingResponseDTOList);
 
+        List<MyApplyResponseDTO> myApplyResponseDTOList=recruitService.selectMyApply(authentication);
+        model.addAttribute("myApplyDTO", myApplyResponseDTOList);
+
         return "myRecruit";
+    }
+
+    @GetMapping("/pastParticipate")
+    public String pastList(Model model, Authentication authentication){
+        List<PastAppliedDTO> pastApplyList=recruitService.selectPastApply(authentication);
+        model.addAttribute("pastApplyDTO", pastApplyList);
+
+        return "./user/accom_list";
+    }
+
+    @GetMapping("/createReview")
+    public String createReview(Long rid, Model model){
+
+        return null;
     }
 }
