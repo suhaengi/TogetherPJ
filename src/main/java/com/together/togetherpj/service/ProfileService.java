@@ -5,60 +5,53 @@ import com.together.togetherpj.dto.EditForm;
 import com.together.togetherpj.dto.ProfileDto;
 import com.together.togetherpj.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.UUID;
 
+@Transactional
 @Service
 @RequiredArgsConstructor
 public class ProfileService {
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public ProfileDto readOne(String email){
-        //board_image까지 조인 처리되는 findByWithImages()를 이용
-        //Optional<Member> result = memberRepository.findByIdWithImages(email);
-        //Member member = result.orElseThrow();
-        Member member = memberRepository.findByEmail(email);
-        //ProfileDto profileDto =entityToDTO(member);
+    //mypage불러올때
+    public ProfileDto readOne(String email) throws IOException{
+
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });
+
         ProfileDto profileDto= ProfileDto.builder()
                 .nickname(member.getNickname())
                 .intro(member.getIntro())
                 .gender(member.getGender())
                 .regDate(member.getJoinDate())
                 .like(member.getLike())
+                .profileImgPath(member.getProfileImgPath())
+                .profileImgName(member.getProfileImgName())
                 .build();
 
         return profileDto;
     }
 
-/*    private ProfileDto entityToDTO(Member member) {
-        ProfileDto profileDto= ProfileDto.builder()
-                .nickname(member.getNickname())
-                .intro(member.getIntro())
-                .gender(member.getGender())
-                .regDate(member.getJoinDate())
-                .like(member.getLike())
-                .build();
-        String fileName = member.getProfileImg().getUuid()+"_"
-                            + member.getProfileImg().getFileName();
-
-        profileDto.setFileName(fileName);
-
-        return profileDto;
-    };*/
-
+    //프로필편집 페이지 불러올 때
     public EditForm readForEdit(String email){
-        Member member = memberRepository.findByEmail(email);
-        EditForm editForm = EditForm.builder()
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });        EditForm editForm = EditForm.builder()
                 .name(member.getName())
                 .gender(member.getGender())
                 //.birth(member.getBirth())
@@ -70,20 +63,33 @@ public class ProfileService {
         return editForm;
     }
 
-    @Transactional
+    //프로필 편집할때
    public void change(Authentication authentication, EditForm editForm){
-        Member member = memberRepository.findByEmail(authentication.getName());
+        String email = authentication.getName();
+       Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+           throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+       });
         member.setNickname(editForm.getNickname());
         member.setIntro(editForm.getIntro());
         member.setPhone(editForm.getPhone());
         member.setPassword(passwordEncoder.encode(editForm.getPassword()));
     }
-/*
-   public void modify(EditForm editForm, Authentication authentication){
-        Member member=memberRepository.findByEmail(authentication.getName());
-        member.change(editForm.getNickname(),editForm.getIntro(),editForm.getPhone(),
-                editForm.getPassword(),passwordEncoder);
-        memberRepository.save(member);
-    }*/
+
+    //이미지 업로드할 때
+    @Value("c://upload")
+    private String uploadPath;
+    public void saveImg(Authentication authentication, MultipartFile imgFile) throws IOException {
+
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });        UUID uuid = UUID.randomUUID();
+        String fileName = uuid.toString() + "_" + imgFile.getOriginalFilename();
+        File profileImg=  new File(uploadPath,fileName);
+        imgFile.transferTo(profileImg);
+        member.setProfileImgName(fileName);
+        member.setProfileImgPath(uploadPath+"/"+fileName);
+    }
+
 
 }

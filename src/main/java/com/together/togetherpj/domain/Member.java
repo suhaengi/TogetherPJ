@@ -2,15 +2,13 @@ package com.together.togetherpj.domain;
 
 import com.together.togetherpj.constant.Gender;
 import com.together.togetherpj.constant.Role;
-import com.together.togetherpj.dto.MemberFormDto;
+import com.together.togetherpj.dto.MemberRegisterFormDto;
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.ColumnDefault;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,10 +32,13 @@ public class Member {
   private String phone;
   @Column(name = "M_EMAIL", nullable = false, length = 30, unique = true)
   private String email;
-//  @Column(name = "M_BIRTH", nullable = false)
-//  private Date birth;
+  @Column(name = "M_BIRTH", nullable = false)
+  private LocalDate birth;
   @Column(name = "M_NICK", nullable = false, length = 20, unique = true)
   private String nickname;
+  @Column(name = "M_IMG")
+  @Lob
+  private byte[] img;
   @Column(name = "M_JOINDATE")
   private LocalDate joinDate;
   @Column(name = "M_SOCIAL")
@@ -49,79 +50,46 @@ public class Member {
   @Column(name = "M_LIKE")
   @ColumnDefault("0")
   private long like;
-
-  @Column(name="introduce", length=500)
+  @Column(name = "intro")
   private String intro;
 
+  @Setter private String profileImgName;
+  @Setter private String profileImgPath;
+
+  //동행게시글과의 연관관계
   @OneToMany(mappedBy = "recruitWriter")
   private List<Recruit> recruitList = new ArrayList<>();
 
+  //댓글과의 연관관계
   @OneToMany(mappedBy = "commentWriter")
   private List<Comment> commentList = new ArrayList<>();
 
+  //동행그룹과의 연관관계
   @OneToMany(mappedBy = "applier")
   private List<Applying>  applyingList = new ArrayList<>();
 
+  //후기
   @OneToMany(mappedBy = "reviewer")
   private List<Review> reviewList = new ArrayList<>();
 
-  /*@OneToOne(mappedBy = "member",
-          cascade = {CascadeType.ALL},
-          fetch = FetchType.LAZY,
-          orphanRemoval = true)
-  @Builder.Default
-  private ProfileImg profileImg;
-
-  public void addImg(String uuid,String fimeName){
-    ProfileImg profileImg = ProfileImg.builder()
-            .uuid(uuid)
-            .fileName(fimeName)
-            .member(this)
-            .build();
-  }*/
-
   public static Member createMember(
-      MemberFormDto memberFormDto,
+      MemberRegisterFormDto memberRegisterFormDto,
       PasswordEncoder passwordEncoder
   ) {
     Member member = new Member();
-    member.setName(memberFormDto.getName());
-    member.setGender(memberFormDto.getGender());
-    member.setPhone(memberFormDto.getPhone());
-    member.setEmail(memberFormDto.getEmail());
-//    member.setBirth(memberFormDto.getBirth());
-    member.setNickname(memberFormDto.getNickname());
+    member.setName(memberRegisterFormDto.getName());
+    member.setGender(memberRegisterFormDto.getGender());
+    member.setPhone(memberRegisterFormDto.getPhone());
+    member.setEmail(memberRegisterFormDto.getEmail());
+    member.setBirth(LocalDate.parse(memberRegisterFormDto.getBirth()));
+    member.setNickname(memberRegisterFormDto.getNickname());
     member.setJoinDate(LocalDate.now());
     member.setSocial(false);
     member.setRole(Role.MEMBER);
-    String password = passwordEncoder.encode(memberFormDto.getPassword());
+    String password = passwordEncoder.encode(memberRegisterFormDto.getPassword());
     member.setPassword(password);
     return member;
 
   }
-/*
-  public void change(String nickname, String intro,String phone, String password,PasswordEncoder passwordEncoder){
-    this.nickname=nickname;
-    this.intro=intro;
-    this.phone=phone;
-    String secret = passwordEncoder.encode(password);
-    this.password=secret;
-  }*/
-
 }
 
-//  CREATE TABLE `MEMBER` (
-//    `M_ID`	VARCHAR(30)	NOT NULL,
-//    `M_PW`	VARCHAR(20)	NOT NULL,
-//    `M_NAME`	VARCHAR(10)	NOT NULL,
-//    `M_GENDER`	VARCHAR(5)	NOT NULL,
-//    `M_PHONE`	VARCHAR(11)	NOT NULL,
-//    `M_EMAIL`	VARCHAR(30)	NOT NULL,
-//    `M_BIRTHDAY`	Date	NOT NULL,
-//    `M_NICK`	VARCHAR(20)	NOT NULL,
-//    `M_IMG`	BLOB	NULL,
-//    `M_JOINDATE`	DATETIME	NOT NULL,
-//    `M_SOCIAL`	BOOLEAN	NOT NULL,
-//    `Role`	VARCHAR(20)	NOT NULL,
-//    `M_LIKE`	NUMBER	NOT NULL	DEFAULT 0
-//    );

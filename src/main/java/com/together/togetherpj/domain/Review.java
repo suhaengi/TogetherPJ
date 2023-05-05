@@ -33,7 +33,7 @@ public class Review {
   @Column(name = "REVIEW_COMMENT", nullable = false, length = 100)
   private String comment;
 
-  @Column(name ="REVIEW_LIKE")
+  /*@Column(name ="REVIEW_LIKE")
   @ColumnDefault("0")
-  private boolean like;
+  private boolean like;*/
 }

@@ -26,12 +26,12 @@ public class EditForm {
     @NotBlank(message = "패스워드는 필수 항목 입니다.")
     @Length(min = 4, max=12, message = "최소 4자, 최대 12자를 입력하세요")
     private String password;
-
+/*
    public void change(String nickname, String intro,String phone, String password){
         this.nickname=nickname;
         this.intro=intro;
         this.phone=phone;
         this.password=password;
-    }
+    }*/
 
 }

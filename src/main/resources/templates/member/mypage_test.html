@@ -38,75 +38,79 @@
                         <div
                                 class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3"
                         >
-                            <i class="ai-user text-primary lead pe-1 me-2"></i>
                             <h2 class="h4 mb-0">내프로필</h2>
                         </div>
-                        <div class="d-md-flex align-items-center">
-                            <div class="d-sm-flex align-items-center">
-                                <div class="rounded-circle bg-size-cover bg-position-center flex-shrink-0"
-                                     style="
-                                          width: 80px;
-                                          height: 80px;
-                                          background-image: url(../../static/images/profile.PNG);"
-                                ></div>
+                        <!--
+                            <div th:if="${profileDTO.image != null && dto.boardImages.size() > 0}">
+                                <img style="width:100px" th:each="boarImage: ${dto.boardImages}"
+                                th:src="|/view/s_${boarImage.uuid}_${boarImage.fileName}|">
+                            </div>
+    -->
 
-                                <div class="pt-3 pt-sm-0 ps-sm-3">
-                                    <h3 class="h5 mb-2">
-                                        닉네임: [[ ${profileDTO.nickname} ]]
-                                    </h3>
+                        <img id="imgId" th:src="@{/member/image}"
+                             width="100" height="100"  alt="첨부이미지" />
 
+                        <form action="/member/image" method="post" style="width:700px"  enctype="multipart/form-data">
+                                <label for="imgFile">프로필 사진</label>
+                                <input type="file" name="imgFile" id="imgFile"  accept=".jpg, .png" class="form-control">
+                                <button type="submit">변경하기</button>
+                            </form>
+
+    <script>
+
+    </script>
+
+                            <div class="row py-4 mb-2 mb-sm-3">
+                                <div class="col-md-6 mb-4 mb-md-0">
+                                    <table class="table mb-0">
+                                        <tr>
+                                            <td class="border-0 text-muted py-1 px-0">닉네임</td>
+                                            <td class="border-0 text-dark fw-medium py-1 ps-3">
+                                                [[ ${profileDTO.nickname} ]]
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="border-0 text-muted py-1 px-0">성별</td>
+                                            <td class="border-0 text-dark fw-medium py-1 ps-3">
+                                                [[ ${profileDTO.gender} ]]
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border-0 text-muted py-1 px-0">소개글</td>
+                                            <td class="border-0 text-dark fw-medium py-1 ps-3">
+                                                [[ ${profileDTO.intro} ]]
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="border-0 text-muted py-1 px-0">가입일</td>
+                                            <td class="border-0 text-dark fw-medium py-1 ps-3">
+                                                [[ ${profileDTO.regDate} ]]
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="col-md-6 d-md-inline-flex">
+                                    <div
+                                            class="w-100 border rounded-3 p-4"
+                                            style="max-width: 212px"
+                                    >
+                                        <h4 class="h5 lh-base mb-0">받은 좋아요 수</h4>
+                                        <p class="fs-sm text-muted mb-0">
+                                            [[ ${profileDTO.like} ]]
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-
-
-                        <div class="row py-4 mb-2 mb-sm-3">
-                            <div class="col-md-6 mb-4 mb-md-0">
-                                <table class="table mb-0">
-                                    <tr>
-                                        <td class="border-0 text-muted py-1 px-0">성별</td>
-                                        <td class="border-0 text-dark fw-medium py-1 ps-3">
-                                            [[ ${profileDTO.gender} ]]
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="border-0 text-muted py-1 px-0">소개글</td>
-                                        <td class="border-0 text-dark fw-medium py-1 ps-3">
-                                            [[ ${profileDTO.intro} ]]
-                                        </td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="border-0 text-muted py-1 px-0">가입일</td>
-                                        <td class="border-0 text-dark fw-medium py-1 ps-3">
-                                            [[ ${profileDTO.regDate} ]]
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            <div class="col-md-6 d-md-inline-flex">
-                                <div
-                                        class="w-100 border rounded-3 p-4"
-                                        style="max-width: 212px"
-                                >
-                                    <h4 class="h5 lh-base mb-0">받은 좋아요 수</h4>
-                                    <p class="fs-sm text-muted mb-0">
-                                        [[ ${profileDTO.like} ]]
-                                    </p>
+                                <div class="button" onClick="location.href='/member/editProfile'">
+                                    <button> 프로필편집 </button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
-                            <div class="button" onClick="location.href='/member/editProfile'">
-                                <button> 프로필편집 </button>
-                            </div>
-                        </form>
-                    </div>
-                </section>
+                    </section>
 
-
-                <!-- 동행후기-->
+                    <!-- 동행후기-->
                 <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
                     <div class="card-body">
                         <div
@@ -117,7 +121,7 @@
 
                             <a
                                     class="btn btn-sm btn-secondary ms-auto"
-                                    href="accom_list.html"
+                                    href="/manage/myParticipate"
                             >내 동행 관리하기</a
                             >
                         </div>
@@ -164,10 +168,7 @@
                         </div>
                     </div>
                 </section>
-
-
-            </div>
         </div>
-    </div>
+</div>
 
 </html>

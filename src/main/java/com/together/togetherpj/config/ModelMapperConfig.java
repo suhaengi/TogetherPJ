@@ -5,7 +5,9 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-//@Configuration
+@Configuration
+// Configuration 어노테이션은 스프링 IOC Container에게 해당 클래스를 Bean 구성 Class임을 알려주는 것이다.
+
 public class ModelMapperConfig {
     @Bean
     public ModelMapper getMapper() {
