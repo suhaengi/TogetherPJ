@@ -1,5 +1,5 @@
 // 소켓 객체 생성 및 서버 연결
-const socket = io("http://localhost:3036", { path: "/socket.io", transports: ["websocket"] });
+const socket = io("http://localhost:8086", { path: "/socket.io", transports: ["websocket"] });
 
 // HTML 문서 내의 요소들을 가져와 변수에 저장
 const welcome = document.getElementById("welcome");
@@ -14,7 +14,7 @@ function addMessage(message) {
     ul.appendChild(li);
 }
 
-socket.on('connect', function() {
+/*socket.on('connect', function() {
     // get logged in user's nickname
     const nickname = document.getElementById('nickname-input').value;
 
@@ -67,7 +67,7 @@ document.querySelector("#nickname").addEventListener("submit", (e) => {
     });
     document.querySelector("#nick").style.display = "none";
     document.querySelector("#welcome").style.display = "block";
-});
+});*/
 
 
 // 메시지 입력 폼에서 입력을 받아와 서버로 새로운 메시지를 전송하는 함수

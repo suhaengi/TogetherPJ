@@ -1,271 +1,34 @@
-<!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Soho - Chat and Discussion Platform</title>
-
-    <!-- Favicon -->
-    <link rel="icon" href="../../static/assets/chat_media/img/favicon.png" type="image/png">
-
-    <!-- Soho css -->
-    <link rel="stylesheet" href="../../static/chat/css/soho.css">
-
+    <title>슬리액</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: initial !important;
+        }
+        body {
+            font-size: 15px;
+            line-height: 1.46668;
+            font-weight: 400;
+            font-variant-ligatures: common-ligatures;
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+        }
+        * {
+            box-sizing: border-box;
+        }
+    </style>
+    <link rel="stylesheet" href="https://a.slack-edge.com/bv1-10/client-boot-styles.82a58f4.min.css?cacheKey=gantry-1674776250" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://a.slack-edge.com/bv1-10/slack-kit-styles.b2b0c56.min.css?cacheKey=gantry-1674776250" crossorigin="anonymous" />
+    <link rel="shortcut icon" href="https://a.slack-edge.com/cebaa/img/ico/favicon.ico" />
 </head>
-
-<!-- disconnected modal -->
-<div class="modal fade" id="disconnected" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-     aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-zoom" role="document">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="connection-error">
-                    <h4 class="text-center">Application disconnected...</h4>
-                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                         y="0px"
-                         width="862.899px" height="862.9px" viewBox="0 0 862.899 862.9" style="enable-background:new 0 0 862.899 862.9;"
-                         xml:space="preserve">
-                        <g>
-                            <g>
-                                <circle cx="385.6" cy="656.1" r="79.8"/>
-                                <path d="M561.7,401c-15.801-10.3-32.601-19.2-50.2-26.6c-39.9-16.9-82.3-25.5-126-25.5c-44.601,0-87.9,8.9-128.6,26.6
-                                    c-39.3,17-74.3,41.3-104.1,72.2L253.5,545c34.899-36.1,81.8-56,132-56c49,0,95.1,19.1,129.8,53.8l25.4-25.399L493,469.7L561.7,401
-                                    z"/>
-                                <path d="M385.6,267.1c107.601,0,208.9,41.7,285.3,117.4l98.5-99.5c-50-49.5-108.1-88.4-172.699-115.6
-                                    c-66.9-28.1-138-42.4-211.101-42.4c-73.6,0-145,14.4-212.3,42.9c-65,27.5-123.3,66.8-173.3,116.9l99,99
-                                    C175.5,309.299,277.3,267.1,385.6,267.1z"/>
-                                <polygon points="616.8,402.5 549.7,469.599 639.2,559.099 549.7,648.599 616.8,715.7 706.3,626.2 795.8,715.7 862.899,648.599
-                                    773.399,559.099 862.899,469.599 795.8,402.5 706.3,492 		"/>
-                            </g>
-                        </g>
-                        <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                    </svg>
-                </div>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary btn-lg">Reconnect</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ./ disconnected modal -->
-
-<!-- layout -->
-<div class="layout">
-    <!-- navigation 채팅방 왼쪽 네비게이션-->
-    <nav class="navigation">
-        <div class="nav-group">
-            <ul>
-                <li>
-                    <a class="logo" href="#">
-                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                             width="33.004px" height="33.003px" viewBox="0 0 33.004 33.003" style="enable-background:new 0 0 33.004 33.003;"
-                             xml:space="preserve">
-                            <g>
-                                <path d="M4.393,4.788c-5.857,5.857-5.858,15.354,0,21.213c4.875,4.875,12.271,5.688,17.994,2.447l10.617,4.161l-4.857-9.998
-                                    c3.133-5.697,2.289-12.996-2.539-17.824C19.748-1.072,10.25-1.07,4.393,4.788z M25.317,22.149l0.261,0.512l1.092,2.142l0.006,0.01
-                                    l1.717,3.536l-3.748-1.47l-0.037-0.015l-2.352-0.883l-0.582-0.219c-4.773,3.076-11.221,2.526-15.394-1.646
-                                    C1.469,19.305,1.469,11.481,6.277,6.672c4.81-4.809,12.634-4.809,17.443,0.001C27.919,10.872,28.451,17.368,25.317,22.149z"/>
-                                <g>
-                                    <circle cx="9.835" cy="16.043" r="1.833"/>
-                                    <circle cx="15.502" cy="16.043" r="1.833"/>
-                                    <circle cx="21.168" cy="16.043" r="1.833"/>
-                                </g>
-                            </g>
-                            <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
-                        </svg>
-                    </a>
-                </li>
-                <li>
-                    <a data-navigation-target="chats" class="active" href="#">
-                        <i class="ti-comment-alt"></i>
-                    </a>
-                </li>
-                <li>
-                    <a data-navigation-target="friends" href="#" class="notifiy_badge">
-                        <i class="ti-user"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="./login.html">
-                        <i class="ti-power-off"></i>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <!-- ./ navigation -->
-
-    <!-- content -->
-    <div class="content">
-
-        <!-- sidebar group -->
-        <div class="sidebar-group">
-
-            <!-- Chats sidebar, 채팅 몸통 -->
-            <div id="chats" class="sidebar active">
-                <header>
-                    <span>Chats</span>
-                    <ul class="list-inline">
-                        <li class="list-inline-item" data-toggle="tooltip" title="New Group" >
-                            <a class="btn btn-light" href="#" data-toggle="modal" data-target="#newGroup">
-                                <i class="fa fa-users"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a class="btn btn-light" data-toggle="tooltip" title="New Chat" href="#" data-navigation-target="friends">
-                                <i class="ti-comment-alt"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item d-lg-none d-sm-block">
-                            <a href="#" class="btn btn-light sidebar-close">
-                                <i class="ti-close"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </header>
-                <form action="">
-                    <input type="text" class="form-control" placeholder="Search chat">
-                </form>
-                <div class="sidebar-body">
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <figure class="avatar avatar-state-success">
-                                <img src="https://via.placeholder.com/150" class="rounded-circle">
-                            </figure>
-                            <div class="users-list-body">
-                                <h5>Patsy Paulton</h5>
-                                <p>Traditional heading elscas sdscsd sdcsdsc</p>
-                                <div class="users-list-action">
-                                    <div class="new-message-count">2</div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item open-chat">
-                            <div>
-                                <figure class="avatar">
-                                    <img src="https://via.placeholder.com/150" class="rounded-circle">
-                                </figure>
-                            </div>
-                            <div class="users-list-body">
-                                <h5>Karl Hubane</h5>
-                                <p>Lorem ipsum dolor sitsdc sdcsdc sdcsdcs</p>
-                                <div class="users-list-action action-toggle">
-                                    <div class="dropdown">
-                                        <a data-toggle="dropdown" href="#">
-                                            <i class="ti-more"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right">
-                                            <a href="#" class="dropdown-item">Open</a>
-                                            <a href="#" data-navigation-target="contact-information" class="dropdown-item">Profile</a>
-                                            <a href="#" class="dropdown-item">Add to archive</a>
-                                            <a href="#" class="dropdown-item">Delete</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- ./ Chats sidebar -->
-
-
-        </div>
-        <!-- ./ sidebar group -->
-
-        <!-- chat -->
-        <div class="chat">
-            <div class="chat-header">
-                <div class="chat-header-user">
-                    <figure class="avatar avatar-lg">
-                        <img src="https://via.placeholder.com/150" class="rounded-circle">
-                    </figure>
-                    <!-- 채팅 목록 유저 이름-->
-                    <div>
-                        <h5>Karl Hubane</h5>
-                        <small class="text-muted">
-                            <i>Online</i>
-                        </small>
-                    </div>
-                </div>
-                <!-- 오른쪽 상단 채팅방 header-->
-                <div class="chat-header-action">
-                    <ul class="list-inline">
-                        <li class="list-inline-item">
-                            <a href="#" class="btn btn-secondary" data-toggle="dropdown">
-                                <i class="ti-more"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right">
-                                <a href="#" data-navigation-target="contact-information" class="dropdown-item">Profile</a>
-                                <a href="#" class="dropdown-item">Add to archive</a>
-                                <a href="#" class="dropdown-item">Delete</a>
-                                <div class="dropdown-divider"></div>
-                                <a href="#" class="dropdown-item">Block</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="chat-body"> <!-- 채팅 대화 내용 -->
-                <div class="messages">
-                    <div class="message-item outgoing-message">
-                        <div class="message-content">
-                            Hey, Maher! I'm waiting for you to send me the files.
-                        </div>
-                        <div class="message-action">
-                            Am 09:34 <i class="ti-double-check"></i>
-                        </div>
-                    </div>
-                    <div class="message-item">
-                        <div class="message-content">
-                            I'm sorry :( I'll send you as soon as possible.
-                        </div>
-                        <div class="message-action">
-                            Pm 14:20
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- 채팅 보내기-->
-            <div class="chat-footer">
-                <form action="", id="msg">
-                    <input type="text" class="form-control" placeholder="Please enter the message"
-                           aria-label="Recipient's username" aria-describedby="button-addon2">
-                    <div class="form-buttons">
-                        <button class="btn btn-primary btn-floating" type="submit">
-                            <i class="fa fa-send"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div> <!-- ./ chat -->
-    </div> <!--content /div-->
-</div> <!-- ./ layout -->
-
-<!-- JQuery -->
-<script src="../../static/chat/vendor/jquery-3.4.1.min.js"></script>
-
-<!-- Popper.js -->
-<script src="../../static/chat/vendor/popper.min.js"></script>
-
-<!-- Bootstrap -->
-<script src="../../static/chat/vendor/bootstrap/bootstrap.min.js"></script>
-
-<!-- Nicescroll -->
-<script src="../../static/chat/vendor/jquery.nicescroll.min.js"></script>
-
-<!-- Soho -->
-<script src="../../static/chat/js/soho.min.js"></script>
-
-<!-- Examples -->
-<script src="../../static/chat/js/examples.js"></script>
-
-<!-- 채팅 스크립트-->
-<script src="../../node_modules/socket.io/client-dist/socket.io.js"></script>
-<script src="../../static/chat/public/js/app.js"></script>
-
+<body>
+<div id="app"></div>
+<script src="/dist/app.js"></script>
 </body>
 </html>
