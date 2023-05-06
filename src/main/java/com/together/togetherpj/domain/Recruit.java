@@ -74,7 +74,7 @@ public class Recruit extends BaseEntity{
     private String writerNick;*/
 
     //동행그룹과의관계
-    @OneToMany(mappedBy = "recruit")
+    @OneToMany(mappedBy = "recruit",cascade = CascadeType.ALL)
     private List<Applying>  applyingList = new ArrayList<>();
 /*
     @OneToMany

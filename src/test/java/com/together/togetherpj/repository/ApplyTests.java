@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -50,7 +51,7 @@ public class ApplyTests {
 
     @Test
     public void testMyApply(){
-        List<Applying> list=applyingRepository.myApplyingMember(1L);
+        List<Applying> list=applyingRepository.myApplyingMember(4L);
 
         List<MyApplyResponseDTO> dtoList=list.stream().map(applying-> modelMapper
                 .map(applying, MyApplyResponseDTO.class)).collect(Collectors.toList());
@@ -61,10 +62,18 @@ public class ApplyTests {
 
     @Test
     public void testPastApply(){
-        applyingRepository.pastApply(1L).forEach(c -> {
-            log.info(c.getCity());
+        applyingRepository.pastApply(4L).forEach(c -> {
+            log.info("+++++++"+c.getCity());
             log.info(c.getNickname());
             log.info(c.getEnddate());
+            log.info(c.getId());
+        });
+    }
+
+    @Test
+    public void testPastAppliers(){
+        applyingRepository.pastApplyw (1L).forEach(c ->{
+            log.info(c.getNickname());
         });
     }
 }
