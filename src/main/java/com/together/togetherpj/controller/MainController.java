@@ -25,7 +25,7 @@ public class MainController {
       Model model){
     model.addAttribute("recruitList",recruitService.findAll());
 
-    return "demo-main";
+    return "mainpage";
   }
 
   @GetMapping("/recruit")
