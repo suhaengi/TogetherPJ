@@ -13,13 +13,14 @@ create table member (
                         m_email varchar(30) not null,
                         m_gender varchar(10) not null,
                         m_img longblob,
-                        m_joindate datetime(6),
+                        m_joindate date,
                         m_like bigint default 0,
                         m_nick varchar(20) not null,
                         m_pw varchar(100) not null,
                         m_phone varchar(11) not null,
                         m_role varchar(255),
                         m_social bit default 0,
+                        m_birth date,
                         primary key (m_id)
 ) engine=InnoDB;
 

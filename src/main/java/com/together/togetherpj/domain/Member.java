@@ -5,6 +5,8 @@ import com.together.togetherpj.constant.Role;
 import com.together.togetherpj.dto.MemberRegisterFormDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -15,7 +17,7 @@ import java.util.List;
 @Setter @Getter @ToString
 @NoArgsConstructor @AllArgsConstructor
 @Entity
-public class Member {
+public class Member extends BaseEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,8 +41,8 @@ public class Member {
   @Column(name = "M_IMG")
   @Lob
   private byte[] img;
-  @Column(name = "M_JOINDATE")
-  private LocalDate joinDate;
+//  @Column(name = "M_JOINDATE")
+//  private LocalDate joinDate;
   @Column(name = "M_SOCIAL")
   @ColumnDefault("0")
   private boolean social;
@@ -83,7 +85,7 @@ public class Member {
     member.setEmail(memberRegisterFormDto.getEmail());
     member.setBirth(LocalDate.parse(memberRegisterFormDto.getBirth()));
     member.setNickname(memberRegisterFormDto.getNickname());
-    member.setJoinDate(LocalDate.now());
+//    member.setJoinDate(LocalDate.now());
     member.setSocial(false);
     member.setRole(Role.MEMBER);
     String password = passwordEncoder.encode(memberRegisterFormDto.getPassword());
