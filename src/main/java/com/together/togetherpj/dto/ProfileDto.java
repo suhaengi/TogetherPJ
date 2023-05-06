@@ -23,7 +23,7 @@ public class ProfileDto {
 
     private String name;
     private Gender gender;
-    //private Date birth;
+    private LocalDate birth;
     private String email;
     private LocalDate regDate;
     private Long like;

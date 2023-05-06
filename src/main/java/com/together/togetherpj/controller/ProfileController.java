@@ -73,7 +73,7 @@ public class ProfileController {
             throws IOException {
         profileService.saveImg(authentication,imgFile);
 
-        return "/member/mypage";
+        return "redirect:/member/mypage";
     }
 
     @GetMapping("/image")

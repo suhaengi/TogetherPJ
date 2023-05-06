@@ -40,15 +40,10 @@
                         >
                             <h2 class="h4 mb-0">내프로필</h2>
                         </div>
-                        <!--
-                            <div th:if="${profileDTO.image != null && dto.boardImages.size() > 0}">
-                                <img style="width:100px" th:each="boarImage: ${dto.boardImages}"
-                                th:src="|/view/s_${boarImage.uuid}_${boarImage.fileName}|">
-                            </div>
-    -->
+
 
                         <img id="imgId" th:src="@{/member/image}"
-                             width="100" height="100"  alt="첨부이미지" />
+                             width="300" height="300" style="border-radius: 50%" alt="프로필 이미지가 존재하지 않습니다" />
 
                         <form action="/member/image" method="post" style="width:700px"  enctype="multipart/form-data">
                                 <label for="imgFile">프로필 사진</label>
