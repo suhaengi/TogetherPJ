@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Transactional
@@ -38,7 +39,7 @@ public class ProfileService {
                 .nickname(member.getNickname())
                 .intro(member.getIntro())
                 .gender(member.getGender())
-                .regDate(member.getJoinDate())
+                .regDate(LocalDate.from(member.getRegDate()))
                 .like(member.getLike())
                 .profileImgPath(member.getProfileImgPath())
                 .profileImgName(member.getProfileImgName())
