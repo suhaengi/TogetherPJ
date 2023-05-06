@@ -30,9 +30,7 @@ public class ProfileService {
     //mypage불러올때
     public ProfileDto readOne(String email) throws IOException{
 
-        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
-            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-        });
+        Member member = memberRepository.findByEmail(email).orElseThrow();
 
         ProfileDto profileDto= ProfileDto.builder()
                 .nickname(member.getNickname())
@@ -50,9 +48,8 @@ public class ProfileService {
 
     //프로필편집 페이지 불러올 때
     public EditForm readForEdit(String email){
-        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
-            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-        });        EditForm editForm = EditForm.builder()
+        Member member = memberRepository.findByEmail(email).orElseThrow();
+        EditForm editForm = EditForm.builder()
                 .name(member.getName())
                 .gender(member.getGender())
                 .birth(member.getBirth())
@@ -67,14 +64,25 @@ public class ProfileService {
     //프로필 편집할때
    public void change(Authentication authentication, EditForm editForm){
         String email = authentication.getName();
-       Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
-           throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-       });
+       Member member = memberRepository.findByEmail(email).orElseThrow();
         member.setNickname(editForm.getNickname());
         member.setIntro(editForm.getIntro());
         member.setPhone(editForm.getPhone());
-        member.setPassword(passwordEncoder.encode(editForm.getPassword()));
-    }
+        if(editForm.getPassword() != null){
+            member.setPassword(passwordEncoder.encode(editForm.getPassword()));
+        }
+
+   }
+
+/*    public void change(Authentication authentication, EditForm editForm){
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });
+        member.setNickname(editForm.getNickname());
+        member.setIntro(editForm.getIntro());
+        member.setPhone(editForm.getPhone());
+    }*/
 
     //이미지 업로드할 때
     @Value("c://upload")
@@ -82,9 +90,8 @@ public class ProfileService {
     public void saveImg(Authentication authentication, MultipartFile imgFile) throws IOException {
 
         String email = authentication.getName();
-        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
-            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-        });        UUID uuid = UUID.randomUUID();
+        Member member = memberRepository.findByEmail(email).orElseThrow();
+        UUID uuid = UUID.randomUUID();
         String fileName = uuid.toString() + "_" + imgFile.getOriginalFilename();
         File profileImg=  new File(uploadPath,fileName);
         imgFile.transferTo(profileImg);
