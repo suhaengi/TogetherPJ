@@ -3,6 +3,7 @@ package com.together.togetherpj.controller;
 import com.together.togetherpj.constant.State;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
+import com.together.togetherpj.dto.ViewForm;
 import com.together.togetherpj.service.MemberService;
 import com.together.togetherpj.service.RecruitService;
 import lombok.RequiredArgsConstructor;
@@ -54,4 +55,14 @@ public class RecruitController {
 
     return "redirect:/";
   }
+/*  @GetMapping({"/read", "/modify"})
+  public void read(Long bno, Model model){
+
+    ViewForm boardDTO = recruitService.readOne(bno);
+
+    log.info(boardDTO);
+
+    model.addAttribute("dto", boardDTO);
+
+  }*/
 }

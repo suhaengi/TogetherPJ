@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +57,7 @@ public class ProfileController {
 
     @PostMapping("/editProfile")
     public String modify(Authentication authentication,
-                         EditForm editForm, RedirectAttributes redirectAttributes){
+                         @Valid EditForm editForm, RedirectAttributes redirectAttributes){
         log.info("PROFILE CONTROLLER - POST EDITPROFILE");
 
         String email = authentication.getName();

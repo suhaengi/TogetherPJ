@@ -4,12 +4,14 @@ import com.together.togetherpj.constant.State;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
+import com.together.togetherpj.dto.ViewForm;
 import com.together.togetherpj.repository.MemberRepository;
 import com.together.togetherpj.repository.RecruitRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -19,6 +21,13 @@ import java.util.List;
 public class RecruitService {
   private final RecruitRepository recruitRepository;
   private final MemberRepository memberRepository;
+
+//  public ViewForm readOne(Long bno) throws IOException{
+//    Recruit recruit = recruitRepository.findById(bno).orElseThrow();
+//    Member member = recruit.getRecruitWriter();
+//
+//
+//  }
 
   public List<Recruit> findAll(){
     return recruitRepository.findAll();

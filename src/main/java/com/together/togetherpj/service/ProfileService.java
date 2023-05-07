@@ -15,9 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -31,9 +29,7 @@ public class ProfileService {
     //mypage불러올때
     public ProfileDto readOne(String email) throws IOException{
 
-        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
-            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-        });
+        Member member = memberRepository.findByEmail(email).orElseThrow();
 
         ProfileDto profileDto= ProfileDto.builder()
                 .nickname(member.getNickname())
@@ -68,13 +64,13 @@ public class ProfileService {
     //프로필 편집할때
    public void change(Authentication authentication, EditForm editForm){
         String email = authentication.getName();
-       Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
-           throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-       });
+       Member member = memberRepository.findByEmail(email).orElseThrow();
         member.setNickname(editForm.getNickname());
         member.setIntro(editForm.getIntro());
         member.setPhone(editForm.getPhone());
-        member.setPassword(passwordEncoder.encode(editForm.getPassword()));
+        if(editForm.getPassword()!= ""){
+            member.setPassword(passwordEncoder.encode(editForm.getPassword()));
+        }
     }
 
     //이미지 업로드할 때
@@ -83,10 +79,9 @@ public class ProfileService {
     public void saveImg(Authentication authentication, MultipartFile imgFile) throws IOException {
 
         String email = authentication.getName();
-        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
-            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-        });        UUID uuid = UUID.randomUUID();
-        String fileName = uuid.toString() + "_" + imgFile.getOriginalFilename();
+        Member member = memberRepository.findByEmail(email).orElseThrow();
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid + "_" + imgFile.getOriginalFilename();
         File profileImg=  new File(uploadPath,fileName);
         imgFile.transferTo(profileImg);
         member.setProfileImgName(fileName);

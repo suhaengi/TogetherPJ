@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row mt-3">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    Board Read
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Bno</span>
+                        <input type="text" class="form-control" th:value="${dto.bno}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Title</span>
+                        <input type="text" class="form-control" th:value="${dto.title}" readonly>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Content</span>
+                        <textarea class="form-control col-sm-5" rows="5" readonly>[[${dto.content}]]</textarea>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Writer</span>
+                        <input type="text" class="form-control" th:value="${dto.writer}" readonly>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">RegDate</span>
+                        <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">ModDate</span>
+                        <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
+
+                    <div class="my-4" th:with="user=${#authentication.principal}">
+                        <div class="float-end" th:with="link = ${pageRequestDTO.getLink()}">
+                            <a th:href="|@{/board/list}?${link}|" class="text-decoration-none">
+                                <button type="button" class="btn btn-primary">List</button>
+                            </a>
+                            <a th:if="${#user != null && #user.username == dto.writer}"
+                               th:href="|@{/board/modify(bno=${dto.bno})}&${link}|" class="text-decoration-none">
+                                <button type="button" class="btn btn-secondary">Modify</button>
+                            </a>
+                        </div>
+                    </div>
+
+                </div><!--end card body-->
+
+                <div class="col">
+                    <div class="card" th:if="${dto.fileNames != null && dto.fileNames.size() > 0}">
+                        <img class="card-img-top"
+                             th:each="fileName: ${dto.fileNames}"
+                             th:src="|/view/${fileName}|">
+                    </div>
+
+                </div><!--end card-->
+            </div><!-- end col-->
+        </div><!-- end row-->
+
+        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="my-4 ">
+                    <button class="btn btn-info  addReplyBtn">ADD REPLY</button>
+                </div>
+                <ul class="list-group replyList">
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <ul class="pagination replyPaging">
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="modal registerModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Register Reply</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Reply Text</span>
+                            <input type="text" class="form-control replyText" >
+                        </div>
+                        <div class="input-group mb-3" th:with="user=${#authentication.principal}">
+                            <span class="input-group-text">Replyer</span>
+                            <input type="text" class="form-control replyer" th:value="${user.username}"readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary registerBtn">Register</button>
+                        <button type="button" class="btn btn-outline-dark closeRegisterBtn" >Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end regist modal -->
+
+        <div class="modal modifyModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title replyHeader"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Reply Text</span>
+                            <input type="text" class="form-control modifyText" >
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info modifyBtn">Modify</button>
+                        <button type="button" class="btn btn-danger removeBtn">Remove</button>
+                        <button type="button" class="btn btn-outline-dark closeModifyBtn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div> <!--modifyModal -->
+
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <script src="/js/reply.js"></script>
+
+    </div>
+</div>
+</body>
+</html>
