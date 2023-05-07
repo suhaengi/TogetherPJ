@@ -28,17 +28,17 @@ public class SecurityConfig {
         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
         .logoutSuccessUrl("/");
 
+
     http.authorizeHttpRequests()
         .mvcMatchers("/css/**", "/assets/**", "/forms/**", "/images/**").permitAll()  // static
         .mvcMatchers("/", "/recruit/**", "/member/login", "/member/register").permitAll()  // permit all templates
         .mvcMatchers("/member/**").hasRole("MEMBER")
-//        .mvcMatchers("/member/**", "/recruit").hasRole("MEMBER")  // permit user templates
         .mvcMatchers("/admin").hasRole("ADMIN")  // permit admin templates
         .anyRequest().authenticated();
-//
-//    http.exceptionHandling()
-//        .authenticationEntryPoint(new CustomEntryPoint());
-//
+
+    http.exceptionHandling()
+        .authenticationEntryPoint(new CustomEntryPoint());
+
     return http.build();
   }
 

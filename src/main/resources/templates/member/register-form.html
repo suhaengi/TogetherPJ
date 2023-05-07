@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/layout1}">
+      layout:decorate="~{layouts/sb-and-logis-layout}">
 
-<!-- 사용자 CSS 추가 -->
+<head>
+  <title>Together Register</title>
+</head>
 <th:block layout:fragment="preEndHead">
   <style>
       .fieldError {
@@ -11,7 +13,96 @@
       }
   </style>
 </th:block>
-<!-- 사용자 스크립트 추가 -->
+<body layout:fragment="content">
+  <!-- ======= Hero Section ======= -->
+  <!-- <section id="hero" class="hero d-flex align-items-center"> -->
+  <section
+    style="width:100%;min-height:50vh;background-color:var(--color-secondary);background-image:url('/assets/img/hero-bg.png');background-size:cover;background-position:center;position:relative;padding:120px 0 60px 0;"
+    id="hero" class="d-flex align-items-center">
+    <div class="container">
+
+      <div class="card o-hidden border-0 shadow-lg my-5">
+        <div class="card-body p-0 bg-gray-400">
+          <!-- Nested Row within Card Body -->
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                </div>
+                <form class="user">
+                  <div class="form-group">
+                    <label class="text-dark m-0 p-0">이메일</label>
+                    <input type="email" class="form-control form-control-user" id="email"
+                      placeholder="이메일을 입력해주세요">
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-1 mb-sm-0">
+                      <label class="text-dark m-0 p-0">전화번호</label>
+                      <input type="text" class="form-control form-control-user" id="phoneNumber"
+                        placeholder="010-xxxx-xxxx">
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="text-dark m-0 p-0">Birth Date</label>
+                      <input type="date" class="form-control form-control-user" id="birthDate" placeholder="Last Name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-1 mb-sm-0">
+                      <label class="text-dark m-0 p-0">Nickname</label>
+                      <input type="text" class="form-control form-control-user" id="nickname"
+                        placeholder="Enter your nickname">
+                    </div>
+                  </div>
+                  <!-- <div class="form-group row">
+                    <div class="col-sm-6 mb-3 mb-sm-0">
+                      <input type="text" class="form-control form-control-user" id="exampleFirstName"
+                        placeholder="First Name">
+                    </div>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control form-control-user" id="exampleLastName"
+                        placeholder="Last Name">
+                    </div>
+                  </div> -->
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-1 mb-sm-0">
+                      <label class="text-dark m-0 p-0">Password</label>
+                      <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                        placeholder="Password">
+                    </div>
+                    <div class="col-sm-6">
+                      <label class="text-dark m-0 p-0">Password Check</label>
+                      <input type="password" class="form-control form-control-user" id="exampleRepeatPassword"
+                        placeholder="Repeat Password">
+                    </div>
+                  </div>
+                  <a href="register2.html" class="btn btn-primary btn-user btn-block">
+                    Next
+                  </a>
+                  <hr>
+                  <a href="index.html" class="btn btn-warning btn-user btn-block text-dark">
+                    Register with Kakao
+                  </a>
+                </form>
+                <hr>
+                <div class="text-center">
+                  <a class="small" href="forgot-password.html">Forgot Password?</a>
+                </div>
+                <div class="text-center">
+                  <a class="small" href="login.html">Already have an account? Login!</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2 hero-img">
+              <img src="/assets/sb/img/login.jpg" class="img-fluid mb-3 mb-lg-0 " alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Hero Section -->
+</body>
 <th:block layout:fragment="script">
   <script th:inline="javascript">
       $(document).ready(function(){
@@ -22,53 +113,4 @@
       });
   </script>
 </th:block>
-
-
-<div layout:fragment="content">
-  <form action="/member/register" role="form" method="post"  th:object="${memberRegisterFormDto}">
-    <div class="form-group">
-      <label th:for="title">Title</label>
-      <input type="text" th:field="*{email}" class="form-control" placeholder="이메일을 입력해주세요">
-      <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect email</p>
-    </div>
-    <div class="form-group">
-      <label th:for="password">비밀번호</label>
-      <input type="password" th:field="*{password}" class="form-control" placeholder="비밀번호 입력">
-      <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect password</p>
-    </div>
-    <div class="form-group">
-      <label th:for="name">이름</label>
-      <input type="text" th:field="*{name}" class="form-control" placeholder="이름을 입력해주세요">
-      <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect name</p>
-    </div>
-    <div class="form-group">
-      <div>성별</div>
-      <div th:each="type: ${genderTypes}" class="form-check form-check-inline">
-        <input type="radio" th:field="*{gender}" th:value="${type.name()}" class="form-check-input">
-        <label th:for="${#ids.prev('gender')}" th:text="${type.description}" class="form-check-label"></label>
-      </div>
-      <p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="fieldError">Incorrect gender</p>
-    </div>
-    <div class="form-group">
-      <label th:for="phone">전화번호</label>
-      <input type="text" th:field="*{phone}" class="form-control" placeholder="전화번호를 입력해주세요">
-      <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError">Incorrect phone</p>
-    </div>
-    <div class="form-group">
-      <label th:for="phone">생일</label>
-      <input type="date" th:field="*{birth}" class="form-control" placeholder="생일을 입력해주세요">
-      <p th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}" class="fieldError">Incorrect birth</p>
-    </div>
-    <div class="form-group">
-      <label th:for="nickname">닉네임</label>
-      <input type="text" th:field="*{nickname}" class="form-control" placeholder="닉네임을 입력해주세요">
-      <p th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="fieldError">Incorrect nickname</p>
-    </div>
-    <div style="text-align: center">
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
-  </form>
-</div>
-
 </html>
