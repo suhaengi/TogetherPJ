@@ -1,27 +1,21 @@
 package com.together.togetherpj.controller;
 
-import com.together.togetherpj.domain.Member;
-import com.together.togetherpj.dto.EditForm;
 import com.together.togetherpj.dto.ProfileDto;
+import com.together.togetherpj.dto.PwForm;
 import com.together.togetherpj.service.ProfileService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,39 +35,42 @@ public class ProfileController {
 
         model.addAttribute("profileDTO",profileDto);
         log.info("PROFILE CONTROLLER - myPage()");
-        return "member/mypage_test";
+        return "member/mypage";
     }
 
     @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
     @GetMapping("/editProfile")
     public String EditGet(Model model,Authentication authentication){
         String email = authentication.getName();
-        EditForm editForm = profileService.readForEdit(email);
-        model.addAttribute("dto",editForm);
+        ProfileDto dto = profileService.readForEdit(email);
+        model.addAttribute("dto",dto);
         log.info("PROFILE CONTROLLER - GET EDITPROFILE");
-        return "member/editProfile_test";
+        return "member/editProfile";
     }
 
     @PostMapping("/editProfile")
-    public String modify(Authentication authentication,
-                         EditForm editForm, RedirectAttributes redirectAttributes){
+    public String modify(Authentication authentication, ProfileDto profileDto){
         log.info("PROFILE CONTROLLER - POST EDITPROFILE");
+        profileService.change(authentication,profileDto);
 
-        String email = authentication.getName();
-        profileService.change(authentication,editForm);
-        //profileService.modify(editForm,authentication);
-        EditForm dto = profileService.readForEdit(email);
-        //redirectAttributes.addAttribute("dto",dto);
-        redirectAttributes.addFlashAttribute("dto","dto");
-        return "redirect:/member/editProfile";
+        return "redirect:/member/mypage";
     }
+
+    @PostMapping("/changePw")
+    public String changePw(Authentication authentication, @Valid PwForm pwForm){
+        log.info("PROFILE CONTROLLER - POST changePw");
+        profileService.PWchange(authentication,pwForm);
+        return "redirect:/member/mypage";
+    }
+
+
 
     @PostMapping("/image")
     public String imageUpload(@RequestPart(value = "imgFile") MultipartFile imgFile, Authentication authentication)
             throws IOException {
         profileService.saveImg(authentication,imgFile);
 
-        return "/member/mypage";
+        return "redirect:/member/mypage";
     }
 
     @GetMapping("/image")

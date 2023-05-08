@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/sb-and-logis-layout}"
+      lang="en">
+<meta charset="utf-8" />
+<div layout:fragment="content">
+
+<div class="breadcrumbs">
+  <div
+          class="page-header d-flex align-items-center">
+<!--          style="background-image: url('../../static/assets/img/together.jpg')"-->
+    <div class="container position-relative">
+      <div class="row d-flex justify-content-center">
+        <div class="col-lg-6 text-center">
+          <h2>마이페이지</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <nav>
+    <div class="container">
+      <ol>
+        <li><a href="/">Home</a></li>
+        <li>마이페이지</li>
+      </ol>
+    </div>
+  </nav>
+</div>
+
+
+<main id="main">
+
+    <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+      <div class="row pt-sm-2 pt-lg-0">
+          <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+            <div class="card-body">
+              <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                <h2 class="h4 mb-0">내프로필</h2>
+              </div>
+
+              <!--보여지는 프로필 이미지-->
+                <div class="d-md-flex align-items-center">
+                  <img id="imgId" th:src="@{/member/image}"
+                     width="300" height="300" style="border-radius: 50%" alt="　　프로필 이미지가 존재하지 않습니다　　" />
+                </div>
+
+              <!-- 이미지 등록 폼-->
+              <div class="pt-3 pt-sm-0 ps-sm-3">
+                  <form action="/member/image" method="post" style="inline-size: auto"  enctype="multipart/form-data">
+                      <label for="imgFile">프로필 사진</label>
+                      <input type="file" name="imgFile" id="imgFile"  accept=".jpg, .png" class="form-control">
+                      <button type="submit" class="btn btn-sm btn-secondary ms-auto">변경하기</button>
+                      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                  </form>
+              </div>
+
+              <div class="pt-3 pt-sm-0 ps-sm-3">
+                <div class="w-100 pt-3 pt-md-0 ms-md-auto"
+                 style="max-width: 212px">
+                </div>
+                <div class="row py-4 mb-2 mb-sm-3">
+                  <div class="col-md-6 mb-4 mb-md-0">
+                    <table class="table mb-0">
+                      <tr>
+                        <td class="border-0 text-muted py-1 px-0">닉네임</td>
+                        <td class="border-0 text-dark fw-medium py-1 ps-3">
+                          [[ ${profileDTO.nickname} ]]
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="border-0 text-muted py-1 px-0">성별</td>
+                        <td class="border-0 text-dark fw-medium py-1 ps-3">
+                          [[ ${profileDTO.gender} ]]
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="border-0 text-muted py-1 px-0">소개글</td>
+                        <td class="border-0 text-dark fw-medium py-1 ps-3">
+                         [[ ${profileDTO.intro} ]]
+                        </td>
+                     </tr>
+
+                      <tr>
+                        <td class="border-0 text-muted py-1 px-0">가입일</td>
+                        <td class="border-0 text-dark fw-medium py-1 ps-3">
+                         [[ ${profileDTO.regDate} ]]
+                        </td>
+                      </tr>
+
+                    <tr>
+                      <td class="border-0 text-muted py-1 px-0">좋아요 수</td>
+                      <td class="border-0 text-dark fw-medium py-1 ps-3">
+                        [[ ${profileDTO.like} ]]
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+               </div>
+              <a class="btn btn-sm btn-secondary ms-auto"
+                 href="/member/editProfile">프로필편집</a>
+            </div>
+          </section>
+
+
+          <!-- 동행후기-->
+          <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+            <div class="card-body">
+              <div
+                      class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3"
+              >
+                <i class="ai-cart text-primary lead pe-1 me-2"></i>
+                <h2 class="h4 mb-0">받은 동행후기</h2>
+
+                <a
+                        class="btn btn-sm btn-secondary ms-auto"
+                        href="accom_list.html"
+                >내 동행 관리하기</a
+                >
+              </div>
+              <!-- 받은 후기 목록-->
+              <div class="accordion-item border-top mb-0">
+                <table class="table">
+                  <thread>
+                    <tr>
+                      <th>작성자</th>
+                      <th>동행 게시글</th>
+                      <th>장소</th>
+                      <th>날짜</th>
+                      <th>코멘트</th>
+                    </tr>
+                  </thread>
+                  <tbody>
+                  <tr>
+                    <td>동행자1</td>
+                    <td><a href="view.html">춘천갈사람</a></td>
+                    <td>소양강댐</td>
+                    <td>2022.03.01</td>
+                    <td>재밌었어요~</td>
+                  </tr>
+
+                  <tr>
+                    <td>동행자2</td>
+                    <td><a href="view.html">춘천갈사람</a></td>
+                    <td>소양강댐</td>
+                    <td>2022.03.01</td>
+                    <td>춘천최고~</td>
+                  </tr>
+
+                  <tr>
+                    <td>동행자2</td>
+                    <td><a href="view.html">평창갈사람모집해요</a></td>
+                    <td>평창어딘가</td>
+                    <td>2022.01.01</td>
+                    <td>평창최고~@@@@@@@@@@@@@@@@@@@@@</td>
+                  </tr>
+
+                  </tbody>
+                </table>
+
+              </div>
+            </div>
+          </section>
+    </div>
+
+
+</main>
+</div>
+</html>

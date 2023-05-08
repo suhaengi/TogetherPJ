@@ -39,12 +39,21 @@
       <input type="text" th:field="*{title}" class="form-control" placeholder="타이틀을 입력해주세요">
       <p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" class="fieldError">Incorrect title</p>
     </div>
-    <div class="form-group col-1">
-      <label th:for="city" class="form-label">City</label>
-      <input type="text" th:field="*{city}" class="form-control" placeholder="도시를 입력해주세요">
-      <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}" class="fieldError">Incorrect city</p>
+    <div class="form-group col-4">
+      <!--      <label th:for="city" class="form-label">City</label>
+      <input type="" th:field="*{city}" class="form-control" placeholder="도시를 입력해주세요">-->
+
+      <label class="col-form-label">city:</label>
+      <select class="form-control" th:field="*{city}">
+        <option th:each="cityValue : ${T(com.together.togetherpj.constant.City).values()}"
+                th:value="${cityValue.name()}"
+                th:text="${cityValue.name()}">
+          val
+        </option>
+      </select>
+
     </div>
-    <div class="form-group col-1">
+    <div class="form-group col-4">
       <label th:for="perNum" class="form-label">총원</label>
       <input type="text" th:field="*{perNum}" class="form-control" placeholder="총원을 입력해주세요">
       <p th:if="${#fields.hasErrors('perNum')}" th:errors="*{perNum}" class="fieldError">Incorrect 총원</p>
@@ -68,7 +77,7 @@
     <div style="text-align: center">
       <button type="submit" class="btn btn-primary" style="">Submit</button>
     </div>
-    <!--    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">-->
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
   </form>
 </div>
 <th:block layout:fragment="script">

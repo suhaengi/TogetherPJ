@@ -38,11 +38,6 @@ public class Member extends BaseEntity {
   private LocalDate birth;
   @Column(name = "M_NICK", nullable = false, length = 20, unique = true)
   private String nickname;
-  @Column(name = "M_IMG")
-  @Lob
-  private byte[] img;
-//  @Column(name = "M_JOINDATE")
-//  private LocalDate joinDate;
   @Column(name = "M_SOCIAL")
   @ColumnDefault("0")
   private boolean social;
@@ -54,7 +49,7 @@ public class Member extends BaseEntity {
   private long like;
   @Column(name = "intro")
   private String intro;
-
+  //프로필이미지첨부
   @Setter private String profileImgName;
   @Setter private String profileImgPath;
 
@@ -85,7 +80,6 @@ public class Member extends BaseEntity {
     member.setEmail(memberRegisterFormDto.getEmail());
     member.setBirth(LocalDate.parse(memberRegisterFormDto.getBirth()));
     member.setNickname(memberRegisterFormDto.getNickname());
-//    member.setJoinDate(LocalDate.now());
     member.setSocial(false);
     member.setRole(Role.MEMBER);
     String password = passwordEncoder.encode(memberRegisterFormDto.getPassword());
