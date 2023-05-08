@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -19,17 +20,23 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 @Slf4j
+@Transactional
 public class MemberService implements UserDetailsService {
 
   private final MemberRepository memberRepository;
   private final PasswordEncoder passwordEncoder;
 
+  @Transactional(readOnly = true)
   public List<Member> findAll(){
     return memberRepository.findAll();
   }
+
   public Member saveMember(MemberRegisterFormDto registerFormDto){
+    log.info("member service saveMember");
     Member member = Member.createMember(registerFormDto, passwordEncoder);
+    log.info("member service member create");
     validateDuplicate(registerFormDto);
+    log.info("member service member duplicate check");
     return memberRepository.save(member);
   }
 
