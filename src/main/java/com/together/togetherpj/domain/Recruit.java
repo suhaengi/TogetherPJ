@@ -62,7 +62,7 @@ public class Recruit extends BaseEntity{
     private State state;
 
     @Column(name="C_VIEWCOUNT", nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("1")
     private long viewcount;
 
     @ManyToOne(fetch = FetchType.LAZY)
