@@ -30,59 +30,76 @@
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                 </div>
-                <form class="user">
+                <form th:object="${memberRegisterFormDto}"
+                      role="form" action="/member/register" class="user" method="post">
                   <div class="form-group">
-                    <label class="text-dark m-0 p-0">이메일</label>
-                    <input type="email" class="form-control form-control-user" id="email"
-                      placeholder="이메일을 입력해주세요">
+                    <label th:for="*{email}" class="text-dark m-0 p-0">이메일</label>
+                    <input th:field="*{email}"
+                            type="email" class="form-control form-control-user"  placeholder="이메일을 입력해주세요">
+                    <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect email</p>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-1 mb-sm-0">
-                      <label class="text-dark m-0 p-0">전화번호</label>
-                      <input type="text" class="form-control form-control-user" id="phoneNumber"
-                        placeholder="010-xxxx-xxxx">
+                      <label th:for="*{phone}" class="text-dark m-0 p-0">전화번호</label>
+                      <input th:field="*{phone}"
+                              type="text" class="form-control form-control-user" placeholder="(-) 없이 숫자만 입력해주세요">
+                      <p th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}" class="fieldError">Incorrect phone</p>
                     </div>
                     <div class="col-sm-6">
-                      <label class="text-dark m-0 p-0">Birth Date</label>
-                      <input type="date" class="form-control form-control-user" id="birthDate" placeholder="Last Name">
+                      <label th:for="*{birth}" class="text-dark m-0 p-0">Birth Date</label>
+                      <input th:field="*{birth}"
+                              type="date" class="form-control form-control-user">
+                      <p th:if="${#fields.hasErrors('birth')}" th:errors="*{birth}" class="fieldError">Incorrect birth</p>
                     </div>
                   </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-1 mb-sm-0">
-                      <label class="text-dark m-0 p-0">Nickname</label>
-                      <input type="text" class="form-control form-control-user" id="nickname"
-                        placeholder="Enter your nickname">
-                    </div>
-                  </div>
-                  <!-- <div class="form-group row">
-                    <div class="col-sm-6 mb-3 mb-sm-0">
-                      <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                        placeholder="First Name">
+                      <label th:for="*{nickname}" class="text-dark m-0 p-0">Nickname</label>
+                      <input th:field="*{nickname}"
+                              type="text" class="form-control form-control-user" placeholder="닉네임을 입력해주세요">
+                      <p th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" class="fieldError">Incorrect nickname</p>
                     </div>
                     <div class="col-sm-6">
-                      <input type="text" class="form-control form-control-user" id="exampleLastName"
-                        placeholder="Last Name">
+                      <div>성별</div>
+                      <div class="d-flex justify-content-center">
+                        <div th:each="type: ${genderTypes}" class="form-check form-check-inline mt-3">
+                          <input type="radio" th:field="*{gender}" th:value="${type.name()}" class="form-check-input">
+                          <label th:for="${#ids.prev('gender')}" th:text="${type.description}" class="form-check-label"></label>
+                        </div>
+                      </div>
+                      <p th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}" class="fieldError">Incorrect gender</p>
                     </div>
-                  </div> -->
+                  </div>
                   <div class="form-group row">
                     <div class="col-sm-6 mb-1 mb-sm-0">
-                      <label class="text-dark m-0 p-0">Password</label>
-                      <input type="password" class="form-control form-control-user" id="exampleInputPassword"
-                        placeholder="Password">
-                    </div>
-                    <div class="col-sm-6">
-                      <label class="text-dark m-0 p-0">Password Check</label>
-                      <input type="password" class="form-control form-control-user" id="exampleRepeatPassword"
-                        placeholder="Repeat Password">
+                      <label th:for="*{name}" class="text-dark m-0 p-0">Name</label>
+                      <input th:field="*{name}"
+                             type="text" class="form-control form-control-user" placeholder="성함을 입력해주세요">
+                      <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="fieldError">Incorrect name</p>
                     </div>
                   </div>
-                  <a href="register2.html" class="btn btn-primary btn-user btn-block">
-                    Next
-                  </a>
+                  <div class="form-group row">
+                    <div class="col-sm-6 mb-1 mb-sm-0">
+                      <label th:for="*{password}" class="text-dark m-0 p-0">Password</label>
+                      <input th:field="*{password}" type="password" class="form-control form-control-user" placeholder="Password">
+                    </div>
+                    <div class="col-sm-6">
+                      <label th:for="*{passwordCheck}" class="text-dark m-0 p-0">Password Check</label>
+                      <input type="password" th:field="*{passwordCheck}" class="form-control form-control-user" placeholder="Repeat Password">
+                    </div>
+                    <div class="alert alert-success mt-1" id="alert-success">비밀번호가 일치합니다.</div>
+                    <div class="alert alert-danger mt-1" id="alert-danger">비밀번호가 일치하지 않습니다.</div>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect password</p>
+                  </div>
+                  <button th:href="@{/member/register}"
+                          type="submit" href="register2.html" class="btn btn-primary btn-user btn-block">
+                    회원가입
+                  </button>
                   <hr>
                   <a href="index.html" class="btn btn-warning btn-user btn-block text-dark">
                     Register with Kakao
                   </a>
+                  <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 </form>
                 <hr>
                 <div class="text-center">
@@ -94,7 +111,7 @@
               </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img">
-              <img src="/assets/sb/img/login.jpg" class="img-fluid mb-3 mb-lg-0 " alt="">
+              <img src="/assets/sb/img/login.jpg" class="img-fluid mb-3 mb-lg-0 bg-size-cover" alt="">
             </div>
           </div>
         </div>
@@ -111,6 +128,27 @@
               alert(errorMessage);
           }
       });
+  </script>
+  <script th:inline="javascript">
+    $(function(){
+      $("#alert-success").hide();
+      $("#alert-danger").hide();
+      $("input").keyup(function(){
+        var pwd1=$("#password").val();
+        var pwd2=$("#passwordCheck").val();
+        if(pwd1 != "" && pwd2 != ""){
+          if(pwd1 == pwd2){
+            $("#alert-success").show();
+            $("#alert-danger").hide();
+            $("#submit").removeAttr("disabled");
+          }else{
+            $("#alert-success").hide();
+            $("#alert-danger").show();
+            $("#submit").attr("disabled", "disabled");
+          }
+        }
+      });
+    });
   </script>
 </th:block>
 </html>
