@@ -1,8 +1,8 @@
 package com.together.togetherpj.service;
 
 import com.together.togetherpj.domain.Member;
-import com.together.togetherpj.dto.EditForm;
 import com.together.togetherpj.dto.ProfileDto;
+import com.together.togetherpj.dto.PwForm;
 import com.together.togetherpj.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
@@ -46,31 +46,34 @@ public class ProfileService {
     }
 
     //프로필편집 페이지 불러올 때
-    public EditForm readForEdit(String email){
-        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
-            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
-        });        EditForm editForm = EditForm.builder()
+    public ProfileDto readForEdit(String email){
+        Member member = memberRepository.findByEmail(email).orElseThrow();
+        ProfileDto dto = ProfileDto.builder()
                 .name(member.getName())
                 .gender(member.getGender())
-                //.birth(member.getBirth())
+                .birth(member.getBirth())
                 .email(member.getEmail())
                 .nickname(member.getNickname())
                 .intro(member.getIntro())
                 .phone(member.getPhone())
                 .build();
-        return editForm;
+        return dto;
     }
 
     //프로필 편집할때
-   public void change(Authentication authentication, EditForm editForm){
+   public void change(Authentication authentication, ProfileDto profileDto){
         String email = authentication.getName();
-       Member member = memberRepository.findByEmail(email).orElseThrow();
-        member.setNickname(editForm.getNickname());
-        member.setIntro(editForm.getIntro());
-        member.setPhone(editForm.getPhone());
-        if(editForm.getPassword()!= ""){
-            member.setPassword(passwordEncoder.encode(editForm.getPassword()));
-        }
+        Member member = memberRepository.findByEmail(email).orElseThrow();
+        member.setNickname(profileDto.getNickname());
+        member.setIntro(profileDto.getIntro());
+        member.setPhone(profileDto.getPhone());
+    }
+
+    //비밀번호 변경
+    public void PWchange(Authentication authentication, PwForm pwForm){
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow();
+        member.setPassword(passwordEncoder.encode(pwForm.getPassword()));
     }
 
     //이미지 업로드할 때

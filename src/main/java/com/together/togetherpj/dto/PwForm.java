@@ -8,19 +8,7 @@ import java.time.LocalDate;
 
 @Data
 @Builder
-public class EditForm {
-    private String fileName;
-
-    private String name;
-    private Gender gender;
-    private LocalDate birth;
-    private String email;
-
-    private String nickname;
-    private String intro;
-    private String phone;
-    //private String sns;
-
+public class PwForm {
     @Length(min = 4, max=12, message = "최소 4자, 최대 12자를 입력하세요")
     private String password;
 
