@@ -3,16 +3,26 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
 <div layout:fragment="content">
-  <th:block th:each="item : ${recruitList}">
-    <div class="card col-2 mb-2">
-      <!--      <img src="..." class="card-img-top" alt="...">-->
-      <div class="card-body">
-        <h5 class="card-title" th:text="${item.title}">Card title</h5>
-        <h6 class="card-text" th:text="|작성자: ${item.recruitWriter.nickname}|">username</h6>
-        <a href="#" th:href="@{/recruit/{param1} (param1=${item.id})}" class="btn btn-primary">상세보기</a>
+  <div class="d-flex justify-content-center">
+    <div th:each="item : ${recruitList}">
+      <div class="card m-2" style="width: 15rem">
+        <img src="https://place-hold.it/200x200" class="card-img-top" alt="...">
+        <div class="card-body">
+          <div class="d-flex justify-content-between">
+            <h6 class="card-title" th:text="${item.title}">Card title</h6>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item card-text" th:text="|작성자: ${item.recruitWriter.nickname}|"></li>
+            <li class="list-group-item">출발 날짜</li>
+            <li class="list-group-item">도착 날짜</li>
+            <li class="list-group-item">목적지</li>
+          </ul>
+          <a th:href="@{/recruit/{param1} (param1=${item.id})}"
+             href="#" class="btn btn-primary">상세보기</a>
+        </div>
       </div>
     </div>
-  </th:block>
+  </div>
 </div>
 
 </html>
