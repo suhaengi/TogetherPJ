@@ -1,4 +1,4 @@
-const socket = io("http://localhost:3000", { path: "/socket.io", transports: ["websocket"] });
+const socket = io("http://localhost:8086", { path: "/socket.io", transports: ["websocket"] });
 
 const welcome = document.getElementById("welcome");
 const form = welcome.querySelector("form");
@@ -37,8 +37,10 @@ function showRoom() {
 function handleRoomSubmit(event) {
     event.preventDefault();
     const input = form.querySelector("input");
-    socket.emit("enter_room", input.value, showRoom);
-    roomName = input.value;
+    const recruitWriteFormDto = new RecruitWriteFormDto(); // Instantiate the RecruitWriteFormDto object
+    recruitWriteFormDto.title = input.value; // Set the title property to the input value
+    socket.emit("enter_room", recruitWriteFormDto.title, showRoom);
+    roomName = recruitWriteFormDto.title; // Set roomName to the title property value
     input.value = "";
 }
 
