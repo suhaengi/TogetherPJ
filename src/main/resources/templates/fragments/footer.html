@@ -1,12 +1,71 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      lang="en">
+      lang="en"
+      th:fragment="footer">
 <head>
 
 <meta charset="utf-8">
 <link rel="stylesheet" href="style.css" type="text/css">
 
 <style>
+  .footer {
+    background-color: #f7f7f7;
+    color: #666666;
+    padding: 60px 0;
+  }
+
+  #footer {
+    background-color: #333333;
+    color: #fff;
+  }
+
+  .footer-info h4,
+  .footer-links h4,
+  .footer-contact h4 {
+    color: #333333;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-links li {
+    margin-bottom: 10px;
+  }
+
+  .footer-links a {
+    color: #666666;
+  }
+
+  .footer-links a:hover {
+    color: #333333;
+  }
+
+  .social-links a {
+    display: inline-block;
+    background-color: #333333;
+    color: #fff;
+    line-height: 1;
+    padding: 8px;
+    border-radius: 4px;
+    transition: 0.3s;
+    text-decoration: none;
+  }
+
+  .social-links a:hover {
+    background-color: #666666;
+  }
+
+  .footer-contact p {
+    line-height: 26px;
+  }
+
+  .footer-contact strong {
+    color: #333333;
+  }
+
+/*
   .footer {
     font-size: 14px;
     background-color: var(--color-secondary);
@@ -117,18 +176,17 @@
 
   .footer .credits a {
     color: #fff;
-  }
+  }*/
 </style>
 </head>
 
 <body>
-<div class="footer" th:fragment="footer">
 <!--  <footer class="page-footer font-small cyan darken-3">
     <div class="footer-copyright text-center py-3">
       Together Project
     </div>
   </footer> -->
-
+<div class="footer">
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
 
