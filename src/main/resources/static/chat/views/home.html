@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <h1>Chat test</h1>
+</header>
+<main>
+    <div id="welcome">
+        <form>
+            <label>
+                <h3 th:text="${ReruitWriteFormDto.title}"></h3>
+            </label>
+            <button>Enter Room</button>
+            <ul></ul>
+        </form>
+    </div>
+    <div id="room">
+        <h3></h3>
+        <ul></ul>
+        <form id="msg">
+            <label>
+                <input type="text" required="" placeholder="message">
+            </label>
+            <button>Send</button>
+        </form>
+    </div>
+</main>
+<script src="../../../node_modules/socket.io/client-dist/socket.io.js"></script>
+<script src="../public/js/app.js"></script>
+</body>
+</html>
