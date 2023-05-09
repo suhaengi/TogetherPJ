@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}"
+      lang="en">
+
+
+<div layout:fragment="content">
+
+    <div class="container">
+        <div class="intro">
+            <h2>내 동행 관리</h2>
+        </div>
+    </div>
+
+    <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+        <div class="card-body" style="font-weight: bolder">
+
+            <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                <h1 class="h5 mb-0">내가 신청한 동행 목록</h1>
+            </div>
+            <table style="width: 100%; border-collapse: separate; border-spacing: 0 30px">
+                <thead style="font-size: large">
+                <th>동행게시글 제목</th>
+                <th>동행게시글 모집자닉네임</th>
+                <th>현재상태(참여됨or미정)</th>
+                </thead>
+
+                <tbody>
+                <tr th:each="dto:${applyingDTO}">
+                    <td>[[${dto.getTitle()}]]</td>
+                    <td>[[${dto.getNickname()}]]</td>
+                    <td>[[${dto.getIsOk()}]]</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section class="card border-0 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+        <div class="card-body" style="font-weight: bolder">
+            <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                <h2 class="h4 mb-0">내가 모집중인 동행 목록</h2>
+            </div>
+
+            <table style="width: 100%; border-collapse: separate; border-spacing: 0 30px">
+                <thead style="font-size: large">
+                    <th>동행게시글 제목</th>
+                    <th>모집현황</th>
+                    <th>신청인</th>
+                </thead>
+
+                <tbody>
+                <tr>
+                    <td>동행게시글제목(게시글링크)</td>
+                    <td>
+                        <button class="btn btn-primary" type="button">
+                        <b>모집완료</b>
+                        </button>
+                    </td>
+                    <td>
+                        모집현황(2/4)
+                        <ul>
+                            <ol>
+                                동행인1(동행인닉네임)
+                            </ol>
+                            <ol>
+                                동행인2(동행인닉네임)
+                            </ol>
+                        </ul>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        </section>
+
+    <div >
+        <button
+                class="btn btn-primary"
+                type="button"
+                onclick="location.href='../user/accom_list.html'"
+        >
+            <b>지난 동행모집완료내역 가기</b>
+        </button>
+    </div>
+</div>
+</html>

@@ -8,6 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -15,30 +20,31 @@ public class SecurityConfig {
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
 //
-    http.csrf().disable();
+//    http.csrf().disable();
 //
+
     http.formLogin()
         .loginPage("/member/login")
+        .loginProcessingUrl("/member/login")
         .defaultSuccessUrl("/", true)
         .usernameParameter("email")
-//        .passwordParameter("pw")
         .failureUrl("/member/login/error")
         .and()
         .logout()
         .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
         .logoutSuccessUrl("/");
 
+
     http.authorizeHttpRequests()
         .mvcMatchers("/css/**", "/assets/**", "/forms/**", "/images/**").permitAll()  // static
         .mvcMatchers("/", "/recruit/**", "/member/login", "/member/register").permitAll()  // permit all templates
         .mvcMatchers("/member/**").hasRole("MEMBER")
-//        .mvcMatchers("/member/**", "/recruit").hasRole("MEMBER")  // permit user templates
         .mvcMatchers("/admin").hasRole("ADMIN")  // permit admin templates
         .anyRequest().authenticated();
-//
-//    http.exceptionHandling()
-//        .authenticationEntryPoint(new CustomEntryPoint());
-//
+
+    http.exceptionHandling()
+        .authenticationEntryPoint(new CustomEntryPoint());
+
     return http.build();
   }
 

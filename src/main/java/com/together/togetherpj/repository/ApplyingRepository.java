@@ -3,6 +3,7 @@ package com.together.togetherpj.repository;
 import com.together.togetherpj.domain.Applying;
 import com.together.togetherpj.dto.ApplyingResponseDTO;
 import com.together.togetherpj.dto.PastAppliedDTO;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -24,17 +25,30 @@ public interface ApplyingRepository extends JpaRepository<Applying, Long> {
     List<Applying> myApplyingMember(@Param("m_id")Long id);
 
     //모집이 완료된 지난 동행참여 및 모집글
-    @Query("select r.recruitWriter.nickname as nickname, r.city as city " +
+   /* @Query(nativeQuery = true, value ="select * from (select  r.recruitWriter.nickname as nickname, r.city as city " +
             ", r.enddate as enddate, r.id as id from Applying a, Recruit r, Member m" +
-            " where (a.applier.id=:m_id or r.recruitWriter.id=:m_id) " +
-            "and m.id=a.applier.id and r.id=a.recruit.id  and r.state='FINISHED'")
+            " where   " +
+            " m.id=a.applier.id and r.id=a.recruit.id and  a.applier.id=:m_id  and r.state='FINISHED'" +
+            "UNION select m.nickname as nickname, r.city as city, r.enddate as enddate" +
+            ", r.id as id from Applying a, Recruit r, Member m where m.id=a.applier.id and r.id=a.recruit.id and  " +
+            "r.recruitWriter.id=:m_id  and r.state='FINISHED')")*/
+    @EntityGraph(attributePaths = {"recruit"})
+    @Query(" select distinct r.recruitWriter.nickname as nickname, r.city as city " +
+            ", r.enddate as enddate, r.id as id from  Recruit r left outer join Applying a " +
+            " on a.recruit.id=r.id where   " +
+            "    (a.applier.id=:m_id or r.recruitWriter.id=:m_id)  and r.state='FINISHED'"
+            )
     List<PastAppliedDTO> pastApply(@Param("m_id")Long id);
 
-    @Query("select r.recruitWriter.nickname as nickname,a.applier.nickname " +
-            " from Applying a, Recruit r, Member m" +
-            " where (a.applier.id=:m_id or r.recruitWriter.id=:m_id) " +
-            "and m.id=a.applier.id and r.id=a.recruit.id  and r.state='FINISHED'")
-    List<PastAppliedDTO> pastApplyw(@Param("m_id")Long id);
+
+    //모집이 완료된 지난 동행참여 및 모집글에서 같이 갔던 동행인들 닉네임
+    //미완성
+    @Query("select  m.nickname as nickname" +
+            " from  Recruit r left  join Member m on r.recruitWriter.id=m.id left  join" +
+            " Applying a on m.id=a.applier.id" +
+            " where " +
+            "r.id=:r_id   and r.state='FINISHED'")
+    List<PastAppliedDTO> pastApplyw(@Param("r_id")Long rid);
 
 
 }

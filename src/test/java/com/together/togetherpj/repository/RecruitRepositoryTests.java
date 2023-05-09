@@ -1,6 +1,7 @@
 package com.together.togetherpj.repository;
 
-import com.together.togetherpj.domain.Applying;
+import com.together.togetherpj.constant.State;
+import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -10,10 +11,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.text.ParseException;
-import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest

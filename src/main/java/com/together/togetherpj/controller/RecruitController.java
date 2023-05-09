@@ -3,6 +3,7 @@ package com.together.togetherpj.controller;
 import com.together.togetherpj.constant.State;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
+import com.together.togetherpj.dto.ViewForm;
 import com.together.togetherpj.service.MemberService;
 import com.together.togetherpj.service.RecruitService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDate;
 
 @Controller
@@ -53,5 +55,11 @@ public class RecruitController {
     }
 
     return "redirect:/";
+  }
+
+  @GetMapping({"/view", "/modify"})
+  public void read(Long bno, Model model) throws IOException {
+    ViewForm boardDTO = recruitService.readOne(bno);
+    model.addAttribute("dto", boardDTO);
   }
 }
