@@ -18,30 +18,25 @@ public class ViewForm {
     private Long bno;
 
     private LocalDateTime regDate;
-
     private LocalDateTime modDate;
 
     private String writer;
-
-    private String content;
-
     private String title;
+    private String content;
+    private long viewcount;
 
     private String city;
-
     private String tourspot;
 
     private long perNum;
-
     private long curNum;
 
     private LocalDate startdate;
-
     private LocalDate enddate;
 
     private State state;
 
-    private long viewcount;
+    private String writerId;
 
 
 }
