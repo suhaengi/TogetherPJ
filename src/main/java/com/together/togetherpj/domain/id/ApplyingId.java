@@ -9,12 +9,12 @@ import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.io.Serializable;
 
-@Data
+
+@Embeddable//필드값 묶기
+@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
-@Embeddable
-@EqualsAndHashCode
 public class ApplyingId implements Serializable  {
-  private Long applierId; //신청자아이디
-  private Long recruitId; //동행게시글번호
+  private Long applierId; //신청자
+  private Long recruitId; //게시글id
 }
