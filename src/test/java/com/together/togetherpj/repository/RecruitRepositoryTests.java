@@ -18,13 +18,23 @@ import java.util.Optional;
 
 @SpringBootTest
 @Log4j2
-@EnableJpaAuditing
 public class RecruitRepositoryTests {
 
-    /*  @Autowired
-      private RecruitRepository recruitRepository;
-      @Autowired
-      private MemberRepository memberRepository      /* @Test
+    @Autowired
+    private RecruitRepository recruitRepository;
+    @Autowired
+    private MemberRepository memberRepository;
+
+    @Test
+    public void findbyId(){
+        Long id=1L;
+        Recruit recruit = recruitRepository.findById(id).orElseThrow();
+        log.info(recruit.getCity());
+
+    }
+
+
+    /* @Test
       *
        public void testInsert() throws ParseException{
 
