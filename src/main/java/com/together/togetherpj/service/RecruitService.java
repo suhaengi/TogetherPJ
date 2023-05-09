@@ -9,9 +9,12 @@ import com.together.togetherpj.repository.MemberRepository;
 import com.together.togetherpj.repository.RecruitRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import javax.swing.text.View;
+import java.awt.print.Pageable;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -44,10 +47,6 @@ public class RecruitService {
     return viewForm;
   }
 
-  public List<Recruit> findAll(){
-    return recruitRepository.findAll();
-  }
-
   public void save(RecruitWriteFormDto writeFormDto, String userEmail){
     Member writer = memberRepository.findByEmail(userEmail)
         .orElseThrow(IllegalStateException::new);
@@ -68,4 +67,18 @@ public class RecruitService {
         .recruitWriter(writer)
         .build();
   }
+
+  public List<Recruit> findAll() {
+    return recruitRepository.findAll();
+  }
+
+/*
+    public List<Post> getRecentPosts() {
+      Pageable pageable = PageRequest.of(0, 10);
+      return recruitRepository.findAllByOrderByCreatedAtDesc(pageable);
+    }
+*/
+
+
+
 }

@@ -23,7 +23,7 @@ public class MainController {
   @GetMapping("/")
   public String mainPage(
       Model model){
-//    model.addAttribute("recruitList",recruitService.findAll());
+      model.addAttribute("recruitList",recruitService.findAll());
 
     return "mainpage";
   }

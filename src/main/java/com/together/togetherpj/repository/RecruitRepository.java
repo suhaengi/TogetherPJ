@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface RecruitRepository extends JpaRepository<Recruit, Long>, RecruitRepositoryCustom {
 
+
 }

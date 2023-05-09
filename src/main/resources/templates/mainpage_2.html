@@ -2,12 +2,59 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/logis-main-layout}">
-<meta charset="utf-8" />
 
 <head>
     <title>Together - Mainpage</title>
+
+    <th:block layout:fragment="preEndHead">
+        <style>
+            /* 슬라이드 영역 스타일 */
+            .slider {
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            /* 슬라이드 내부 이미지 스타일 */
+            .slider img {
+                width: 100%;
+                height: auto;
+            }
+        </style>
+    </th:block>
 </head>
 <body layout:fragment="content">
+
+<!--&lt;!&ndash; ======= start header ======= &ndash;&gt;-->
+<!--<header id="header" class="header d-flex align-items-center fixed-top">-->
+<!--  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">-->
+
+<!--    <a href="mainpage.html" class="logo d-flex align-items-center">-->
+<!--      &lt;!&ndash; Uncomment the line below if you also wish to use an image logo &ndash;&gt;-->
+<!--      &lt;!&ndash; <img src="assets/img/logo.png" alt=""> &ndash;&gt;-->
+<!--      <h1>Together</h1>-->
+<!--    </a>-->
+
+<!--    <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>-->
+<!--    <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>-->
+<!--    <nav id="navbar" class="navbar">-->
+<!--      <ul>-->
+<!--        <li><a href="mainpage.html" class="active">Home</a></li>-->
+<!--        <li><a href="recruit_board.html">동행 게시판</a></li>-->
+<!--        <li class="dropdown"><a href="#"><span>커뮤니티 게시판</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>-->
+<!--          <ul>-->
+<!--            <li><a href="#">Q&A</a></li>-->
+<!--            <li><a href="#">정보 공유</a></li>-->
+<!--            <li><a href="#">자유 게시판</a></li>-->
+<!--          </ul>-->
+<!--        </li>-->
+<!--        <li><a href="user/mypage.html">마이 페이지</a></li>-->
+<!--        <li><a class="get-a-quote" href="login.html">로그인</a></li>-->
+<!--      </ul>-->
+<!--    </nav>&lt;!&ndash; .navbar &ndash;&gt;-->
+
+<!--  </div>-->
+<!--</header>-->
+<!--&lt;!&ndash; ================= End Header =============== &ndash;&gt;-->
 
 <!-- ======= Main Section ======= -->
 <section id="hero" class="hero d-flex align-items-center">
@@ -16,8 +63,9 @@
             <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
                 <h2 data-aos="fade-up">설레는 여행을 함께, 'Together'</h2>
                 <p data-aos="fade-up" data-aos-delay="100">
-                    Together에서는 지금 여행을 하고 있거나, 혹은 여행을 계획하고 있는 여행자들이 같이 여행할 동행을 구하는 사이트 입니다.
-                    지금 바로 동행을 찾아보세요!
+                    Together에서는 지금 여행을 하고 있거나, 혹은 여행을 계획하고 있는 여행자들이 같이 여행할 동행을 구하거나,
+                    여행에 대한 Q&A, 여행하는 나라에 대한 정보 공유, 자유 게시판을 통한 소통 등
+                    여행에 대한 이야기를 서로 공유할 수 있는 커뮤니티 공간입니다.
                 </p>
 
                 <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
@@ -65,98 +113,220 @@
 
 <main id="main">
 
-    <div class="d-flex justify-content-center">
-        <div th:each="item : ${recruitList}">
-            <div class="card m-2" style="width: 15rem">
-                <img src="https://place-hold.it/200x200" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                        <h6 class="card-title" th:text="${item.title}">Card title</h6>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item card-text" th:text="|작성자: ${item.recruitWriter.nickname}|"></li>
-                        <li class="list-group-item">출발 날짜</li>
-                        <li class="list-group-item">도착 날짜</li>
-                        <li class="list-group-item">목적지</li>
-                    </ul>
-                    <a th:href="@{/recruit/{param1} (param1=${item.id})}"
-                       href="#" class="btn btn-primary">상세보기</a>
+    <!-- ======== 여행 상위 등급 동행 구인 노출 ========= -->
+    <section class="level Benefit">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mb-6">
+
+                    <h2 class="mb-0">Lv5 동행 모집</h2>
+
                 </div>
             </div>
-        </div>
-    </div>
+            <div class="category-slider " style="width:100%">
+
+                <div class="item">
+                    <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                            <div class="main_accompany_slider">
+                                <img src="/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+                                <div class="text-truncate">로마 가실분</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                            <div class="main_accompany_slider">
+                                <img src="/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+                                <div class="text-truncate">로마 가실분</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                            <div class="main_accompany_slider">
+                                <img src="/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+                                <div class="text-truncate">홍콩 가실분</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                            <div class="main_accompany_slider">
+                                <img src="/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+                                <div class="text-truncate">일본 가실분</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                            <div class="main_accompany_slider">
+                                <img src="/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+                                <div class="text-truncate">중국 가실분</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                            <div class="main_accompany_slider">
+                                <img src="/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+                                <div class="text-truncate">베네치아 가실분</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="item">
+                    <a href="../templates/pointlog.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                            <div class="main_accompany_slider">
+                                <img src="/assets/img/roma_ex.jpg" class="mb-3 img-fluid">
+                                <div class="text-truncate">파리 가실분</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
 
-    <div class="post-container">
-        <div class="post">
-            <h2 class="post-title"></h2>
-            <p class="post-content"></p>
+                <!--      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                          <div class="card-body text-center py-8">
+                            <img src="/assets/img/pari_ex.jpg" alt="Grocery Ecommerce Template"
+                                 class="mb-3">
+                            <div class="text-truncate">Snack & Munchies</div>
+                          </div>
+                        </div>
+                      </a></div>
+
+                      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                          <div class="card-body text-center py-8">
+                            <img src="/assets/images/category/category-bakery-biscuits.jpg" alt="Grocery Ecommerce Template"
+                                 class="mb-3">
+                            <div class="text-truncate">Bakery & Biscuits</div>
+                          </div>
+                        </div>
+                      </a></div>
+
+                      <div class="item"> <a href="../pages/shop-grid.html" class="text-decoration-none text-inherit">
+                        <div class="card card-product mb-lg-4">
+                          <div class="card-body text-center py-8">
+                            <img src="/assets/images/category/category-instant-food.jpg" class="slider_img">
+                            <div class="text-truncate">Instant Food</div>
+                          </div>
+                        </div>
+                      </a></div>-->
+
+            </div>
         </div>
-        <div class="post">
-            <h2 class="post-title">${post.title}</h2>
-            <p class="post-content">${post.content}</p>
-        </div>
-        <div class="post">
-            <h2 class="post-title"></h2>
-            <p class="post-content"></p>
-        </div>
-    </div>
+    </section>
+
 
     <section class="my-lg-14 my-8">
         <div class="container">
             <div class="row">
                 <div class="col-12 mb-6">
+
                     <h1 class="section-header">동행 게시판</h1>
+
                 </div>
             </div>
 
             <div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3">
-                <div class="col" th:each="post : ${recentPosts}">
+                <div class="col">
                     <div class="card card-product">
                         <div class="card-body">
+
                             <div class="text-center position-relative">
                                 <div class=" position-absolute top-0 start-0"></div>
                                 <a href="#!"> <img src="/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
+
                             </div>
-                            <div class="text-small mb-1">
-                                <a href="#!" class="text-decoration-none text-muted"><small th:text="${post.c_writer_id}"></small></a>
+                            <div class="text-small mb-1"><a href="#!"
+                                                            class="text-decoration-none text-muted"><small>맛집/관광지</small></a>
                             </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg" class="text-inherit text-decoration-none"
-                                                th:text="${post.c_content}"></a></h2>
+                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
+                                                class="text-inherit text-decoration-none">파리
+                                맛집도 가고 에펠탑도 구경해요</a></h2>
+                            <div>
+
+                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i></small> <span
+                                    class="text-muted small">4.5(149)</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-
-
-
-            <div class="col">
+                <div class="col">
                     <div class="card card-product">
                         <div class="card-body">
+
                             <div class="text-center position-relative">
                                 <div class=" position-absolute top-0 start-0"></div>
                                 <a href="#!"> <img src="/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
+
                             </div>
-                            <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>맛집/관광지</small></a>
+                            <div class="text-small mb-1"><a href="#!"
+                                                            class="text-decoration-none text-muted"><small>맛집/관광지</small></a>
                             </div>
+                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
+                                                class="text-inherit text-decoration-none">파리
+                                맛집도 가고 에펠탑도 구경해요</a></h2>
                             <div>
-                                <ul>
-                                    <li th:each="recruit : ${list}" class="col">
-                                        <div class="card card-product">
-                                            <div class="card-body">
-                                                <div class="text-center position-relative">
-                                                    <div class="position-absolute top-0 start-0"></div>
-                                                    <a href="#!"><img th:src="@{/assets/img/pari_ex.jpg}" class="main_accompany_img"></a>
-                                                </div>
-                                                <div class="text-small mb-1">
-                                                    <a href="#!" class="text-decoration-none text-muted"><small th:text="${recruit.writer_id}">[[ ${RecruitWriteFormDto.title} ]]</small></a>
-                                                </div>
-                                                <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg" class="text-inherit text-decoration-none" th:text="${recruit.content}"></a></h2>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
+
+                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i></small> <span
+                                    class="text-muted small">4.5(149)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card card-product">
+                        <div class="card-body">
+
+                            <div class="text-center position-relative">
+                                <div class=" position-absolute top-0 start-0"></div>
+                                <a href="#!"> <img src="/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
+
+                            </div>
+                            <div class="text-small mb-1"><a href="#!"
+                                                            class="text-decoration-none text-muted"><small>맛집/관광지</small></a>
+                            </div>
+                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
+                                                class="text-inherit text-decoration-none">파리
+                                맛집도 가고 에펠탑도 구경해요</a></h2>
+                            <div>
+
+                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-fill"></i>
+                                    <i class="bi bi-star-half"></i></small> <span
+                                    class="text-muted small">4.5(149)</span>
                             </div>
                         </div>
                     </div>
@@ -434,11 +604,6 @@
         </div>
     </section><!-- End Features Section -->
 
-    <div id="chat-icon">
-        <a href="/chat/home.html"><img src="/assets/img/chat.png" alt="채팅 아이콘"></a>
-    </div>
-
-
 </main>
 <!-- ================== End main =================================== -->
 
@@ -446,47 +611,7 @@
 
 <div id="preloader"></div>
 
-<style>
-    #chat-icon {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-    }
-
-</style>
-
-<script>
-    const chatIcon = document.getElementById('chat-icon');
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        chatIcon.style.bottom = `${20 + scrollY}px`;
-    });
-</script>
-
 <th:block layout:fragment="script">
-<!--    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Fetch the posts data
-            fetch('https://example.com/api/posts')
-                .then(response => response.json())
-                .then(data => {
-                    // Populate the HTML with data
-                    const postElements = document.querySelectorAll('.post');
-                    postElements.forEach((element, index) => {
-                        const post = data[index];
-                        const titleElement = element.querySelector('.post-title');
-                        const contentElement = element.querySelector('.post-content');
-                        titleElement.innerText = post.title;
-                        contentElement.innerText = post.content;
-                    });
-                });
-        });
-    </script>
-
-    <script src="/assets/js/mainpage.js"></script>-->
-
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -514,7 +639,6 @@
     <script src="/assets/js/vendors/tns-slider.js"></script>
     <script src="/assets/js/vendors/zoom.js"></script>
     <script src="/assets/js/vendors/increment-value.js"></script>
-
 </th:block>
 </body>
 
