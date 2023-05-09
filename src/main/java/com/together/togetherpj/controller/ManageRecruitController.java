@@ -62,12 +62,15 @@ public class ManageRecruitController {
                                   BindingResult bindingResult,
                                   Authentication authentication,
                                   Model model){
+
         if (bindingResult.hasErrors()) {
             //log.info(reviewFormDto.getReviewedId());
             return "./user/createReview";
         }
 
         try {
+            log.info(reviewFormDto.getReviewedId().toString());
+            log.info(reviewFormDto.getComment());
             reviewFormDto.setRid(rid);
             recruitService.postReview(authentication, reviewFormDto);
         } catch (IllegalStateException e) {
