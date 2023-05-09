@@ -1,6 +1,7 @@
 package com.together.togetherpj.controller;
 
 import com.together.togetherpj.constant.State;
+import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
 import com.together.togetherpj.dto.ViewForm;
@@ -58,10 +59,16 @@ public class RecruitController {
     return "redirect:/";
   }
 
-  @GetMapping({"/{bno}", "/modify"})
-  public String read(@PathVariable("bno") Long bno, Model model) throws IOException {
-    ViewForm boardDTO = recruitService.readOne(bno);
-    model.addAttribute("dto", boardDTO);
-    return "recruit/view";
+  @GetMapping({"/view", "/modify"})
+  public void read(Long bno, Model model) throws IOException {
+    ViewForm dto = recruitService.readOne(bno);
+    model.addAttribute("dto", dto);
+  }
+
+  @PostMapping("/apply")
+  public String applying(Authentication authentication,Long bno){
+    String email = authentication.getName();
+    recruitService.Applying(email,bno);
+    return "redirect:/";
   }
 }

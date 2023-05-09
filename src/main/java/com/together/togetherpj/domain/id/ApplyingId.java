@@ -1,8 +1,9 @@
 package com.together.togetherpj.domain.id;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import java.io.Serializable;
 
 
@@ -11,7 +12,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @EqualsAndHashCode
 public class ApplyingId implements Serializable  {
-
-  private Long applierId; //신청자
-  private Long recruitId; //게시글작성자
+  private Long applierId; //신청자아이디
+  private Long recruitId; //동행게시글번호
 }
