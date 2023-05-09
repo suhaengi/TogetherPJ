@@ -38,6 +38,7 @@ public class SecurityConfig {
     http.authorizeHttpRequests()
         .mvcMatchers("/css/**", "/assets/**", "/forms/**", "/images/**").permitAll()  // static
         .mvcMatchers("/", "/recruit/**", "/member/login", "/member/register").permitAll()  // permit all templates
+            .mvcMatchers("/find-applying").permitAll()  // permit all templates
         .mvcMatchers("/member/**").hasRole("MEMBER")
         .mvcMatchers("/admin").hasRole("ADMIN")  // permit admin templates
         .anyRequest().authenticated();

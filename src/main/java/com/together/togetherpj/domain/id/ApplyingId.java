@@ -1,15 +1,17 @@
 package com.together.togetherpj.domain.id;
 
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
+import javax.persistence.*;
 import java.io.Serializable;
 
 
 @Embeddable
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 public class ApplyingId implements Serializable  {
+
   private Long applierId; //신청자
   private Long recruitId; //게시글작성자
 }

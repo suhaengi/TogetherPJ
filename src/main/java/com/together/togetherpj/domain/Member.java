@@ -1,5 +1,6 @@
 package com.together.togetherpj.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.together.togetherpj.constant.Gender;
 import com.together.togetherpj.constant.Role;
 import com.together.togetherpj.dto.MemberRegisterFormDto;
@@ -14,7 +15,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter @Getter @ToString
+@Setter @Getter
+@ToString(exclude = {"recruitList", "commentList", "applyingList", "reviewList"})
 @NoArgsConstructor @AllArgsConstructor
 @Entity
 public class Member extends BaseEntity {

@@ -1,5 +1,7 @@
 package com.together.togetherpj.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.together.togetherpj.constant.State;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
@@ -11,7 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @Builder
-@ToString
+@ToString(exclude = {"applyingList"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity

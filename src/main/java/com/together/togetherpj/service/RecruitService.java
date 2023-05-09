@@ -1,17 +1,21 @@
 package com.together.togetherpj.service;
 
 import com.together.togetherpj.constant.State;
+import com.together.togetherpj.domain.Applying;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
+import com.together.togetherpj.domain.id.ApplyingId;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
 import com.together.togetherpj.dto.ViewForm;
+import com.together.togetherpj.repository.ApplyingRepository;
 import com.together.togetherpj.repository.MemberRepository;
 import com.together.togetherpj.repository.RecruitRepository;
+import com.together.togetherpj.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.View;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
@@ -22,6 +26,8 @@ import java.util.List;
 public class RecruitService {
   private final RecruitRepository recruitRepository;
   private final MemberRepository memberRepository;
+  private final ApplyingRepository applyingRepository;
+  private final ReviewRepository reviewRepository;
 
   public ViewForm readOne(Long bno) throws IOException{
     Recruit recruit = recruitRepository.findById(bno).orElseThrow();
@@ -48,12 +54,29 @@ public class RecruitService {
     return recruitRepository.findAll();
   }
 
+  @Transactional
   public void save(RecruitWriteFormDto writeFormDto, String userEmail){
     Member writer = memberRepository.findByEmail(userEmail)
         .orElseThrow(IllegalStateException::new);
+
     Recruit recruit = createRecruit(writeFormDto, writer);
+    Applying applying = createWriterApplying(writer, recruit);
 
     recruitRepository.save(recruit);
+    Applying savedApplying = applyingRepository.save(applying);
+
+    log.info("savedApplying={}", savedApplying);
+    log.info("applyingId={}", savedApplying.getId());
+    log.info("findApplying={}", applyingRepository.findById(savedApplying.getId()));
+  }
+
+  private Applying createWriterApplying(Member writer, Recruit recruit) {
+    return Applying.builder()
+            .id(new ApplyingId())
+            .isOk(true)
+            .applier(writer)
+            .recruit(recruit)
+            .build();
   }
 
   private Recruit createRecruit(RecruitWriteFormDto writeFormDto, Member writer){

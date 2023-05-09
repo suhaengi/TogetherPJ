@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -57,9 +58,10 @@ public class RecruitController {
     return "redirect:/";
   }
 
-  @GetMapping({"/view", "/modify"})
-  public void read(Long bno, Model model) throws IOException {
+  @GetMapping({"/{bno}", "/modify"})
+  public String read(@PathVariable("bno") Long bno, Model model) throws IOException {
     ViewForm boardDTO = recruitService.readOne(bno);
     model.addAttribute("dto", boardDTO);
+    return "recruit/view";
   }
 }

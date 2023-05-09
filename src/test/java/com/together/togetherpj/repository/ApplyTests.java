@@ -1,6 +1,8 @@
 package com.together.togetherpj.repository;
 
 import com.together.togetherpj.domain.Applying;
+import com.together.togetherpj.domain.Recruit;
+import com.together.togetherpj.domain.id.ApplyingId;
 import com.together.togetherpj.dto.MyApplyResponseDTO;
 import com.together.togetherpj.dto.PastAppliedDTO;
 import lombok.extern.log4j.Log4j2;
@@ -12,23 +14,19 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @SpringBootTest
 @Log4j2
-@EnableJpaAuditing
 public class ApplyTests {
 
     @Autowired
     private RecruitRepository recruitRepository;
     @Autowired
     private MemberRepository memberRepository;
-
     @Autowired
     private ApplyingRepository applyingRepository;
-
-
-
     @Autowired
     private ModelMapper modelMapper;
 
@@ -47,6 +45,13 @@ public class ApplyTests {
         });
 
 
+    }
+
+    @Test
+    public void aa(){
+        Optional<Applying> findApplying = applyingRepository.findById(new ApplyingId(1L, 5L));
+        if(findApplying.isPresent())  log.info("findApplying={}", findApplying.get());
+        if(findApplying.isEmpty()) log.info("findApplying Error");
     }
 
     @Test

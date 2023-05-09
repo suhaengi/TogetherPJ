@@ -1,5 +1,7 @@
 package com.together.togetherpj.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.together.togetherpj.domain.id.ApplyingId;
 import com.together.togetherpj.domain.id.ReviewId;
 import lombok.*;
@@ -10,9 +12,10 @@ import java.util.List;
 
 @Setter
 @Getter
-@ToString
+@ToString(exclude = {"reviewList"})
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 //동행그룹
 public class Applying {
