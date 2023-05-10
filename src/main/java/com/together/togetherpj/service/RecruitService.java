@@ -5,6 +5,7 @@ import com.together.togetherpj.domain.Applying;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.domain.id.ApplyingId;
+import com.together.togetherpj.dto.LatestRecruitDto;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
 import com.together.togetherpj.dto.ViewForm;
 import com.together.togetherpj.repository.ApplyingRepository;
@@ -13,6 +14,8 @@ import com.together.togetherpj.repository.RecruitRepository;
 import com.together.togetherpj.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -54,6 +57,10 @@ public class RecruitService {
 
   public List<Recruit> findAll(){
     return recruitRepository.findAll();
+  }
+
+  public Page<LatestRecruitDto> findPagingLatestRecruitDto(PageRequest pageRequest){
+    return recruitRepository.getLatestRecruitDto(pageRequest);
   }
 
   @Transactional

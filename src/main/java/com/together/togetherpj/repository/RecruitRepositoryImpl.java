@@ -1,13 +1,21 @@
 package com.together.togetherpj.repository;
 
+import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.together.togetherpj.domain.Recruit;
+import com.together.togetherpj.constant.State;
+import com.together.togetherpj.domain.QRecruit;
+import com.together.togetherpj.dto.LatestRecruitDto;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
+
 import java.util.List;
+
+import static com.together.togetherpj.domain.QRecruit.*;
 
 @Repository
 @Slf4j
@@ -31,4 +39,19 @@ public class RecruitRepositoryImpl implements RecruitRepositoryCustom{
     query.setMaxResults(12);
     return query.getResultList();
   }*/
+
+  public Page<LatestRecruitDto> getLatestRecruitDto(Pageable pageable){
+    List<LatestRecruitDto> content = queryFactory.select(Projections.constructor(LatestRecruitDto.class,
+                    recruit.id, recruit.title, recruit.recruitWriter,
+                    recruit.startdate, recruit.enddate, recruit.city))
+            .from(recruit)
+            .where(recruit.state.eq(State.RECRUITING))
+            .orderBy(recruit.regDate.desc())
+            .offset(pageable.getOffset())
+            .limit(pageable.getPageSize())
+            .fetch();
+
+
+    return new PageImpl<>(content, pageable, content.size());
+  }
 }

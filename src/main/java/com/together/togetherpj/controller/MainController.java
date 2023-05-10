@@ -6,6 +6,7 @@ import com.together.togetherpj.service.RecruitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -25,8 +26,15 @@ public class MainController {
   private final RecruitService recruitService;
 
   @GetMapping("/")
-  public String mainPage(Model model){
-      model.addAttribute("recruitList",recruitService.findAll());
+  public String mainPage(
+          Integer page, Integer size,
+          Model model){
+    PageRequest pageRequest;
+    if(page == null && size == null) pageRequest = PageRequest.of(0, 16);
+    else pageRequest = PageRequest.of(page, size);
+    log.info("find paging:{}", recruitService.findPagingLatestRecruitDto(pageRequest).getContent());
+    model.addAttribute("recruitList", recruitService.findPagingLatestRecruitDto(pageRequest).getContent());
+//    model.addAttribute("recruitList",recruitService.findAll());
 
     return "mainpage";
   }
