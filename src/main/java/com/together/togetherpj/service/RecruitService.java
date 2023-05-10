@@ -24,6 +24,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+
 public class RecruitService {
   private final RecruitRepository recruitRepository;
   private final MemberRepository memberRepository;
@@ -101,6 +102,10 @@ public class RecruitService {
              .build();
      applyingRepository.save(applying);
   }
+
+
+
+
 
 
 }

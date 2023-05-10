@@ -15,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Builder
+
 //동행그룹
 public class Applying {
 
@@ -22,7 +23,7 @@ public class Applying {
   private ApplyingId id;
 
   private boolean isOk;
-  //동행신청자(member)와의 연관관계
+  //동행신청자(member)와의 연관관계, @mapsId는 fk를 pk로 사용하기위해 쓰는 어노테이션
   @MapsId("applierId")
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "C_APPLIER_ID")

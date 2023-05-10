@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
 
+@Table(name="recruit")
 @Setter
 @Getter
 @Builder
@@ -78,5 +79,13 @@ public class Recruit extends BaseEntity{
     public void prePersist(){
         this.state= this.state == null ? State.RECRUITING : this.state;
         this.curNum = this.curNum == 0 ? 1 : this.curNum;
+    }
+    @Builder
+    public Recruit(Long id, String title, LocalDate startdate, LocalDate enddate, long viewcount){
+        this.id = id;
+        this.title = title;
+        this.startdate = startdate;
+        this.enddate = enddate;
+        this.viewcount = viewcount;
     }
 }
