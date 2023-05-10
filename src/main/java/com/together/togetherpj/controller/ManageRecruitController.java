@@ -45,7 +45,7 @@ public class ManageRecruitController {
         List<PastAppliedDTO> pastApplyList=recruitService.selectPastApply(authentication);
         model.addAttribute("pastApplyDTO", pastApplyList);
 
-        return "./user/accom_list";
+        return "user/pastParticipate";
     }
 
     @GetMapping("/createReview")
@@ -53,9 +53,8 @@ public class ManageRecruitController {
         List<PastAppliedDTO> appliedReview=recruitService.selectAppliedReview(authentication, rid);
         model.addAttribute("appliedNickname", appliedReview);
 
-        return "./user/createReview";
+        return "user/Review";
     }
-
 
     @PostMapping("/createReview")
     public String  createPostReview(@Valid ReviewFormDTO reviewFormDto,
@@ -65,7 +64,7 @@ public class ManageRecruitController {
             log.info("----------------------");
         if (bindingResult.hasErrors()) {
             //log.info(reviewFormDto.getReviewedId());
-            return "user/createReview";
+            return "user/Review";
         }
 
         try {
@@ -77,7 +76,7 @@ public class ManageRecruitController {
             recruitService.postReview(authentication, reviewFormDto);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "user/createReview";
+            return "user/Review";
         }
 
         return "redirect:/manage/pastParticipate";
