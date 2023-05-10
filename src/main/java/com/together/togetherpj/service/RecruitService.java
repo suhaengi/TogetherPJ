@@ -51,10 +51,6 @@ public class RecruitService {
     return viewForm;
   }
 
-  public List<Recruit> findAll(){
-    return recruitRepository.findAll();
-  }
-
   @Transactional
   public void save(RecruitWriteFormDto writeFormDto, String userEmail){
     Member writer = memberRepository.findByEmail(userEmail)
@@ -102,9 +98,12 @@ public class RecruitService {
      applyingRepository.save(applying);
   }
 
+/*  public List<Recruit> findAll(){
+    return recruitRepository.findAll();
+  }*/
 
-
-
-
+  public List<Recruit> getLatestRecruits() {
+    return recruitRepository.findTop16ByOrderByModDateDesc();
+  }
 
 }
