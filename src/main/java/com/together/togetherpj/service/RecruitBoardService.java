@@ -2,37 +2,34 @@ package com.together.togetherpj.service;
 
 
 import com.together.togetherpj.domain.Recruit;
-import com.together.togetherpj.dto.RecruitDto;
-import com.together.togetherpj.repository.RecruitRepository;
+import com.together.togetherpj.dto.RecruitBoardDto;
+import com.together.togetherpj.repository.RecruitBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.together.togetherpj.domain.QRecruit.recruit;
-
 @Service
 @RequiredArgsConstructor
-public class RecruitService {
+public class RecruitBoardService {
     @Autowired
-    private RecruitRepository recruitRepository;
+    private RecruitBoardRepository recruitRepository;
 
-public RecruitService(RecruitRepository recruitRepository){
-    this.recruitRepository = recruitRepository;
+public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
+    this.recruitRepository = recruitBoardRepository;
 }
 
     //조회
   @Transactional
-    public List<RecruitDto> getBoardList(){
+    public List<RecruitBoardDto> getBoardList(){
     List<Recruit> boards = recruitRepository.findAll();
-    List<RecruitDto> boardDtoList = new ArrayList<>();
+    List<RecruitBoardDto> boardDtoList = new ArrayList<>();
 
     for(Recruit board : boards){
-        RecruitDto boardDto = RecruitDto.builder()
+        RecruitBoardDto boardDto = RecruitBoardDto.builder()
                 .id(board.getId())
                 .title(board.getTitle())
                 .startdate(board.getStartdate())
@@ -44,9 +41,9 @@ public RecruitService(RecruitRepository recruitRepository){
     return boardDtoList;
   }
 
-  public List<RecruitDto> searchPosts(String keyword){
+  public List<RecruitBoardDto> searchPosts(String keyword){
     List<Recruit> boards = recruitRepository.findByTitleContaining(keyword);
-    List<RecruitDto> boardDtoList = new ArrayList<>();
+    List<RecruitBoardDto> boardDtoList = new ArrayList<>();
 
     if(boards.isEmpty()) return boardDtoList;
 
@@ -57,8 +54,8 @@ public RecruitService(RecruitRepository recruitRepository){
     return boardDtoList;
   }
 
-  private RecruitDto convertEntityToDto(Recruit board){
-    return RecruitDto.builder()
+  private RecruitBoardDto convertEntityToDto(Recruit board){
+    return RecruitBoardDto.builder()
             .id(board.getId())
             .title(board.getTitle())
             .startdate(board.getStartdate())

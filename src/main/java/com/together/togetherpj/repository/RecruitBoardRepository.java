@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RecruitRepository extends JpaRepository<Recruit, Long> {
+public interface RecruitBoardRepository extends JpaRepository<Recruit, Long> {
     List<Recruit> findByTitleContaining(String keyword);
-
 }

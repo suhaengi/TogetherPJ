@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class RecruitDto {
+public class RecruitBoardDto {
     private Long id;
     private String title;
     private Date startdate;
@@ -27,7 +27,7 @@ public class RecruitDto {
     }
 
     @Builder
-    public RecruitDto (Long id, String title, Date startdate, Date enddate, long viewcount){
+    public RecruitBoardDto(Long id, String title, Date startdate, Date enddate, long viewcount){
         this.id = id;
         this.title = title;
         this.startdate = startdate;
