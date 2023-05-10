@@ -118,6 +118,7 @@
         </nav>
       </div>
       <!-- End Breadcrumbs -->
+      <form th:action="@{/manage/createReview}" method="post"  th:object="${reviewFormDto}">
 
       <section class="sample-page">
         <div class="container1">
@@ -125,16 +126,24 @@
             함께 여행했던 동행자들에게 리뷰를 남겨주세요!
           </b> <br></h4>
         </div>
-        <div class="container1" >
-          <form action="#">
+
+
+            <div class="container1" >
             <label for="acc"><b>동행자를 선택해주세요!</b></label>
-            <select name="동행자 선택" id="com">
-              <option value="ex1">홍길동</option>
-              <option value="ex2">강감찬</option>
-              <option value="ex3">이순신</option>
+            <select name="reviewedId" >
+
+              <th:block th:each="appliedReviewDto:${appliedNickname}">
+                <option   th:value="${appliedReviewDto.getReviewedId()}"
+                        th:text="${appliedReviewDto.getNickname()}" th:selected="${appliedReviewDto.getNickname()}"></option>
+              </th:block>
+              <!--<input type="hidden" name="rid" th:value="${appliedReviewDto.getId()}">-->
+              <!--<input type="hidden" name="reviewedId" th:value="${appliedReviewDto.getNickname()}">-->
+
+
+
             </select>
-            <b><input id="choose" type="submit" value="선택!" /><br><br></b>
-          </form>
+
+
         </div>
 
 <!--        <div class="container1">
@@ -158,16 +167,17 @@
             <input type="file" id="file">
         </div>-->
         <div>
-          <form id="form1">
-            <p><textarea cols="100" rows="10"></textarea></p>
+
+            <p><textarea cols="100" rows="10" name="comment"></textarea></p>
 
             <input id="sub" type="submit" value="작성완료">
-          </form>
+
           <button id="cancel"  onclick="location.href='accom_list.html'";>취소</button>
 
         </div>
         </div>
       </section>
+      </form>
     </main>
     <!-- End #main -->
 
