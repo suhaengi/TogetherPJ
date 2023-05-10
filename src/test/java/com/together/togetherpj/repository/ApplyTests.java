@@ -191,7 +191,7 @@ public class ApplyTests {
                 .title(writeFormDto.getTitle())
                 .city(writeFormDto.getCity())
                 .content(writeFormDto.getContent())
-                .perNum(Long.parseLong(writeFormDto.getPerNum()))
+                .perNum(writeFormDto.getPerNum())
                 .startdate(LocalDate.parse(writeFormDto.getStartdate()))
                 .enddate(LocalDate.parse(writeFormDto.getEnddate()))
                 .state(RECRUITING)

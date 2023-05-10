@@ -2,6 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
+<meta charset="utf-8" />
+
 <div layout:fragment="content">
   <div class="d-flex justify-content-center">
     <div th:each="item : ${recruitList}">
