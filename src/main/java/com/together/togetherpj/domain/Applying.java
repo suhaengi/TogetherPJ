@@ -17,7 +17,6 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Builder
 //동행그룹
 public class Applying {
 

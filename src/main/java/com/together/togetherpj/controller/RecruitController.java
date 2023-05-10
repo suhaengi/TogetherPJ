@@ -64,11 +64,4 @@ public class RecruitController {
     ViewForm dto = recruitService.readOne(bno);
     model.addAttribute("dto", dto);
   }
-
-  @PostMapping("/apply")
-  public String applying(Authentication authentication,Long bno){
-    String email = authentication.getName();
-    recruitService.Applying(email,bno);
-    return "redirect:/";
-  }
 }

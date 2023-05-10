@@ -20,4 +20,5 @@ public class RecruitRepositoryImpl implements RecruitRepositoryCustom{
     this.queryFactory = new JPAQueryFactory(em);
   }
 
+
 }
