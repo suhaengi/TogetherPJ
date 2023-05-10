@@ -118,7 +118,7 @@
         </nav>
       </div>
       <!-- End Breadcrumbs -->
-      <form action="/manage/createView" method="post" th:object="${reviewFormDto}">
+      <form th:action="@{/manage/createReview}" method="post"  th:object="${reviewFormDto}">
 
       <section class="sample-page">
         <div class="container1">
@@ -136,7 +136,7 @@
                 <option   th:value="${appliedReviewDto.getReviewedId()}"
                         th:text="${appliedReviewDto.getNickname()}" th:selected="${appliedReviewDto.getNickname()}"></option>
               </th:block>
-
+              <!--<input type="hidden" name="rid" th:value="${appliedReviewDto.getId()}">-->
               <!--<input type="hidden" name="reviewedId" th:value="${appliedReviewDto.getNickname()}">-->
 
 
