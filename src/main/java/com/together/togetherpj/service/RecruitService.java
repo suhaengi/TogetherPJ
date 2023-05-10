@@ -12,7 +12,6 @@ import com.together.togetherpj.repository.MemberRepository;
 import com.together.togetherpj.repository.RecruitRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,12 +23,13 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+
 public class RecruitService {
   private final RecruitRepository recruitRepository;
   private final MemberRepository memberRepository;
   private final ApplyingRepository applyingRepository;
 
-  public ViewForm readOne(Long bno) throws IOException{
+  public ViewForm readOne(Long bno) throws IOException {
     Recruit recruit = recruitRepository.findById(bno).orElseThrow();
     Member member = recruit.getRecruitWriter();
     ViewForm viewForm = ViewForm.builder()
@@ -101,6 +101,10 @@ public class RecruitService {
              .build();
      applyingRepository.save(applying);
   }
+
+
+
+
 
 
 }

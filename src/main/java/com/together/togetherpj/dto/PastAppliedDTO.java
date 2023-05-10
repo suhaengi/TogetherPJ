@@ -14,4 +14,5 @@ public interface PastAppliedDTO {
     String getNickname();
     Date getEnddate();
     Long getId();
+    Long getReviewedId();
 }
