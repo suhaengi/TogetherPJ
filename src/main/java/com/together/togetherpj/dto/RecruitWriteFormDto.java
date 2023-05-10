@@ -3,6 +3,7 @@ package com.together.togetherpj.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
@@ -27,4 +28,7 @@ public class RecruitWriteFormDto {
 
   @NotEmpty(message = "내용을 입력해주세요" )
   private String content;
+
+  MultipartFile imgFile;
+
 }

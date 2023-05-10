@@ -33,9 +33,9 @@
 <div layout:fragment="content">
 
   <div class="breadcrumbs">
-    <div
-            class="page-header d-flex align-items-center">
-      <div class="container position-relative">
+    <div class="page-header d-flex align-items-center"
+         th:style="'background-image:url('+ @{/assets/img/together.jpg} +');'">
+    <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
             <h2>동행 게시글 작성</h2>
@@ -56,7 +56,7 @@
   <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
     <div class="row pt-sm-2 pt-lg-0">
       <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
-        <form action="/recruit/save" role="form" method="post"  th:object="${writeFormDto}">
+        <form action="/recruit/save" role="form" method="post"  th:object="${writeFormDto}" enctype="multipart/form-data">
           <div class="form-group col-4">
             <label th:for="title" class="form-label">Title</label>
             <input type="text" th:field="*{title}" class="form-control" placeholder="타이틀을 입력해주세요">
@@ -89,6 +89,13 @@
               <p th:if="${#fields.hasErrors('enddate')}" th:errors="*{enddate}" class="fieldError">Incorrect 도착 날짜</p>
             </div>
           </div>
+
+          <!-- 이미지 등록-->
+          <div class="pt-3 pt-sm-0 ps-sm-3">
+              <label th for="imgFile">배경사진을 등록해주세요</label>
+              <input type="file" name="imgFile" id="imgFile"  accept=".jpg, .png" class="form-control">
+          </div>
+
           <div class="form-group">
             <label th:for="content" class="form-label">Content</label>
             <textarea class="form-control summernote" rows="5" id="content" name="content"></textarea>
