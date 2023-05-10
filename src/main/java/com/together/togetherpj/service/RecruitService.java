@@ -58,6 +58,10 @@ public class RecruitService {
     return viewForm;
   }
 
+  public List<Recruit> findAll(){
+    return recruitRepository.findAll();
+  }
+
   @Value("c://upload/recruitImg")
   private String uploadPath;
   @Transactional
@@ -89,11 +93,12 @@ public class RecruitService {
 
   private Applying createWriterApplying(Member writer, Recruit recruit) {
     return Applying.builder()
-            .id(new ApplyingId())
+            .id(new ApplyingId(writer.getId(), recruit.getId()))
             .isOk(true)
             .applier(writer)
             .recruit(recruit)
             .build();
+
   }
 
   private Recruit createRecruit(RecruitWriteFormDto writeFormDto, Member writer){
