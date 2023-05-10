@@ -37,7 +37,7 @@ public class ManageRecruitController {
         List<MyApplyResponseDTO> myApplyResponseDTOList=recruitService.selectMyApply(authentication);
         model.addAttribute("myApplyDTO", myApplyResponseDTOList);
 
-        return "myRecruit";
+        return "myRecruit_test";
     }
 
     @GetMapping("/pastParticipate")
