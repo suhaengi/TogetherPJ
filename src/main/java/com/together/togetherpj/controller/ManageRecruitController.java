@@ -60,7 +60,7 @@ public class ManageRecruitController {
     public String  createPostReview(@Valid ReviewFormDTO reviewFormDto,
                                   BindingResult bindingResult,
                                   Authentication authentication,
-                                  Model model, Long rid){
+                                  Model model){
 
         if (bindingResult.hasErrors()) {
             //log.info(reviewFormDto.getReviewedId());

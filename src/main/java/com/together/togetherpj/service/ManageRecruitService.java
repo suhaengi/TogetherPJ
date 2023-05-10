@@ -102,13 +102,6 @@ public class ManageRecruitService {
         Member reviewed=memberRepository.findById(reviewFormDTO.getReviewedId()).orElseThrow(IllegalStateException::new);
 
 
-        /*Applying applying=Applying.builder()
-                .id(new ApplyingId())
-                .isOk(true)
-                .applier(reviewed)
-                .recruit(recruit)
-                .build();*/
-
         Applying applying1=repository.findById(new ApplyingId(reviewFormDTO.getReviewedId(),reviewFormDTO.getRid()))
                 .orElseThrow(IllegalStateException::new);
 
