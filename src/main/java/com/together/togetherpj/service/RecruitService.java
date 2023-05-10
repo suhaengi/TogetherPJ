@@ -74,28 +74,28 @@ public class RecruitService {
 
   private Recruit createRecruit(RecruitWriteFormDto writeFormDto, Member writer){
     return Recruit.builder()
-            .title(writeFormDto.getTitle())
-            .city(writeFormDto.getCity())
-            .content(writeFormDto.getContent())
-            .perNum(writeFormDto.getPerNum())
-            .startdate(LocalDate.parse(writeFormDto.getStartdate()))
-            .enddate(LocalDate.parse(writeFormDto.getEnddate()))
-            .state(State.RECRUITING)
-            .recruitWriter(writer)
-            .build();
+        .title(writeFormDto.getTitle())
+        .city(writeFormDto.getCity())
+        .content(writeFormDto.getContent())
+        .perNum(writeFormDto.getPerNum())
+        .startdate(LocalDate.parse(writeFormDto.getStartdate()))
+        .enddate(LocalDate.parse(writeFormDto.getEnddate()))
+        .state(State.RECRUITING)
+        .recruitWriter(writer)
+        .build();
   }
 
   public void Applying(String email, Long bno){
     Member applier = memberRepository.findByEmail(email).orElseThrow();
     Recruit recruit = recruitRepository.findById(bno).orElseThrow();
 
-    Applying applying = Applying.builder()
-            .id(new ApplyingId())
-            .isOk(false)
-            .applier(applier)
-            .recruit(recruit)
-            .build();
-    applyingRepository.save(applying);
+     Applying applying = Applying.builder()
+             .id(new ApplyingId())
+             .isOk(false)
+             .applier(applier)
+             .recruit(recruit)
+             .build();
+     applyingRepository.save(applying);
   }
 
 /*  public List<Recruit> findAll(){
