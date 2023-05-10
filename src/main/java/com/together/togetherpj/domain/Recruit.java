@@ -61,7 +61,7 @@ public class Recruit extends BaseEntity{
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="C_WRITER_ID")
     private Member recruitWriter;
-
+    
    /* //작성자닉네임
     @Column(name="C_NICK", nullable = false)
     private String writerNick;*/
@@ -75,6 +75,10 @@ public class Recruit extends BaseEntity{
     private List<Comment> commentList = new ArrayList<>();
 
 */
+    //배경이미지첨부
+    @Setter private String imgName;
+    @Setter private String imgPath;
+    
     @PrePersist
     public void prePersist(){
         this.state= this.state == null ? State.RECRUITING : this.state;
