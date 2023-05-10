@@ -61,7 +61,7 @@ public interface ApplyingRepository extends JpaRepository<Applying, ApplyingId> 
     List<PastAppliedDTO> pastAppliedReview(@Param("r_id")Long rid, @Param("m_id")Long mid);*/
 
     @Query(nativeQuery = true, value =
-            "select m.m_nick as nickname, m.m_id as reviewedId from recruit r, member m, applying a where " +
+            "select m.m_nick as nickname, m.m_id as reviewedId, r.c_id as id from recruit r, member m, applying a where " +
             " a.c_id=r.c_id  and a.c_applier_id=m.m_id and r.c_state='FINISHED' and" +
             "                    r.c_id=:r_id and not m.m_id=:m_id ")
     List<PastAppliedDTO> pastAppliedReview(@Param("r_id")Long rid, @Param("m_id")Long mid);

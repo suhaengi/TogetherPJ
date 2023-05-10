@@ -5,6 +5,7 @@ import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.domain.Review;
 import com.together.togetherpj.domain.id.ApplyingId;
+import com.together.togetherpj.domain.id.ReviewId;
 import com.together.togetherpj.dto.ApplyingResponseDTO;
 import com.together.togetherpj.dto.MyApplyResponseDTO;
 import com.together.togetherpj.dto.PastAppliedDTO;
@@ -101,23 +102,12 @@ public class ManageRecruitService {
         Member reviewed=memberRepository.findById(reviewFormDTO.getReviewedId()).orElseThrow(IllegalStateException::new);
 
 
-        /*Applying applying=Applying.builder()
-                .id(new ApplyingId())
-                .isOk(true)
-                .applier(reviewed)
-                .recruit(recruit)
-                .build();*/
-
         Applying applying1=repository.findById(new ApplyingId(reviewFormDTO.getReviewedId(),reviewFormDTO.getRid()))
                 .orElseThrow(IllegalStateException::new);
 
-        log.info(applying1);
-
-
-
-
 
         Review review= Review.builder()
+                .reviewId(new ReviewId())
                 .comment(reviewFormDTO.getComment())
                 .reviewer(writer)
                 .applying(applying1)

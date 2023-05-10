@@ -61,7 +61,7 @@ public class ManageRecruitController {
                                   BindingResult bindingResult,
                                   Authentication authentication,
                                   Model model){
-            log.info("----------------------");
+
         if (bindingResult.hasErrors()) {
             //log.info(reviewFormDto.getReviewedId());
             return "user/Review";
@@ -70,7 +70,7 @@ public class ManageRecruitController {
         try {
             log.info(reviewFormDto.getReviewedId().toString());
             log.info(reviewFormDto.getComment());
-            reviewFormDto.setRid(2L);
+            reviewFormDto.setRid(reviewFormDto.getRid());
             log.info(reviewFormDto.toString());
 
             recruitService.postReview(authentication, reviewFormDto);
