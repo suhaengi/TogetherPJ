@@ -81,7 +81,7 @@ public class Recruit extends BaseEntity{
         this.curNum = this.curNum == 0 ? 1 : this.curNum;
     }
     @Builder
-    public Recruit(Long id, String title, Date startdate, Date enddate, long viewcount){
+    public Recruit(Long id, String title, LocalDate startdate, LocalDate enddate, long viewcount){
         this.id = id;
         this.title = title;
         this.startdate = startdate;
