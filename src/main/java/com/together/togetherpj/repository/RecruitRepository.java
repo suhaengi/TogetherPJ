@@ -8,5 +8,6 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public interface RecruitRepository extends JpaRepository<Recruit, Long>, RecruitRepositoryCustom {
-/*    static List<Recruit> findTop12ByOrderByModDateDesc();*/
+
+/*    List<Recruit> findTop12ByOrderByModDateDesc();*/
 }
