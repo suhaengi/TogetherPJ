@@ -1,0 +1,25 @@
+.post-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.post {
+    width: 30%;
+    margin: 0 2% 2% 0;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.post:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+
+.post-title {
+    margin-top: 0;
+}
+
+.post-content {
+    margin-bottom: 0;
+}

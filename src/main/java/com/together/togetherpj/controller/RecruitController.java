@@ -3,12 +3,15 @@ package com.together.togetherpj.controller;
 import com.together.togetherpj.constant.State;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
+import com.together.togetherpj.dto.ProfileDto;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
 import com.together.togetherpj.dto.ViewForm;
+import com.together.togetherpj.repository.RecruitRepository;
 import com.together.togetherpj.service.MemberService;
 import com.together.togetherpj.service.RecruitService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 
 @Controller
 @RequestMapping("/recruit")
@@ -67,4 +71,7 @@ public class RecruitController {
     recruitService.Applying(email,bno);
     return "redirect:/";
   }
+
+
+
 }
