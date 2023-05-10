@@ -71,12 +71,11 @@ public class RecruitService {
 
   private Applying createWriterApplying(Member writer, Recruit recruit) {
     return Applying.builder()
-            .id(new ApplyingId())
+            .id(new ApplyingId(writer.getId(), recruit.getId()))
             .isOk(true)
             .applier(writer)
             .recruit(recruit)
             .build();
-
 
   }
 
