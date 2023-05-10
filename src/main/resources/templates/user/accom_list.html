@@ -80,7 +80,7 @@
                 <i class="bi bi-chevron-down dropdown-indicator"></i
               ></a>
             </li>
-            <li><a href="mypage.html">마이 페이지</a></li>
+            <li><a href="../member/mypage.html">마이 페이지</a></li>
             <li><a class="get-a-quote" href="../login.html">로그인</a></li>
           </ul>
         </nav>
@@ -108,7 +108,7 @@
           <div class="container">
             <ol>
               <li><a href="../mainpage.html">Home</a></li>
-              <li><a href="mypage.html">마이페이지</a></li>
+              <li><a href="../member/mypage.html">마이페이지</a></li>
               <li>동행 내역</li>
             </ol>
           </div>
@@ -118,30 +118,27 @@
 
       <section class="sample-page">
         <div class="container" data-aos="fade-up">
-          <p><b>내 동행 내역</b></p>
+          <p><b>내 동행 완료한 내역</b></p>
           <br />
           <table class="table" height="200">
             <thread>
               <tr>
-                <th>번호</th>
+
                 <th>동행지</th>
                 <th>모집자</th>
                 <th>날짜</th>
               </tr>
             </thread>
             <tbody>
-              <tr>
-                <td>2</td>
-                <td><a href="review.html">파리</a></td>
-                <td>작성자2</td>
-                <td>2023.02.01</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td><a href="review.html">일본</a></td>
-                <td>작성자1</td>
-                <td>2022.01.01</td>
-              </tr>
+            <tr th:each="dto:${pastApplyDTO}">
+              <td>
+                <a th:href="|@{/manage/createReview(rid =${dto.getId()})}|" >
+                  [[${dto.getCity()}]]</a></td>
+              <td>[[${dto.getNickname()}]]</td>
+              <td>[[${dto.getEnddate()}]]</td>
+
+            </tr>
+
             </tbody>
           </table>
         </div>

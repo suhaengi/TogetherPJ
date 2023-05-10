@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Nunito:400,400i,600,700&display=swap&subset=latin-ext);
-@import url(../../vendor/bootstrap/bootstrap.min.css);
-@import url(../../dist/icons/themify/themify-icons.css);
-@import url(../../dist/icons/font-awesome/css/font-awesome.min.css);
+@import url(../assets/chat_vendor/bootstrap/bootstrap.min.css);
+@import url(../assets/chat_icons/themify/themify-icons.css);
+@import url(../assets/chat_icons/font-awesome/css/font-awesome.min.css);
 .bg-primary {
   background: #3db16b !important;
   color: white !important;
@@ -13,7 +13,7 @@
 
 .bg-primary-gradient {
   background: -webkit-linear-gradient(220deg, #3db16b, #65d993) !important;
-  background: -moz- oldlinear-gradient(220deg, #3db16b, #65d993) !important;
+  background: -moz-linear-gradient(220deg, #3db16b, #65d993) !important;
   background: -o-linear-gradient(220deg, #3db16b, #65d993) !important;
   background: linear-gradient(230deg, #3db16b, #65d993) !important;
   color: white !important;
@@ -30,7 +30,7 @@
 
 .bg-info-gradient {
   background: -webkit-linear-gradient(220deg, #00bcd4, #28e4fc) !important;
-  background: -moz- oldlinear-gradient(220deg, #00bcd4, #28e4fc) !important;
+  background: -moz-linear-gradient(220deg, #00bcd4, #28e4fc) !important;
   background: -o-linear-gradient(220deg, #00bcd4, #28e4fc) !important;
   background: linear-gradient(230deg, #00bcd4, #28e4fc) !important;
   color: white !important;
@@ -47,7 +47,7 @@
 
 .bg-secondary-gradient {
   background: -webkit-linear-gradient(220deg, dimgray, #919191) !important;
-  background: -moz- oldlinear-gradient(220deg, dimgray, #919191) !important;
+  background: -moz-linear-gradient(220deg, dimgray, #919191) !important;
   background: -o-linear-gradient(220deg, dimgray, #919191) !important;
   background: linear-gradient(230deg, dimgray, #919191) !important;
   color: white !important;
@@ -64,7 +64,7 @@
 
 .bg-success-gradient {
   background: -webkit-linear-gradient(220deg, #0abb87, #32e3af) !important;
-  background: -moz- oldlinear-gradient(220deg, #0abb87, #32e3af) !important;
+  background: -moz-linear-gradient(220deg, #0abb87, #32e3af) !important;
   background: -o-linear-gradient(220deg, #0abb87, #32e3af) !important;
   background: linear-gradient(230deg, #0abb87, #32e3af) !important;
   color: white !important;
@@ -81,7 +81,7 @@
 
 .bg-danger-gradient {
   background: -webkit-linear-gradient(220deg, #ea4141, #ff6969) !important;
-  background: -moz- oldlinear-gradient(220deg, #ea4141, #ff6969) !important;
+  background: -moz-linear-gradient(220deg, #ea4141, #ff6969) !important;
   background: -o-linear-gradient(220deg, #ea4141, #ff6969) !important;
   background: linear-gradient(230deg, #ea4141, #ff6969) !important;
   color: white !important;
@@ -102,7 +102,7 @@
 
 .bg-warning-gradient {
   background: -webkit-linear-gradient(220deg, #ff9d36, #ffc55e) !important;
-  background: -moz- oldlinear-gradient(220deg, #ff9d36, #ffc55e) !important;
+  background: -moz-linear-gradient(220deg, #ff9d36, #ffc55e) !important;
   background: -o-linear-gradient(220deg, #ff9d36, #ffc55e) !important;
   background: linear-gradient(230deg, #ff9d36, #ffc55e) !important;
   color: white !important;
@@ -123,7 +123,7 @@
 
 .bg-dark-gradient {
   background: -webkit-linear-gradient(220deg, #3a3f51, #585d6f) !important;
-  background: -moz- oldlinear-gradient(220deg, #3a3f51, #585d6f) !important;
+  background: -moz-linear-gradient(220deg, #3a3f51, #585d6f) !important;
   background: -o-linear-gradient(220deg, #3a3f51, #585d6f) !important;
   background: linear-gradient(230deg, #3a3f51, #585d6f) !important;
   color: white !important;
@@ -273,7 +273,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 .btn {
   font-size: 14px;
   width: auto;
-  display: -webkit-inline-box;
+  display: inline-block;
   display: -webkit-inline-flex;
   display: -moz-inline-box;
   display: -ms-inline-flexbox;
@@ -422,7 +422,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-primary {
   background: -webkit-linear-gradient(70deg, #65d993, #2ea25c);
-  background: -moz- oldlinear-gradient(70deg, #65d993, #2ea25c);
+  background: -moz-linear-gradient(70deg, #65d993, #2ea25c);
   background: -o-linear-gradient(70deg, #65d993, #2ea25c);
   background: linear-gradient(20deg, #65d993, #2ea25c);
   border-color: transparent;
@@ -431,7 +431,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-primary:not(:disabled):not(.disabled):hover, .btn.btn-gradient-primary:not(:disabled):not(.disabled):focus, .btn.btn-gradient-primary:not(:disabled):not(.disabled):active {
   background: -webkit-linear-gradient(70deg, #3db16b, #2ea25c);
-  background: -moz- oldlinear-gradient(70deg, #3db16b, #2ea25c);
+  background: -moz-linear-gradient(70deg, #3db16b, #2ea25c);
   background: -o-linear-gradient(70deg, #3db16b, #2ea25c);
   background: linear-gradient(20deg, #3db16b, #2ea25c);
   border-color: transparent;
@@ -547,7 +547,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-secondary {
   background: -webkit-linear-gradient(70deg, #919191, #5a5a5a);
-  background: -moz- oldlinear-gradient(70deg, #919191, #5a5a5a);
+  background: -moz-linear-gradient(70deg, #919191, #5a5a5a);
   background: -o-linear-gradient(70deg, #919191, #5a5a5a);
   background: linear-gradient(20deg, #919191, #5a5a5a);
   border-color: transparent;
@@ -556,7 +556,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-secondary:not(:disabled):not(.disabled):hover, .btn.btn-gradient-secondary:not(:disabled):not(.disabled):focus, .btn.btn-gradient-secondary:not(:disabled):not(.disabled):active {
   background: -webkit-linear-gradient(70deg, dimgray, #5a5a5a);
-  background: -moz- oldlinear-gradient(70deg, dimgray, #5a5a5a);
+  background: -moz-linear-gradient(70deg, dimgray, #5a5a5a);
   background: -o-linear-gradient(70deg, dimgray, #5a5a5a);
   background: linear-gradient(20deg, dimgray, #5a5a5a);
   border-color: transparent;
@@ -672,7 +672,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-success {
   background: -webkit-linear-gradient(70deg, #32e3af, #00ac78);
-  background: -moz- oldlinear-gradient(70deg, #32e3af, #00ac78);
+  background: -moz-linear-gradient(70deg, #32e3af, #00ac78);
   background: -o-linear-gradient(70deg, #32e3af, #00ac78);
   background: linear-gradient(20deg, #32e3af, #00ac78);
   border-color: transparent;
@@ -681,7 +681,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-success:not(:disabled):not(.disabled):hover, .btn.btn-gradient-success:not(:disabled):not(.disabled):focus, .btn.btn-gradient-success:not(:disabled):not(.disabled):active {
   background: -webkit-linear-gradient(70deg, #0abb87, #00ac78);
-  background: -moz- oldlinear-gradient(70deg, #0abb87, #00ac78);
+  background: -moz-linear-gradient(70deg, #0abb87, #00ac78);
   background: -o-linear-gradient(70deg, #0abb87, #00ac78);
   background: linear-gradient(20deg, #0abb87, #00ac78);
   border-color: transparent;
@@ -797,7 +797,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-danger {
   background: -webkit-linear-gradient(70deg, #ff6969, #db3232);
-  background: -moz- oldlinear-gradient(70deg, #ff6969, #db3232);
+  background: -moz-linear-gradient(70deg, #ff6969, #db3232);
   background: -o-linear-gradient(70deg, #ff6969, #db3232);
   background: linear-gradient(20deg, #ff6969, #db3232);
   border-color: transparent;
@@ -806,7 +806,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-danger:not(:disabled):not(.disabled):hover, .btn.btn-gradient-danger:not(:disabled):not(.disabled):focus, .btn.btn-gradient-danger:not(:disabled):not(.disabled):active {
   background: -webkit-linear-gradient(70deg, #ea4141, #db3232);
-  background: -moz- oldlinear-gradient(70deg, #ea4141, #db3232);
+  background: -moz-linear-gradient(70deg, #ea4141, #db3232);
   background: -o-linear-gradient(70deg, #ea4141, #db3232);
   background: linear-gradient(20deg, #ea4141, #db3232);
   border-color: transparent;
@@ -922,7 +922,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-warning {
   background: -webkit-linear-gradient(70deg, #ffc55e, #f08e27);
-  background: -moz- oldlinear-gradient(70deg, #ffc55e, #f08e27);
+  background: -moz-linear-gradient(70deg, #ffc55e, #f08e27);
   background: -o-linear-gradient(70deg, #ffc55e, #f08e27);
   background: linear-gradient(20deg, #ffc55e, #f08e27);
   border-color: transparent;
@@ -932,7 +932,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-warning:not(:disabled):not(.disabled):hover, .btn.btn-gradient-warning:not(:disabled):not(.disabled):focus, .btn.btn-gradient-warning:not(:disabled):not(.disabled):active {
   background: -webkit-linear-gradient(70deg, #ff9d36, #f08e27);
-  background: -moz- oldlinear-gradient(70deg, #ff9d36, #f08e27);
+  background: -moz-linear-gradient(70deg, #ff9d36, #f08e27);
   background: -o-linear-gradient(70deg, #ff9d36, #f08e27);
   background: linear-gradient(20deg, #ff9d36, #f08e27);
   border-color: transparent;
@@ -1052,7 +1052,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-info {
   background: -webkit-linear-gradient(70deg, #28e4fc, #00adc5);
-  background: -moz- oldlinear-gradient(70deg, #28e4fc, #00adc5);
+  background: -moz-linear-gradient(70deg, #28e4fc, #00adc5);
   background: -o-linear-gradient(70deg, #28e4fc, #00adc5);
   background: linear-gradient(20deg, #28e4fc, #00adc5);
   border-color: transparent;
@@ -1061,7 +1061,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-info:not(:disabled):not(.disabled):hover, .btn.btn-gradient-info:not(:disabled):not(.disabled):focus, .btn.btn-gradient-info:not(:disabled):not(.disabled):active {
   background: -webkit-linear-gradient(70deg, #00bcd4, #00adc5);
-  background: -moz- oldlinear-gradient(70deg, #00bcd4, #00adc5);
+  background: -moz-linear-gradient(70deg, #00bcd4, #00adc5);
   background: -o-linear-gradient(70deg, #00bcd4, #00adc5);
   background: linear-gradient(20deg, #00bcd4, #00adc5);
   border-color: transparent;
@@ -1177,7 +1177,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-light {
   background: -webkit-linear-gradient(70deg, white, #d7d7d7);
-  background: -moz- oldlinear-gradient(70deg, white, #d7d7d7);
+  background: -moz-linear-gradient(70deg, white, #d7d7d7);
   background: -o-linear-gradient(70deg, white, #d7d7d7);
   background: linear-gradient(20deg, white, #d7d7d7);
   border-color: transparent;
@@ -1187,7 +1187,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-light:not(:disabled):not(.disabled):hover, .btn.btn-gradient-light:not(:disabled):not(.disabled):focus, .btn.btn-gradient-light:not(:disabled):not(.disabled):active {
   background: -webkit-linear-gradient(70deg, #e6e6e6, #d7d7d7);
-  background: -moz- oldlinear-gradient(70deg, #e6e6e6, #d7d7d7);
+  background: -moz-linear-gradient(70deg, #e6e6e6, #d7d7d7);
   background: -o-linear-gradient(70deg, #e6e6e6, #d7d7d7);
   background: linear-gradient(20deg, #e6e6e6, #d7d7d7);
   border-color: transparent;
@@ -1280,7 +1280,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-dark {
   background: -webkit-linear-gradient(70deg, #626779, #2b3042);
-  background: -moz- oldlinear-gradient(70deg, #626779, #2b3042);
+  background: -moz-linear-gradient(70deg, #626779, #2b3042);
   background: -o-linear-gradient(70deg, #626779, #2b3042);
   background: linear-gradient(20deg, #626779, #2b3042);
   border-color: transparent;
@@ -1289,7 +1289,7 @@ a.btn:hover, a.btn:active, a.btn:focus {
 
 .btn.btn-gradient-dark:not(:disabled):not(.disabled):hover, .btn.btn-gradient-dark:not(:disabled):not(.disabled):focus, .btn.btn-gradient-dark:not(:disabled):not(.disabled):active {
   background: -webkit-linear-gradient(70deg, #3a3f51, #2b3042);
-  background: -moz- oldlinear-gradient(70deg, #3a3f51, #2b3042);
+  background: -moz-linear-gradient(70deg, #3a3f51, #2b3042);
   background: -o-linear-gradient(70deg, #3a3f51, #2b3042);
   background: linear-gradient(20deg, #3a3f51, #2b3042);
   border-color: transparent;

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/sb-and-logis-layout}"
+      lang="en">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>내 동행 관리</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="/">Home</a></li>
+                    <li>동행게시판</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="intro">
+            <h2>내 동행 관리</h2>
+        </div>
+    </div>
+
+    <main id="main">
+
+        <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+            <div class="row pt-sm-2 pt-lg-0">
+                <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                            <h1 class="h5 mb-0">내가 신청한 동행 목록</h1>
+                        </div>
+                        <table style="width: 100%; border-collapse: separate; border-spacing: 0 30px">
+                            <thead style="font-size: large">
+                            <th>동행게시글 제목</th>
+                            <th>동행게시글 모집자닉네임</th>
+                            <th>현재상태(참여됨or미정)</th>
+                            </thead>
+
+                            <tbody>
+                            <tr th:each="dto:${applyingDTO}">
+                                <td>[[${dto.getTitle()}]]</td>
+                                <td>[[${dto.getNickname()}]]</td>
+                                <td>[[${dto.getIsOk()}]]</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                            <h2 class="h4 mb-0">내가 모집중인 동행 목록</h2>
+                        </div>
+
+                        <table style="width: 100%; border-collapse: separate; border-spacing: 0 30px">
+                            <thead style="font-size: large">
+                            <th>동행게시글 제목</th>
+                            <th>모집현황</th>
+                            <th>신청인</th>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <ol>동행게시글제목(게시글링크)</ol>
+                                    <ol>
+                                    <button class="btn btn-primary" type="button">
+                                        <b>모집완료</b>
+                                    </button>
+                                    </ol>
+                                </td>
+
+                                <td>
+                                    <br>모집현황(2/4)
+                                        <ol>동행인1(동행인닉네임)</ol>
+                                        <ol>동행인2(동행인닉네임)</ol>
+                                </td>
+
+                                <td>
+                                    <ol>신청인(신청인닉네임)(프로필링크)
+                                        <button class="btn btn-primary"
+                                                type="button"
+                                        ><b>수락</b></button>
+
+                                        <button class="btn btn-primary"
+                                                type="button"
+                                        ><b>거절</b>
+                                        </button>
+                                    </ol>
+                                    <br>
+                                    <ol>신청인(신청인닉네임)(프로필링크)
+                                        <button class="btn btn-primary"
+                                                type="button">
+                                            <b>수락</b>
+                                        </button>
+                                        <button class="btn btn-primary"
+                                                type="button">
+                                            <b>거절</b>
+                                        </button>
+                                    </ol>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary" type="button"
+                                onclick="location.href='/manage/pastParticipate'"
+                        ><b>지난 동행모집완료내역 가기</b>
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>
+</html>

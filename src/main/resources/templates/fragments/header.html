@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
-      lang="en">
-
-<div th:fragment="header">
-  <nav class="navbar navbar-expand-lg bg-body-tertiary navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Together</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item" sec:authorize="hasAuthority('ROLE_ADMIN')">
-            <a class="nav-link active" aria-current="page" href="/admin">관리</a>
-          </li>
-          <li class="nav-item" sec:authorize="permitAll()">
-            <a class="nav-link active" aria-current="page" href="/recruit">동행</a>
-          </li>
-          <li class="nav-item" sec:authorize="isAnonymous()">
-            <a class="nav-link active" aria-current="page" href="/member/register">회원가입</a>
-          </li>
-          <li class="nav-item" sec:authorize="isAnonymous()">
-            <a class="nav-link active" aria-current="page" href="/member/login">로그인</a>
-          </li>
-          <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MEMBER')">
-            <a class="nav-link active" aria-current="page" href="/member/mypage">마이페이지</a>
-          </li>
-          <li class="nav-item" sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MEMBER')">
-            <a class="nav-link active" aria-current="page" href="/member/logout">로그아웃</a>
-          </li>
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!-- ======= Header ======= -->
+<header th:fragment="header" id="header" class="header d-flex align-items-center fixed-top">
+  <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
+    <div class="d-flex">
+      <a href="/" th:href="@{/}" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="/assets/img/logo.png" alt=""> -->
+        <h1>Together</h1>
+      </a>
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+      <nav id="navbar-left" class="navbar">
+        <ul>
+          <!--          <li><a href="../mainpage.html" class="active">Home</a></li>-->
+          <li><a th:href="@{/recruit}"
+                 href="/recruit_board.html" class="nav-link active">동행</a></li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+      </nav><!-- .navbar -->
     </div>
-  </nav>
-</div>
-</html>
+    <div>
+      <nav id="navbar-right" class="navbar">
+        <ul>
+          <li sec:authorize="hasAnyAuthority('ROLE_MEMBER')">
+            <a th:href="@{/member/mypage}"
+               href="../user/mypage.html">마이 페이지</a></li>
+          <li sec:authorize="isAnonymous()" class="nav-item">
+            <a th:href="@{/member/register}"
+               class="get-a-quote" href="/member/register-form">회원가입</a></li>
+          <li sec:authorize="isAnonymous()">
+            <a th:href="@{/member/login}"
+               class="get-a-quote" href="/member/login.html">로그인</a></li>
+          <li sec:authorize="hasAnyAuthority('ROLE_ADMIN', 'ROLE_MEMBER')">
+            <a th:href="@{/member/logout}"
+               class="get-a-quote" href="/member/logout">로그아웃</a></li>
+        </ul>
+      </nav><!-- .navbar -->
+    </div>
+  </div>
+</header><!-- End Header -->
+<!-- End Header -->
+
+
+

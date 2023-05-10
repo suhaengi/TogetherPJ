@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/sb-and-logis-layout}"
+      lang="en">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+    <div class="breadcrumbs">
+        <div
+                class="page-header d-flex align-items-center">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>게시글 상세</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="/">Home</a></li>
+                    <li>동행게시판</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+        <div class="row pt-sm-2 pt-lg-0">
+
+            <div class="card-body">
+                <form role="form" method="post" th:action="@{/recruit/apply}">
+                    <input type="hidden" name=bno th:value="${dto.bno}">
+                    <div class="row pt-sm-2 pt-lg-0">
+                        <div>
+                            <button class="btn-primary" type="submit">신청하기</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+                <div class="card-header">
+                    Board Read
+                </div>
+                <div class="card-body">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">제목</span>
+                        <input type="text" class="form-control" th:value="${dto.title}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">도시</span>
+                        <input type="text" class="form-control" th:value="${dto.city}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">모집인원</span>
+                        <input type="text" class="form-control" th:value="${dto.perNum}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">현재인원</span>
+                        <input type="text" class="form-control" th:value="${dto.curNum}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">시작날짜</span>
+                        <input type="text" class="form-control" th:value="${dto.startdate}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">종료날짜</span>
+                        <input type="text" class="form-control" th:value="${dto.enddate}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">현재상태</span>
+                        <input type="text" class="form-control" th:value="${dto.state}" readonly>
+                    </div>
+
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">내용</span>
+                        <div th:utext="${dto.content}"></div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">작성자</span>
+                        <input type="text" class="form-control" th:value="${dto.writer}" readonly>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">RegDate</span>
+                        <input type="text" class="form-control" th:value="${#temporals.format(dto.regDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">ModDate</span>
+                        <input type="text" class="form-control" th:value="${#temporals.format(dto.modDate, 'yyyy-MM-dd HH:mm:ss')}" readonly>
+                    </div>
+
+                        <!--    <div class="my-4" th:with="user=${#authentication.principal}">
+                                <div class="float-end" th:with="link = ${pageRequestDTO.getLink()}">
+                                    <a th:href="|@{/board/list}?${link}|" class="text-decoration-none">
+                                        <button type="button" class="btn btn-primary">List</button>
+                                    </a>
+                                    <a th:if="${#user != null && #user.username == dto.writerId}"
+                                       th:href="|@{/board/modify(bno=${dto.bno})}&${link}|" class="text-decoration-none">
+                                        <button type="button" class="btn btn-secondary">Modify</button>
+                                    </a>
+                                </div>
+                            </div>
+                            -->
+                </div><!--end card body-->
+            </section>
+        </div>
+    </div>
+
+<!--        <div class="row mt-3">
+            <div class="col-md-12">
+                <div class="my-4 ">
+                    <button class="btn btn-info  addReplyBtn">ADD REPLY</button>
+                </div>
+                <ul class="list-group replyList">
+                </ul>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <ul class="pagination replyPaging">
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="modal registerModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Register Reply</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Reply Text</span>
+                            <input type="text" class="form-control replyText" >
+                        </div>
+                        <div class="input-group mb-3" th:with="user=${#authentication.principal}">
+                            <span class="input-group-text">Replyer</span>
+                            <input type="text" class="form-control replyer" th:value="${user.username}"readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary registerBtn">Register</button>
+                        <button type="button" class="btn btn-outline-dark closeRegisterBtn" >Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        &lt;!&ndash; end regist modal &ndash;&gt;
+
+        <div class="modal modifyModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title replyHeader"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Reply Text</span>
+                            <input type="text" class="form-control modifyText" >
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info modifyBtn">Modify</button>
+                        <button type="button" class="btn btn-danger removeBtn">Remove</button>
+                        <button type="button" class="btn btn-outline-dark closeModifyBtn">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div> &lt;!&ndash;modifyModal &ndash;&gt;
+
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <script src="../../static/js/reply.js"></script>-->
+
+    </div>
+</div>
+</html>

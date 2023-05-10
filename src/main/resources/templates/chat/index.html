@@ -13,35 +13,6 @@
     <!-- Soho css -->
     <link rel="stylesheet" href="../../static/assets/css/chat.css">
 
-    <!-- NCloud Chat API -->
-    <script src="https://unpkg.com/ncloudchat/ncloudchat.min.js"></script>
-    <script> // 초기화
-    const nc = new ncloudchat.Chat();
-    nc.initialize([3e9ce7bd-c3bb-4141-ad4b-87b1a0783410]);
-
-    // 채널 생성
-    const channel = await nc.createChannel({type:'PUBLIC', name:'First Channel', customField:'customField'});
-
-    // 채널 구독
-    await nc.subscribe(channel.id);
-
-    // 수신된 메시지
-    console.log(message);
-    });
-    await nc.connect({
-        id: 'guest@company',
-        name: 'Guest',
-        profile: 'https://image_url',
-        customField: 'json',
-    });
-
-    // 메시지 발송
-    const response = await nc.sendMessage(channel.id, {
-        type: "text",
-        message: "Chat Test Message"
-    });
-    </script>
-
 </head>
 <body>
 

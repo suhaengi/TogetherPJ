@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/sb-and-logis-layout}"
+      lang="en">
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+    <div class="breadcrumbs">
+        <div class="page-header d-flex align-items-center"
+             th:style="'background-image:url('+ @{/assets/img/together.jpg} +');'">
+            <div class="container position-relative">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-6 text-center">
+                        <h2>프로필 편집</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <ol>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/member/mypage">마이페이지</a></li>
+                    <li>프로필 편집</li>
+                </ol>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+            <div class="row pt-sm-2 pt-lg-0">
+                <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+                  <div class="card-body">
+                     <div class="d-flex align-items-center mt-sm-n1 pb-4 mb-0 mb-lg-1 mb-xl-3">
+                        <h2 class="h2 mb-0">[[ ${dto.name} ]]님의 상세 정보</h2>
+                     </div>
+
+                      <form role="form" method="post" th:action="@{/member/editProfile}" th:object="${profileDto}">
+                          <div class="row pt-sm-2 pt-lg-0">
+                              <ul>
+                                  <div><h5><b>이름</b></h5></div>
+                                  <div>[[ ${dto.name} ]]</div>
+                              </ul>
+                              <ul>
+                                  <div><h5><b>성별</b></h5></div>
+                                  <div>[[ ${dto.gender} ]]</div>
+                              </ul>
+                              <ul>
+                                  <div><h5><b>생년월일</b></h5></div>
+                                  <div>[[ ${dto.birth} ]]</div>
+                              </ul>
+                              <ul>
+                                  <div><h5><b>이메일</b></h5></div>
+                                  <div>[[ ${dto.email} ]]</div>
+                              </ul>
+                              <ul>
+                                  <div><h5><b>닉네임</b></h5></div>
+                                  <div class>
+                                      <input type="text" name="nickname"
+                                             th:value="${dto.nickname}"/>
+                                  </div>
+                              </ul>
+                              <ul>
+                                  <div><h5><b>소개글</b></h5></div>
+                                  <div>
+                                      <input type="textarea" name="intro"
+                                             th:value="${dto.intro}"/>
+                                  </div>
+                              </ul>
+                              <ul>
+                                  <div><h5><b>전화번호</b></h5></div>
+                                  <div>
+                                      <input type="text" name="phone"
+                                             th:value="${dto.phone}"/>
+                                  </div>
+                              </ul>
+
+                          </div>
+                          <div>
+                              <button class="btn-primary" type="submit">회원정보 수정</button>
+                          </div>
+                      </form>
+                  </div>
+                </section>
+
+                <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+                    <div class="card-body">
+                        <form role="form" method="post" th:action="@{/member/changePw}" th:object="${pwForm}">
+                            <div class="row pt-sm-2 pt-lg-0">
+                                <ul>
+                                    <div><h5><b>비밀번호</b></h5></div>
+                                    <div>
+                                        <input type="password" name="password"/>
+                                    </div>
+                                </ul>
+                               <div>
+                                    <button class="btn-primary" type="submit">비밀번호 수정</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+               </section>
+
+                <button class="btn-delete" style="inline-size: auto" id="btn-delete">회원 탈퇴</button>
+
+            </div>
+        </div>
+    </main>
+</div>
+</html>
