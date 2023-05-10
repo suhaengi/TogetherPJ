@@ -58,27 +58,29 @@ public class ManageRecruitController {
 
 
     @PostMapping("/createReview")
-    public String  createPostReview(@Valid ReviewFormDTO reviewFormDto,Long rid,
+    public String  createPostReview(@Valid ReviewFormDTO reviewFormDto,
                                   BindingResult bindingResult,
                                   Authentication authentication,
                                   Model model){
-
+            log.info("----------------------");
         if (bindingResult.hasErrors()) {
             //log.info(reviewFormDto.getReviewedId());
-            return "./user/createReview";
+            return "user/createReview";
         }
 
         try {
             log.info(reviewFormDto.getReviewedId().toString());
             log.info(reviewFormDto.getComment());
-            reviewFormDto.setRid(rid);
+            reviewFormDto.setRid(1L);
+            log.info(reviewFormDto.toString());
+
             recruitService.postReview(authentication, reviewFormDto);
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "/createReview";
+            return "user/createReview";
         }
 
-        return "/pastParticipate";
+        return "redirect:/manage/pastParticipate";
 
     }
 

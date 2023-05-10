@@ -89,6 +89,7 @@ public class ManageRecruitService {
 
     public void postReview(Authentication authentication, ReviewFormDTO reviewFormDTO) {
         String email=authentication.getName();
+
         Member writer=memberRepository.findByEmail(email).orElseThrow(()->{
             throw new UsernameNotFoundException("아이디 비번 잘못됐습니다");
         });
@@ -100,18 +101,25 @@ public class ManageRecruitService {
         Member reviewed=memberRepository.findById(reviewFormDTO.getReviewedId()).orElseThrow(IllegalStateException::new);
 
 
-        Applying applying=Applying.builder()
-                .id(new ApplyingId(reviewFormDTO.getReviewedId(),reviewFormDTO.getRid()))
+        /*Applying applying=Applying.builder()
+                .id(new ApplyingId())
                 .isOk(true)
                 .applier(reviewed)
                 .recruit(recruit)
-                .build();
+                .build();*/
+
+        Applying applying1=repository.findById(new ApplyingId(reviewFormDTO.getReviewedId(),reviewFormDTO.getRid()))
+                .orElseThrow(IllegalStateException::new);
+        //log.info(applying1);
+
+
+
 
 
         Review review= Review.builder()
                 .comment(reviewFormDTO.getComment())
                 .reviewer(writer)
-                .applying(applying)
+                .applying(applying1)
                 .build();
 
         reviewRepository.save(review);
