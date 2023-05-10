@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/sb-and-logis-layout}"
+      lang="en">
+<meta charset="UTF-8">
+
+<div layout:fragment="content">
+
+  <div class="breadcrumbs">
+    <div class="page-header d-flex align-items-center">
+      <div class="container position-relative">
+        <div class="row d-flex justify-content-center">
+          <div class="col-lg-6 text-center">
+            <h2>내 동행 관리</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav>
+      <div class="container">
+        <ol>
+          <li><a href="/">Home</a></li>
+          <li>동행게시판</li>
+        </ol>
+      </div>
+    </nav>
+  </div>
+
+    <main id="main">
+      <div class="container py-5 mt-4 mt-lg-5 mb-lg-4 my-xl-5">
+        <div class="row pt-sm-2 pt-lg-0">
+          <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+            <div class="card-body">
+              <div class="container" data-aos="fade-up">
+                <p><b>내 동행 완료한 내역</b></p>
+              </div>
+            <table class="table" height="200">
+              <thead>
+                <tr>
+                  <th>동행지</th>
+                  <th>모집자</th>
+                  <th>날짜</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="dto:${pastApplyDTO}">
+                  <td>
+                    <a th:href="|@{/manage/createReview(rid =${dto.getId()})}|" >
+                   [[${dto.getCity()}]]</a></td>
+                  <td>[[${dto.getNickname()}]]</td>
+                  <td>[[${dto.getEnddate()}]]</td>
+                </tr>
+              </tbody>
+            </table>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+</div>
+</html>

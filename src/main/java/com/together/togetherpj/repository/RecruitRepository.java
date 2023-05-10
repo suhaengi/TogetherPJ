@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface RecruitRepository extends JpaRepository<Recruit, Long>, RecruitRepositoryCustom {
 
-/*    List<Recruit> findTop12ByOrderByModDateDesc();*/
+    List<Recruit> findTop16ByOrderByModDateDesc();
 }
