@@ -106,11 +106,23 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
             </thead>
             <tbody>
               <tr th:each="board: ${boardList}">
-                <td th:text="${board.id}"></td>
-                <td th:text="${board.title}"></td>
-                <td th:text="*{#temporals.format(board.startdate,'yyyy-MM-dd')}"></td>
-                <td th:text="*{#temporals.format(board.enddate,'yyyy-MM-dd')}"></td>
-                <td th:text="${board.viewcount}"></td>
+                <td>
+                  <span th:text="${board.id}"></span>
+                </td>
+                <td>
+                  <a th:href="@{'/recruit/view?bno=' + ${board.id}}">
+                    <span th:text="${board.title}"></span>
+                  </a>
+                </td>
+                <td>
+                  <span th:text="*{#temporals.format(board.startdate,'yyyy-MM-dd')}"></span>
+                </td>
+                <td>
+                  <span th:text="*{#temporals.format(board.enddate,'yyyy-MM-dd')}"></span>
+                </td>
+                <td>
+                  <span th:text="${board.viewcount}"></span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -150,7 +162,7 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
     <script src="../static/assets/vendor/aos/aos.js"></script>
     <script src="../static/assets/vendor/php-email-form/validate.js"></script>
     <!-- Template Main JS File -->
-    <script src="../static/assets/js/main.js"></script>-->
+    <script src="../static/assets/js/main.js"></script>
   </div>
   </body>
 </html>
