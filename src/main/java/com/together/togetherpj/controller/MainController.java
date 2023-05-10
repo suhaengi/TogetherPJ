@@ -24,12 +24,12 @@ public class MainController {
 
   private final RecruitService recruitService;
 
-  @GetMapping("/")
+/*  @GetMapping("/")
   public String mainPage(Model model){
       model.addAttribute("recruitList",recruitService.findAll());
 
     return "mainpage";
-  }
+  }*/
 
 /*  @GetMapping("/")
   public String mainPage(Model model){
@@ -70,6 +70,12 @@ public class MainController {
     return "mainpage";
   }*/
 
+  @GetMapping("/")
+  public String mainPage(Model model) {
+    List<Recruit> recruitList = recruitService.getLatestRecruits();
+    model.addAttribute("recruitList", recruitList);
+    return "mainpage";
+  }
 
   @GetMapping("/recruit")
   public String recruit(){

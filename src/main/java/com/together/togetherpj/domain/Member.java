@@ -5,6 +5,8 @@ import com.together.togetherpj.constant.Role;
 import com.together.togetherpj.dto.MemberRegisterFormDto;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
