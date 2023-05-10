@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -91,5 +92,18 @@ public class RecruitService {
         .state(State.RECRUITING)
         .recruitWriter(writer)
         .build();
+  }
+
+  public void Applying(String email, Long bno){
+    Member applier = memberRepository.findByEmail(email).orElseThrow();
+    Recruit recruit = recruitRepository.findById(bno).orElseThrow();
+
+     Applying applying = Applying.builder()
+             .id(new ApplyingId())
+             .isOk(false)
+             .applier(applier)
+             .recruit(recruit)
+             .build();
+     applyingRepository.save(applying);
   }
 }
