@@ -38,5 +38,8 @@ public class ViewForm {
 
     private String writerId;
 
+    public String imgName;
+    public String imgPath;
+
 
 }

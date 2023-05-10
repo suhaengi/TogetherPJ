@@ -15,6 +15,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ApplyingId implements Serializable  {
+  @Column(name = "C_APPLIER_ID")
   private Long applierId; //신청자
+  @Column(name = "C_ID")
   private Long recruitId; //게시글id
 }

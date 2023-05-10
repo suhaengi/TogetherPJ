@@ -12,13 +12,18 @@ import com.together.togetherpj.repository.MemberRepository;
 import com.together.togetherpj.repository.RecruitRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -47,29 +52,53 @@ public class RecruitService {
             .state(recruit.getState())
             .viewcount(recruit.getViewcount())
             .writerId(member.getEmail())
+            .imgName(recruit.getImgName())
+            .imgPath(recruit.getImgPath())
             .build();
     return viewForm;
   }
 
+  public List<Recruit> findAll(){
+    return recruitRepository.findAll();
+  }
+
+  @Value("c://upload/recruitImg")
+  private String uploadPath;
   @Transactional
   public void save(RecruitWriteFormDto writeFormDto, String userEmail){
     Member writer = memberRepository.findByEmail(userEmail)
             .orElseThrow(IllegalStateException::new);
+
+    MultipartFile imgFile = writeFormDto.getImgFile();
+
 
     Recruit recruit = createRecruit(writeFormDto, writer);
     Applying applying = createWriterApplying(writer, recruit);
 
     recruitRepository.save(recruit);
     applyingRepository.save(applying);
+
+    try{
+        if(imgFile != null){
+          UUID uuid = UUID.randomUUID();
+          String fileName = uuid + "_" + imgFile.getOriginalFilename();
+          File bgi=  new File(uploadPath,fileName);
+          imgFile.transferTo(bgi);
+          recruit.setImgName(fileName);
+          recruit.setImgPath(uploadPath+"/"+fileName);}
+    }catch(IOException e){
+    }
+
   }
 
   private Applying createWriterApplying(Member writer, Recruit recruit) {
     return Applying.builder()
-            .id(new ApplyingId())
+            .id(new ApplyingId(writer.getId(), recruit.getId()))
             .isOk(true)
             .applier(writer)
             .recruit(recruit)
             .build();
+
   }
 
   private Recruit createRecruit(RecruitWriteFormDto writeFormDto, Member writer){
