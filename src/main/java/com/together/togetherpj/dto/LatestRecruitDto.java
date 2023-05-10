@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class LatestRecruitDto {
     private Long id;
     private String title;
-    private Member recruitWriter;
+    private String nickname;
     private LocalDate startdate;
     private LocalDate enddate;
     private String city;

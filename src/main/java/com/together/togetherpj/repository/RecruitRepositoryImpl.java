@@ -42,11 +42,11 @@ public class RecruitRepositoryImpl implements RecruitRepositoryCustom{
 
   public Page<LatestRecruitDto> getLatestRecruitDto(Pageable pageable){
     List<LatestRecruitDto> content = queryFactory.select(Projections.constructor(LatestRecruitDto.class,
-                    recruit.id, recruit.title, recruit.recruitWriter,
+                    recruit.id, recruit.title, recruit.recruitWriter.nickname,
                     recruit.startdate, recruit.enddate, recruit.city))
             .from(recruit)
             .where(recruit.state.eq(State.RECRUITING))
-            .orderBy(recruit.regDate.desc())
+            .orderBy(recruit.id.desc())
             .offset(pageable.getOffset())
             .limit(pageable.getPageSize())
             .fetch();
