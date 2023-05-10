@@ -63,8 +63,6 @@ public class ProfileController {
         return "redirect:/member/mypage";
     }
 
-
-
     @PostMapping("/image")
     public String imageUpload(@RequestPart(value = "imgFile") MultipartFile imgFile, Authentication authentication)
             throws IOException {
