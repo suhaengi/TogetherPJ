@@ -72,37 +72,6 @@ public class RecruitController {
     return "redirect:/";
   }
 
-  @Autowired
-  private RecruitRepository recruitRepository;
-
-/*  @GetMapping("/mainpage")
-  public String getMainPage(Model model) {
-    List<Recruit> recruit = recruitRepository.findAll();
-    model.addAttribute("recruit", recruit);
-    return "mainpage";
-  }
-
-  @GetMapping("/mainpage")
-  public String mainpage(Model model, Authentication authentication) throws IOException{
-    String email = authentication.getName();
-    RecruitWriteFormDto recruitWriteFormDto = recruitService.readOne();
-
-    model.addAttribute("recruitDTO", recruitWriteFormDto);
-    log.info("Recruit CONTROLLER - mainPage()");
-    return "/mainpage";
-  }*/
-
-/*
-  @GetMapping("/mainpage")
-  public String mainPage(Model model) {
-    List<Post> recentPosts = recruitService.getRecentPosts();
-    model.addAttribute("recentPosts", recentPosts);
-    return "mainpage";
-  }
-*/
-
-
-
 
 
 }

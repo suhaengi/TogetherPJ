@@ -66,6 +66,28 @@
 <main id="main">
 
     <div class="d-flex justify-content-center">
+  <!--      <div th:each="item : ${recruitList.sort((a, b) => b.ModDate.compareTo(a.ModDate)).subList(0, 12)}">-->
+        <div th:each="item : ${recruitList}">
+        <div class="card m-2" style="width: 15rem">
+                <img src="https://place-hold.it/200x200" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="card-title" th:text="${item.title}">Card title</h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item card-text" th:text="|작성자: ${item.recruitWriter.nickname}|"></li>
+                        <li class="list-group-item" th:text="|출발 날짜: ${item.startdate}|"></li>
+                        <li class="list-group-item" th:text="|도착 날짜: ${item.enddate}|"></li>
+                        <li class="list-group-item" th:text="|목적지: ${item.city}|"></li>
+                    </ul>
+                    <a th:href="@{/recruit/{param1} (param1=${item.id})}"
+                       href="#" class="btn btn-primary">상세보기</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--    <div class="d-flex justify-content-center">
         <div th:each="item : ${recruitList}">
             <div class="card m-2" style="width: 15rem">
                 <img src="https://place-hold.it/200x200" class="card-img-top" alt="...">
@@ -75,292 +97,16 @@
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item card-text" th:text="|작성자: ${item.recruitWriter.nickname}|"></li>
-                        <li class="list-group-item">출발 날짜</li>
-                        <li class="list-group-item">도착 날짜</li>
-                        <li class="list-group-item">목적지</li>
+                        <li class="list-group-item" th:text="|출발 날짜: ${item.startdate}|"></li>
+                        <li class="list-group-item" th:text="|도착 날짜: ${item.enddate}|"></li>
+                        <li class="list-group-item" th:text="|목적지: ${item.city}|"></li>
                     </ul>
                     <a th:href="@{/recruit/{param1} (param1=${item.id})}"
                        href="#" class="btn btn-primary">상세보기</a>
                 </div>
             </div>
         </div>
-    </div>
-
-
-    <div class="post-container">
-        <div class="post">
-            <h2 class="post-title"></h2>
-            <p class="post-content"></p>
-        </div>
-        <div class="post">
-            <h2 class="post-title">${post.title}</h2>
-            <p class="post-content">${post.content}</p>
-        </div>
-        <div class="post">
-            <h2 class="post-title"></h2>
-            <p class="post-content"></p>
-        </div>
-    </div>
-
-    <section class="my-lg-14 my-8">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mb-6">
-                    <h1 class="section-header">동행 게시판</h1>
-                </div>
-            </div>
-
-            <div class="row g-4 row-cols-lg-5 row-cols-2 row-cols-md-3">
-                <div class="col" th:each="post : ${recentPosts}">
-                    <div class="card card-product">
-                        <div class="card-body">
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
-                            </div>
-                            <div class="text-small mb-1">
-                                <a href="#!" class="text-decoration-none text-muted"><small th:text="${post.c_writer_id}"></small></a>
-                            </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg" class="text-inherit text-decoration-none"
-                                                th:text="${post.c_content}"></a></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div class="col">
-                    <div class="card card-product">
-                        <div class="card-body">
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
-                            </div>
-                            <div class="text-small mb-1"><a href="#!" class="text-decoration-none text-muted"><small>맛집/관광지</small></a>
-                            </div>
-                            <div>
-                                <ul>
-                                    <li th:each="recruit : ${list}" class="col">
-                                        <div class="card card-product">
-                                            <div class="card-body">
-                                                <div class="text-center position-relative">
-                                                    <div class="position-absolute top-0 start-0"></div>
-                                                    <a href="#!"><img th:src="@{/assets/img/pari_ex.jpg}" class="main_accompany_img"></a>
-                                                </div>
-                                                <div class="text-small mb-1">
-                                                    <a href="#!" class="text-decoration-none text-muted"><small th:text="${recruit.writer_id}">[[ ${RecruitWriteFormDto.title} ]]</small></a>
-                                                </div>
-                                                <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg" class="text-inherit text-decoration-none" th:text="${recruit.content}"></a></h2>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-product">
-                        <div class="card-body">
-
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
-
-                            </div>
-                            <div class="text-small mb-1"><a href="#!"
-                                                            class="text-decoration-none text-muted"><small>맛집/관광지</small></a>
-                            </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
-                                                class="text-inherit text-decoration-none">파리
-                                맛집도 가고 에펠탑도 구경해요</a></h2>
-                            <div>
-
-                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small> <span
-                                    class="text-muted small">4.5(149)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-product">
-                        <div class="card-body">
-
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
-
-                            </div>
-                            <div class="text-small mb-1"><a href="#!"
-                                                            class="text-decoration-none text-muted"><small>맛집/관광지</small></a>
-                            </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
-                                                class="text-inherit text-decoration-none">파리
-                                맛집도 가고 에펠탑도 구경해요</a></h2>
-                            <div>
-
-                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small> <span
-                                    class="text-muted small">4.5(149)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-product">
-                        <div class="card-body">
-
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/pari_ex.jpg" class="main_accompany_img"></a>
-
-                            </div>
-                            <div class="text-small mb-1"><a href="#!"
-                                                            class="text-decoration-none text-muted"><small>맛집/관광지</small></a>
-                            </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
-                                                class="text-inherit text-decoration-none">파리
-                                맛집도 가고 에펠탑도 구경해요</a></h2>
-                            <div>
-
-                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small> <span
-                                    class="text-muted small">4.5(149)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-product">
-                        <div class="card-body">
-
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/roma_ex.jpg" class="main_accompany_img"></a>
-
-                            </div>
-                            <div class="text-small mb-1"><a href="#!"
-                                                            class="text-decoration-none text-muted"><small>관광지</small></a>
-                            </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
-                                                class="text-inherit text-decoration-none">로마
-                                콜로세움 가실 분 구합니다</a></h2>
-                            <div>
-
-                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small> <span
-                                    class="text-muted small">4.5(149)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-product">
-                        <div class="card-body">
-
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/roma_ex.jpg" class="main_accompany_img"></a>
-
-                            </div>
-                            <div class="text-small mb-1"><a href="#!"
-                                                            class="text-decoration-none text-muted"><small>관광지</small></a>
-                            </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
-                                                class="text-inherit text-decoration-none">로마
-                                콜로세움 가실 분 구합니다</a></h2>
-                            <div>
-
-                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small> <span
-                                    class="text-muted small">4.5(149)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-product">
-                        <div class="card-body">
-
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/roma_ex.jpg" class="main_accompany_img"></a>
-
-                            </div>
-                            <div class="text-small mb-1"><a href="#!"
-                                                            class="text-decoration-none text-muted"><small>관광지</small></a>
-                            </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
-                                                class="text-inherit text-decoration-none">로마
-                                콜로세움 가실 분 구합니다</a></h2>
-                            <div>
-
-                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small> <span
-                                    class="text-muted small">4.5(149)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card card-product">
-                        <div class="card-body">
-
-                            <div class="text-center position-relative">
-                                <div class=" position-absolute top-0 start-0"></div>
-                                <a href="#!"> <img src="/assets/img/roma_ex.jpg" class="main_accompany_img"></a>
-
-                            </div>
-                            <div class="text-small mb-1"><a href="#!"
-                                                            class="text-decoration-none text-muted"><small>관광지</small></a>
-                            </div>
-                            <h2 class="fs-6"><a href="/assets/img/pari_ex.jpg"
-                                                class="text-inherit text-decoration-none">로마
-                                콜로세움 가실 분 구합니다</a></h2>
-                            <div>
-
-                                <small class="text-warning"> <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-fill"></i>
-                                    <i class="bi bi-star-half"></i></small> <span
-                                    class="text-muted small">4.5(149)</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
+    </div>-->
 
     <!-- 공지사항 바로가기 NGB-->
     <section id="call-to-action" class="call-to-action">
@@ -454,7 +200,30 @@
         width: 50px;
         height: 50px;
     }
+    .d-flex.justify-content-center {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        max-width: 100%;
+    }
 
+    .card {
+        width: calc((100% - 7rem) / 6);
+        /* your other card styles */
+    }
+
+    @media (max-width: 768px) {
+        .d-flex.justify-content-center {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card {
+            width: 100%;
+            margin-bottom: 1rem;
+        }
+    }
 </style>
 
 <script>
