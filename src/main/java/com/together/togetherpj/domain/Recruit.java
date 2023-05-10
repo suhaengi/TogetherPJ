@@ -7,15 +7,13 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 import java.util.Date;
 
+@Table(name="recruit")
 @Setter
 @Getter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
-
-
 public class Recruit extends BaseEntity{
 
     @Id
@@ -61,8 +59,16 @@ public class Recruit extends BaseEntity{
     @ColumnDefault("0")
     private long viewcount;
 
-    @ManyToOne
+/*    @ManyToOne
     @JoinColumn(name = "M_ID")
-    private Member member;
+    private Member member;*/
 
+    @Builder
+    public Recruit(Long id, String title, Date startdate, Date enddate, long viewcount){
+        this.id = id;
+        this.title = title;
+        this.startdate = startdate;
+        this.enddate = enddate;
+        this.viewcount = viewcount;
+    }
 }

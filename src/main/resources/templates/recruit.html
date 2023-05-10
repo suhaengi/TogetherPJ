@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>[Template] Sample Inner Page</title>
+    <title>게시글 작성 폼</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -132,22 +132,45 @@
         <section class="s1" >
           <div class="con1" >
           <div class="search_box">
-            <p><br><b> 여행할 나라를 선택해주세요!</b>
+            <p><br><b> 여행할 지역을 선택해주세요!</b>
             <select name="" id="" onchange="categoryChange(this)">
-              <option value>대륙 선택</option>
-              <option value="asia">아시아</option>
-              <option value="africa">아프리카</option>
-              <option value="europe">유럽</option>
-              <option value="oceania">오세아니아</option>
-              <option value="southA">남아메리카</option>
-              <option value="northA">북아메리카</option>
+              <option value="region">도시 선택</option>
+              <option value="gangreung">강릉</option>
+              <option value="gosung">고성</option>
+              <option value="donghae">동해</option>
+              <option value="samchuk">삼척</option>
+              <option value="sokcho">속초</option>
+              <option value="yanggu">양구</option>
+              <option value="yangyang">양양</option>
+              <option value="youngwol">영월</option>
+              <option value="wonju">원주</option>
+              <option value="injae">인제</option>
+              <option value="jungsun">정선</option>
+              <option value="chulwon">철원</option>
+              <option value="choonchun">춘천</option>
+              <option value="taebak">태백</option>
+              <option value="pyungchag">평창</option>
+              <option value="hongchun">홍천</option>
+              <option value="hoengseong">횡성</option>
             </select>
-
-            <select name="" id="state">
-              <option>나라 선택</option>
-            </select>
-
           </div> <!--여기-->
+
+              <div class="search_box">
+                <p><br><b> 모집인원을 선택해주세요</b>
+                  <select name="" onchange="categoryChange(this)">
+                    <option value>모집 인원</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+            </div>
           <div class="data11">
             <p><br><b> 여행 기간을 선택해주세요!</b>
             <input type="date" name="startDate" id="startDate">

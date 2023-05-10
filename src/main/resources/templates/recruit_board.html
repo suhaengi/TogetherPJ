@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-    <title>[Template] Sample Inner Page</title>
+    <title>동행글 리스트</title>
     <meta content="" name="description" />
     <meta content="" name="keywords" />
 
@@ -59,6 +59,7 @@
   </head>
 
   <body>
+    <form action="/board/recruitBoard" method="get">
     <!-- Scripts -->
 <!--    <script
       type="module"
@@ -138,86 +139,31 @@
         <div class="container" data-aos="fade-up">
           <p><b>동행자를 찾아보세요!</b></p>
           <br />
+          <div id="wrap">
+            <form action="/board/search" method="GET">
+              <div class="search">
+                <input name="keyword" type="text" placeholder="검색어를 입력하세요.">
+              </div>
+              <button>검색</button>
+            </form>
+          </div>
           <table class="table">
-            <thread>
+            <thead>
               <tr>
                 <th>번호</th>
                 <th>제목</th>
-                <th>작성자</th>
-                <th>날짜</th>
+                <th>출발날짜</th>
+                <th>도착날짜</th>
                 <th>조회수</th>
               </tr>
-            </thread>
+            </thead>
             <tbody>
-              <tr>
-                <td>10</td>
-                <td><a href="view.html">제목10</a></td>
-                <td>작성자10</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>9</td>
-                <td><a href="view.html">제목9</a></td>
-                <td>작성자9</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>8</td>
-                <td><a href="view.html">제목8</a></td>
-                <td>작성자8</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>7</td>
-                <td><a href="view.html">제목7</a></td>
-                <td>작성자7</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td><a href="view.html">제목6</a></td>
-                <td>작성자6</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td><a href="view.html">제목5</a></td>
-                <td>작성자5</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td><a href="view.html">제목4</a></td>
-                <td>작성자4</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td><a href="view.html">제목3</a></td>
-                <td>작성자3</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td><a href="view.html">제목2</a></td>
-                <td>작성자2</td>
-                <td>2022.01.01</td>
-                <th>0</th>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td><a href="view.html">제목1</a></td>
-                <td>작성자1</td>
-                <td>2022.01.01</td>
-                <th>0</th>
+              <tr th:each="board: ${boardList}">
+                <td th:text="${board.id}"></td>
+                <td th:text="${board.title}"></td>
+                <td th:text="*{#temporals.format(board.startdate,'yyyy-MM-dd')}"></td>
+                <td th:text="*{#temporals.format(board.enddate,'yyyy-MM-dd')}"></td>
+                <td th:text="${board.viewcount}"></td>
               </tr>
             </tbody>
           </table>
@@ -232,6 +178,11 @@
             <b>글쓰기</b>
           </button>
         </div>
+      <div>
+        <span th:each="pageNum : ${pageList}" th:inline="text">
+          <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+        </span>
+      </div>
     </main>
     <!-- End #main -->
 
