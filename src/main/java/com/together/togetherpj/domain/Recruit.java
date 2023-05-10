@@ -6,10 +6,6 @@ import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import java.util.List;
 
 @Setter
@@ -32,12 +28,9 @@ public class Recruit extends BaseEntity{
     @Column(name = "C_CITY",nullable = false, length = 30)
     private String city;
 
-    /*@Column(name = "C_IMG")
-    @Lob
-    private byte[] c_img;*/
-
-    /*@Column(name = "C_TOUR", nullable = true, length = 10)
-    private String tour;*/
+    //관광지 api용 미리 추가
+    @Column(name = "tourspot", nullable = true, length = 10)
+    private String spot;
 
     @Column(name = "C_CONTENT", nullable = false)
     @Lob
@@ -57,12 +50,11 @@ public class Recruit extends BaseEntity{
     private LocalDate enddate;
 
     @Column(name="C_STATE", nullable = false, length = 20)
-
     @Enumerated(EnumType.STRING)
     private State state;
 
     @Column(name="C_VIEWCOUNT", nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("1")
     private long viewcount;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -74,7 +66,7 @@ public class Recruit extends BaseEntity{
     private String writerNick;*/
 
     //동행그룹과의관계
-    @OneToMany(mappedBy = "recruit",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recruit",cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Applying>  applyingList = new ArrayList<>();
 /*
     @OneToMany

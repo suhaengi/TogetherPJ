@@ -1,0 +1,4 @@
+{
+  "ignore": ["src/main/resources/static/chat/public/*"],
+  "exec": "babel-node src/main/resources/static/chat/server.js"
+}

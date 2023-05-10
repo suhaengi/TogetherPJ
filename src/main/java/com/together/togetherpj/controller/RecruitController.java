@@ -1,8 +1,10 @@
 package com.together.togetherpj.controller;
 
 import com.together.togetherpj.constant.State;
+import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
+import com.together.togetherpj.dto.ViewForm;
 import com.together.togetherpj.service.MemberService;
 import com.together.togetherpj.service.RecruitService;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.time.LocalDate;
 
 @Controller
@@ -35,11 +38,8 @@ public class RecruitController {
   }
 
   @PostMapping("/save")
-  public String recruitSave(
-      @Valid RecruitWriteFormDto writeFormDto,
-      BindingResult bindingResult,
-      Authentication authentication,
-      Model model) {
+  public String recruitSave(@Valid RecruitWriteFormDto writeFormDto,
+      BindingResult bindingResult, Authentication authentication, Model model) {
 
     if (bindingResult.hasErrors()) {
       return "recruit/write-form";
@@ -52,6 +52,19 @@ public class RecruitController {
       return "recruit/write-form";
     }
 
+    return "redirect:/";
+  }
+
+  @GetMapping({"/view", "/modify"})
+  public void read(Long bno, Model model) throws IOException {
+    ViewForm dto = recruitService.readOne(bno);
+    model.addAttribute("dto", dto);
+  }
+
+  @PostMapping("/apply")
+  public String applying(Authentication authentication,Long bno){
+    String email = authentication.getName();
+    recruitService.Applying(email,bno);
     return "redirect:/";
   }
 }

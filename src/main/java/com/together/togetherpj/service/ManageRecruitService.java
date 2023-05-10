@@ -110,7 +110,8 @@ public class ManageRecruitService {
 
         Applying applying1=repository.findById(new ApplyingId(reviewFormDTO.getReviewedId(),reviewFormDTO.getRid()))
                 .orElseThrow(IllegalStateException::new);
-        //log.info(applying1);
+
+        log.info(applying1);
 
 
 

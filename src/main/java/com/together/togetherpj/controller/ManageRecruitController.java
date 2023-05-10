@@ -71,7 +71,7 @@ public class ManageRecruitController {
         try {
             log.info(reviewFormDto.getReviewedId().toString());
             log.info(reviewFormDto.getComment());
-            reviewFormDto.setRid(1L);
+            reviewFormDto.setRid(2L);
             log.info(reviewFormDto.toString());
 
             recruitService.postReview(authentication, reviewFormDto);

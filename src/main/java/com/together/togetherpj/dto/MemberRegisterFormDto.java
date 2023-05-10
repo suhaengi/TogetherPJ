@@ -21,6 +21,9 @@ public class MemberRegisterFormDto {
 //      message = "패스워드는 4~12자리, 숫자, 영소문자, 영대문자, 특수문자(*!@$%^&(){}[]:;<>,.?/~_+-=|\\)를 포함해야 합니다.")
   private String password;
 
+  @NotBlank(message = "패스워드를 확인해주세요.")
+  private String passwordCheck;
+
   @NotEmpty(message = "이름은 필수 항목 입니다.")
   private String Name;
 
