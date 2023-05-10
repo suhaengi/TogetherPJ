@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Tour List</title>
+</head>
+<body>
+<h1>Tour List</h1>
+<ul>
+  <li th:each="item : ${tourList}" th:text="${item}"></li>
+</ul>
+</body>
+</html>
