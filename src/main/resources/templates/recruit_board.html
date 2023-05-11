@@ -4,6 +4,7 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="~{layouts/sb-and-logis-layout}"
 >
 <meta charset="UTF-8">
+
   <body>
   <div layout:fragment="content">
     <main id="main">
@@ -53,6 +54,7 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
                 <th>출발날짜</th>
                 <th>도착날짜</th>
                 <th>조회수</th>
+                <th>모집현황</th>
               </tr>
             </thead>
             <tbody>
@@ -74,6 +76,9 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
                 <td>
                   <span th:text="${board.viewcount}"></span>
                 </td>
+                <td>
+                  <span th:text="|${board.curNum}/${board.perNum}|"></span>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -84,14 +89,8 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
             </button>
           </div>
         </div>
-
       </section>
 
-      <div>
-        <span th:each="pageNum : ${pageList}" th:inline="text">
-          <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
-        </span>
-      </div>
     </main>
     <!-- End #main -->
     <a href="#"
