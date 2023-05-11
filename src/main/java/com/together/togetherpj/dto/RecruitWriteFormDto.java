@@ -11,6 +11,8 @@ import javax.validation.constraints.Positive;
 @Getter @Setter @ToString
 public class RecruitWriteFormDto {
 
+  private Long bno;
+
   @NotEmpty(message = "제목은 필수 항목 입니다.")
   private String title;
 
