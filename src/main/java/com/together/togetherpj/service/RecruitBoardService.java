@@ -43,13 +43,14 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
     return boardDtoList;
   }
 
+  @Transactional
   public List<RecruitBoardDto> searchPosts(String keyword){
     List<Recruit> boards = recruitRepository.findByTitleContaining(keyword);
     List<RecruitBoardDto> boardDtoList = new ArrayList<>();
 
     if(boards.isEmpty()) return boardDtoList;
 
-    for(Recruit board: boards){
+    for(Recruit board : boards){
         boardDtoList.add(this.convertEntityToDto(board));
     }
 
