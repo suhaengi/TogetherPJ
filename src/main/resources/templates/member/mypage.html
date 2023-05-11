@@ -135,30 +135,16 @@
                     </tr>
                   </thread>
                   <tbody>
-                  <tr>
-                    <td>동행자1</td>
-                    <td><a href="view.html">춘천갈사람</a></td>
-                    <td>소양강댐</td>
-                    <td>2022.03.01</td>
-                    <td>재밌었어요~</td>
-                  </tr>
 
-                  <tr>
-                    <td>동행자2</td>
-                    <td><a href="view.html">춘천갈사람</a></td>
-                    <td>소양강댐</td>
-                    <td>2022.03.01</td>
-                    <td>춘천최고~</td>
-                  </tr>
 
-                  <tr>
-                    <td>동행자2</td>
-                    <td><a href="view.html">평창갈사람모집해요</a></td>
-                    <td>평창어딘가</td>
-                    <td>2022.01.01</td>
-                    <td>평창최고~@@@@@@@@@@@@@@@@@@@@@</td>
-                  </tr>
+                  <tr th:each="dto:${myReviewList}">
+                    <td>[[${dto.getReviewer()}]]</td>
+                    <td>[[${dto.getTitle()}]]</td>
+                    <td>[[${dto.getCity()}]]</td>
+                    <td>[[${dto.getEnddate()}]]</td>
+                    <td>[[${dto.getComment()}]]</td>
 
+                  </tr>
                   </tbody>
                 </table>
 

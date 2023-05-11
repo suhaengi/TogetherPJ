@@ -9,6 +9,9 @@ public interface ApplyingResponseDTO {
     //@Value("#{target.nickname}")
     String getNickname();
 
+    String getRid();
+    Long getAid();
+
 
 
 }
