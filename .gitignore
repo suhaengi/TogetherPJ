@@ -35,3 +35,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### key ###
+test-key-08-04-db.pem
+test-key-08-04.pem

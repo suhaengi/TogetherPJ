@@ -12,6 +12,11 @@ plugins {
     id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
 }
 
+jar {
+    enabled = false
+}
+
+
 group = 'com.together'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
@@ -50,7 +55,8 @@ dependencies {
     implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation'
 
     //    MySQL
-    runtimeOnly 'com.mysql:mysql-connector-j'
+/*    runtimeOnly 'com.mysql:mysql-connector-j'*/
+    runtimeOnly 'mysql:mysql-connector-java:5.7.17'
 
     //    Lombok
     compileOnly 'org.projectlombok:lombok'
