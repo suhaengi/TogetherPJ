@@ -6,12 +6,13 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
 <meta charset="UTF-8">
   <body>
   <div layout:fragment="content">
-
     <main id="main">
       <!-- ======= Breadcrumbs ======= -->
       <div class="breadcrumbs">
-        <div class="page-header d-flex align-items-center"
-             th:style="'background-image:url('+ @{/assets/img/together.jpg} +');'">
+        <div
+          class="page-header d-flex align-items-center"
+          style="background-image: url('../static/assets/img/together.jpg')"
+        >
           <div class="container position-relative">
             <div class="row d-flex justify-content-center">
               <div class="col-lg-6 text-center">
@@ -40,8 +41,8 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
             <form action="/board/search" method="GET">
               <div class="search">
                 <input name="keyword" type="text" placeholder="검색어를 입력하세요.">
+                <button>검색</button>
               </div>
-              <button>검색</button>
             </form>
           </div>
           <table class="table">
@@ -56,40 +57,51 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
             </thead>
             <tbody>
               <tr th:each="board: ${boardList}">
-                <td th:text="${board.id}"></td>
-                <td th:text="${board.title}"></td>
-                <td th:text="*{#temporals.format(board.startdate,'yyyy-MM-dd')}"></td>
-                <td th:text="*{#temporals.format(board.enddate,'yyyy-MM-dd')}"></td>
-                <td th:text="${board.viewcount}"></td>
+                <td>
+                  <span th:text="${board.id}"></span>
+                </td>
+                <td>
+                  <a th:href="@{'/recruit/view?bno=' + ${board.id}}">
+                    <span th:text="${board.title}"></span>
+                  </a>
+                </td>
+                <td>
+                  <span th:text="*{#temporals.format(board.startdate,'yyyy-MM-dd')}"></span>
+                </td>
+                <td>
+                  <span th:text="*{#temporals.format(board.enddate,'yyyy-MM-dd')}"></span>
+                </td>
+                <td>
+                  <span th:text="${board.viewcount}"></span>
+                </td>
               </tr>
             </tbody>
           </table>
-
-          <div>
-            <a class="btn btn-sm btn-secondary ms-auto"
-               href="/recruit/write-form">글쓰기</a>
-
+          <div class="buttonC">
+            <button class="w-btn" type="button"
+                    onclick="location.href='../recruit/write-form' "
+            ><b>글쓰기</b>
+            </button>
           </div>
-
-        </div>
-
-
-
-        <div>
-          <span th:each="pageNum : ${pageList}" th:inline="text">
-            <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
-          </span>
         </div>
 
       </section>
-    </main>
 
-    <a   href="#"
-         class="scroll-top d-flex align-items-center justify-content-center">
-      <i class="bi bi-arrow-up-short"></i>
-    </a>
+      <div>
+        <span th:each="pageNum : ${pageList}" th:inline="text">
+          <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
+        </span>
+      </div>
+    </main>
+    <!-- End #main -->
+    <a href="#"
+       class="scroll-top d-flex align-items-center justify-content-center"
+    ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <div id="preloader"></div>
 
   </div>
   </body>
-
+  </div>
 </html>

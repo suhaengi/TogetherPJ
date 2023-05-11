@@ -1,7 +1,10 @@
 package com.together.togetherpj.controller;
 
+import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.dto.ProfileDto;
 import com.together.togetherpj.dto.PwForm;
+import com.together.togetherpj.dto.ViewForm;
+import com.together.togetherpj.repository.MemberRepository;
 import com.together.togetherpj.service.ProfileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +29,7 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class ProfileController {
     private final ProfileService profileService;
+    private final MemberRepository memberRepository;
 
     @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
     @GetMapping("/mypage")
@@ -71,9 +75,18 @@ public class ProfileController {
         return "redirect:/member/mypage";
     }
 
+//    @GetMapping("/image")
+//    public ResponseEntity<?> getProfileImg (Authentication authentication) throws IOException {
+//        String email = authentication.getName();
+//        ProfileDto profileDto = profileService.readOne(email);
+//
+//        InputStream inputStream = new FileInputStream(profileDto.getProfileImgPath());
+//        byte[] imageByteArray = IOUtils.toByteArray(inputStream);
+//        inputStream.close();
+//        return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
+//    }
     @GetMapping("/image")
-    public ResponseEntity<?> getProfileImg (Authentication authentication) throws IOException {
-        String email = authentication.getName();
+    public ResponseEntity<?> getProfileImg (String email) throws IOException {
         ProfileDto profileDto = profileService.readOne(email);
 
         InputStream inputStream = new FileInputStream(profileDto.getProfileImgPath());
@@ -81,4 +94,13 @@ public class ProfileController {
         inputStream.close();
         return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
     }
+
+
+    @GetMapping({"/othersProfile"})
+    public String read(String email, Model model) throws IOException {
+        ProfileDto dto = profileService.readOne(email);
+        model.addAttribute("dto", dto);
+        return "user/othersProfile";
+    }
+
 }
