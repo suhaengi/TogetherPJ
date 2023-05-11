@@ -35,6 +35,8 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
                 .startdate(board.getStartdate())
                 .enddate(board.getEnddate())
                 .viewcount(board.getViewcount())
+                .curNum(board.getCurNum())
+                .perNum(board.getPerNum())
                 .build();
         boardDtoList.add(boardDto);
     }
@@ -61,6 +63,8 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
             .startdate(board.getStartdate())
             .enddate(board.getEnddate())
             .viewcount(board.getViewcount())
+            .curNum(board.getCurNum())
+            .perNum(board.getPerNum())
             .build();
   }
 }

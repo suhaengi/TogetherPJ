@@ -4,57 +4,10 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorate="~{layouts/sb-and-logis-layout}"
 >
 <meta charset="UTF-8">
+
   <body>
   <div layout:fragment="content">
     <form action="/board/recruitBoard" method="get">
-    <!-- Scripts -->
-<!--    <script
-      type="module"
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"
-    ></script>-->
-<!--    <script src="../static/assets/js/recruit_board.js"></script>-->
-    <!-- ======= Header ======= -->
-   <!-- <header id="header" class="header d-flex align-items-center fixed-top">
-      <div
-        class="container-fluid container-xl d-flex align-items-center justify-content-between"
-      >
-        <a href="mainpage.html" class="logo d-flex align-items-center">
-          &lt;!&ndash; Uncomment the line below if you also wish to use an image logo &ndash;&gt;
-          &lt;!&ndash; <img src="assets/img/logo.png" alt=""> &ndash;&gt;
-          <h1>Together</h1>
-        </a>
-
-        <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-        <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-        <nav id="navbar" class="navbar">
-          <ul>
-            <li><a href="mainpage.html" class="active">Home</a></li>
-            <li><a href="recruit_board.html">동행 게시판</a></li>
-            <li class="dropdown">
-              <a href="#"
-                ><span>커뮤니티 게시판</span>
-                <i class="bi bi-chevron-down dropdown-indicator"></i
-              ></a>
-              <ul>
-                <li><a href="#">Q&A</a></li>
-                <li><a href="#">정보 공유</a></li>
-                <li><a href="#">자유 게시판</a></li>
-              </ul>
-            </li>
-            <li><a href="member/mypage.html">마이 페이지</a></li>
-            <li><a class="get-a-quote" href="login.html">로그인</a></li>
-          </ul>
-        </nav>
-        &lt;!&ndash; .navbar &ndash;&gt;
-      </div>
-    </header>-->
-    <!-- End Header -->
-    <!-- End Header -->
-
     <main id="main">
       <!-- ======= Breadcrumbs ======= -->
       <div class="breadcrumbs">
@@ -90,8 +43,9 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
             <form action="/board/search" method="GET">
               <div class="search">
                 <input name="keyword" type="text" placeholder="검색어를 입력하세요.">
+                <button>검색</button>
               </div>
-              <button>검색</button>
+
             </form>
           </div>
           <table class="table">
@@ -102,6 +56,7 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
                 <th>출발날짜</th>
                 <th>도착날짜</th>
                 <th>조회수</th>
+                <th>모집현황</th>
               </tr>
             </thead>
             <tbody>
@@ -123,30 +78,30 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
                 <td>
                   <span th:text="${board.viewcount}"></span>
                 </td>
+                <td>
+                  <span th:text="|${board.curNum}/${board.perNum}|"></span>
+                </td>
               </tr>
             </tbody>
           </table>
         </div>
-      </section>
+
         <div class="buttonC">
           <button
-            class="w-btn"
-            type="button"
-            onclick="location.href='../recruit/write-form.html' "
-          >
+                  class="row pt-sm-2 pt-lg-0"
+                  type="button"
+                  style="float:right"
+                  onclick="location.href='../recruit/write-form.html'">
             <b>글쓰기</b>
           </button>
         </div>
-      <div>
-        <span th:each="pageNum : ${pageList}" th:inline="text">
-          <a th:href="@{'/?page=' + ${pageNum}}">[[${pageNum}]]</a>
-        </span>
-      </div>
+      </section>
+
     </main>
     <!-- End #main -->
 
     <!--Footer-->
-    <a
+<!--    <a
       href="#"
       class="scroll-top d-flex align-items-center justify-content-center"
       ><i class="bi bi-arrow-up-short"></i
@@ -154,15 +109,15 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
 
     <div id="preloader"></div>
 
-    <!-- Vendor JS Files -->
+    &lt;!&ndash; Vendor JS Files &ndash;&gt;
     <script src="../static/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../static/assets/vendor/purecounter/purecounter_vanilla.js"></script>
     <script src="../static/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="../static/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="../static/assets/vendor/aos/aos.js"></script>
     <script src="../static/assets/vendor/php-email-form/validate.js"></script>
-    <!-- Template Main JS File -->
-    <script src="../static/assets/js/main.js"></script>
+    &lt;!&ndash; Template Main JS File &ndash;&gt;
+    <script src="../static/assets/js/main.js"></script>-->
   </div>
   </body>
 </html>
