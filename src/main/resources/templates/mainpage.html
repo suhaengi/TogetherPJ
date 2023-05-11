@@ -163,11 +163,6 @@
         </div>
     </section><!-- End Features Section -->
 
-    <div id="chat-icon">
-        <a href="/chat/home.html"><img src="/assets/img/chat.png" alt="채팅 아이콘"></a>
-    </div>
-
-
 </main>
 <!-- ================== End main =================================== -->
 
@@ -176,13 +171,6 @@
 <div id="preloader"></div>
 
 <style>
-    #chat-icon {
-        position: fixed;
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-    }
     .d-flex.justify-content-center {
         display: flex;
         flex-wrap: wrap;
@@ -211,35 +199,7 @@
     }
 </style>
 
-<script>
-    const chatIcon = document.getElementById('chat-icon');
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        chatIcon.style.bottom = `${20 + scrollY}px`;
-    });
-</script>
-
 <th:block layout:fragment="script">
-<!--    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Fetch the posts data
-            fetch('https://example.com/api/posts')
-                .then(response => response.json())
-                .then(data => {
-                    // Populate the HTML with data
-                    const postElements = document.querySelectorAll('.post');
-                    postElements.forEach((element, index) => {
-                        const post = data[index];
-                        const titleElement = element.querySelector('.post-title');
-                        const contentElement = element.querySelector('.post-content');
-                        titleElement.innerText = post.title;
-                        contentElement.innerText = post.content;
-                    });
-                });
-        });
-    </script>
-
-    <script src="/assets/js/mainpage.js"></script>-->
 
     <!-- Vendor JS Files -->
     <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
