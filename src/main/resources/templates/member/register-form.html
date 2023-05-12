@@ -96,17 +96,18 @@
                     회원가입
                   </button>
                   <hr>
-                  <a href="index.html" class="btn btn-warning btn-user btn-block text-dark">
+                  <!--<a href="index.html" class="btn btn-warning btn-user btn-block text-dark">
                     Register with Kakao
-                  </a>
+                  </a>-->
                   <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
                 </form>
-                <hr>
+                <!--<hr>
                 <div class="text-center">
                   <a class="small" href="forgot-password.html">Forgot Password?</a>
-                </div>
+                </div>-->
                 <div class="text-center">
-                  <a class="small" href="login.html">Already have an account? Login!</a>
+                  <a th:href="@{/member/login}"
+                          class="small" href="login.html">Already have an account? Login!</a>
                 </div>
               </div>
             </div>
