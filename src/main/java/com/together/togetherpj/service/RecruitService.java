@@ -78,6 +78,9 @@ public class RecruitService {
   recruitRepository.save(recruit);
   }
 
+  public void delete(Long bno){
+    recruitRepository.deleteById(bno);
+  }
   public List<Recruit> findAll(){
     return recruitRepository.findAll();
   }
