@@ -24,7 +24,7 @@ public class RecruitBoardController {
     public String list(Model model){
         List<RecruitBoardDto> boardDtoList = recruitService.getBoardList();
         model.addAttribute("boardList", boardDtoList);
-        return "recruit_board.html";
+        return "recruit_board";
     }
 
     @GetMapping("/board/search")
@@ -32,6 +32,6 @@ public class RecruitBoardController {
         List<RecruitBoardDto> boardDtoList = recruitService.searchPosts(keyword);
         model.addAttribute("boardList", boardDtoList);
 
-        return "recruit_board.html";
+        return "recruit_board";
     }
 }
