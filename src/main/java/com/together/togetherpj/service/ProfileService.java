@@ -6,6 +6,7 @@ import com.together.togetherpj.dto.PwForm;
 import com.together.togetherpj.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -91,6 +92,20 @@ public class ProfileService {
         member.setProfileImgName(fileName);
         member.setProfileImgPath(uploadPath+"/"+fileName);
     }
+
+/*    @Autowired
+    private NStorageService nStorageService;
+
+    public void saveImg(Authentication authentication, MultipartFile imgFile) throws IOException {
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow();
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid + "_" + imgFile.getOriginalFilename();
+        nStorageService.uploadObject("togetherbucket", fileName, imgFile.getBytes());
+        member.setProfileImgName(fileName);
+        member.setProfileImgPath("https://togetherbucket.apigw.ntruss.com/" + fileName);
+    }*/
+
 
 
 }
