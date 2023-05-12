@@ -58,6 +58,29 @@ public class RecruitService {
     return viewForm;
   }
 
+  //게시글 편집
+  public void change(Long bno, RecruitWriteFormDto dto){
+    Recruit recruit = recruitRepository.findById(bno).orElseThrow();
+    recruit.setTitle(dto.getTitle());
+    recruit.setContent(dto.getContent());
+
+    MultipartFile imgFile = dto.getImgFile();
+    try{
+      if(imgFile != null){
+        UUID uuid = UUID.randomUUID();
+        String fileName = uuid + "_" + imgFile.getOriginalFilename();
+        File bgi=  new File(uploadPath,fileName);
+        imgFile.transferTo(bgi);
+        recruit.setImgName(fileName);
+        recruit.setImgPath(uploadPath+"/"+fileName);}
+    }catch(IOException e){
+    }
+  recruitRepository.save(recruit);
+  }
+
+  public void delete(Long bno){
+    recruitRepository.deleteById(bno);
+  }
   public List<Recruit> findAll(){
     return recruitRepository.findAll();
   }

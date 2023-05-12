@@ -3,6 +3,8 @@ package com.together.togetherpj.controller;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.dto.ProfileDto;
 import com.together.togetherpj.dto.PwForm;
+import com.together.togetherpj.dto.ReviewResponseDTO;
+import com.together.togetherpj.service.ManageRecruitService;
 import com.together.togetherpj.dto.ViewForm;
 import com.together.togetherpj.repository.MemberRepository;
 import com.together.togetherpj.service.ProfileService;
@@ -22,6 +24,7 @@ import javax.validation.Valid;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @Controller
 @RequestMapping("/member")
@@ -29,6 +32,7 @@ import java.io.InputStream;
 @RequiredArgsConstructor
 public class ProfileController {
     private final ProfileService profileService;
+    private final ManageRecruitService recruitService;
     private final MemberRepository memberRepository;
 
     @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
@@ -36,6 +40,9 @@ public class ProfileController {
     public String myPage(Model model, Authentication authentication) throws IOException{
         String email = authentication.getName();
         ProfileDto profileDto = profileService.readOne(email);
+
+        List<ReviewResponseDTO> list=recruitService.selectMyReview(authentication);
+        model.addAttribute("myReviewList", list);
 
         model.addAttribute("profileDTO",profileDto);
         log.info("PROFILE CONTROLLER - myPage()");
@@ -103,4 +110,12 @@ public class ProfileController {
         return "user/othersProfile";
     }
 
+
+   /* @GetMapping("/mypage")
+    public String getMyReview(Authentication authentication, Model model){
+        List<ReviewResponseDTO> list=recruitService.selectMyReview(authentication);
+        model.addAttribute("myReviewList", list);
+
+        return "member/mypage";
+    }*/
 }

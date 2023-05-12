@@ -26,20 +26,27 @@ public interface ApplyingRepository extends JpaRepository<Applying, ApplyingId> 
             "r.id=a.recruit.id and m.id=a.applier.id and r.state='RECRUITING' and not r.recruitWriter.id=:m_id")
     ArrayList<ApplyingResponseDTO> selectApplyingMember(@Param("m_id")Long id);
 
-    //내가 모집장인 현재 동행그룹 리스트
-    @Query("select a from Applying a, Recruit r, Member m" +
-            " where r.recruitWriter.id=:m_id and r.id=a.recruit.id and m.id=a.applier.id" +
+    //내가 모집장인 현재 게시글제목
+    @Query("select r.title as title, r.id as rid from  Recruit r" +
+            " where r.recruitWriter.id=:m_id " +
             " and r.state='RECRUITING'")
-    List<Applying> myApplyingMember(@Param("m_id")Long id);
+    List<ApplyingResponseDTO> myApplyingTitle(@Param("m_id")Long id);
+
+    //내가 모집장인 현재 동행그룹 참여자들 리스트
+    @Query("select a.applier.nickname as nickname, a.recruit.id as rid, a.applier.id as aid from  Recruit r, Applying a " +
+            "where a.recruit.id=r.id and r.recruitWriter.id=:m_id " +
+            " and r.state='RECRUITING' and not a.applier.id=:m_id and a.isOk=false")
+    List<ApplyingResponseDTO> myApplyingApplier(@Param("m_id")Long id);
+
+    //내가 모집장인 현재 동행그룹 동행인들 리스트
+    @Query("select a.applier.nickname as nickname, a.recruit.id as rid from  Recruit r, Applying a " +
+            "where a.recruit.id=r.id and r.recruitWriter.id=:m_id " +
+            " and r.state='RECRUITING' and not a.applier.id=:m_id and a.isOk=true")
+    List<ApplyingResponseDTO> myApplyingMember(@Param("m_id")Long id);
+
+
 
     //모집이 완료된 지난 동행참여 및 모집글
-   /* @Query(nativeQuery = true, value ="select * from (select  r.recruitWriter.nickname as nickname, r.city as city " +
-            ", r.enddate as enddate, r.id as id from Applying a, Recruit r, Member m" +
-            " where   " +
-            " m.id=a.applier.id and r.id=a.recruit.id and  a.applier.id=:m_id  and r.state='FINISHED'" +
-            "UNION select m.nickname as nickname, r.city as city, r.enddate as enddate" +
-            ", r.id as id from Applying a, Recruit r, Member m where m.id=a.applier.id and r.id=a.recruit.id and  " +
-            "r.recruitWriter.id=:m_id  and r.state='FINISHED')")*/
     @EntityGraph(attributePaths = {"recruit"})
     @Query(" select distinct r.recruitWriter.nickname as nickname, r.city as city " +
             ", r.enddate as enddate, r.id as id from  Recruit r left outer join Applying a " +
