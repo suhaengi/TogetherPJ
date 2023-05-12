@@ -1,6 +1,9 @@
 package com.together.togetherpj.controller;
 
+import com.together.togetherpj.domain.Applying;
+import com.together.togetherpj.domain.id.ApplyingId;
 import com.together.togetherpj.dto.*;
+import com.together.togetherpj.repository.ApplyingRepository;
 import com.together.togetherpj.service.ManageRecruitService;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -10,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -42,7 +46,6 @@ public class ManageRecruitController {
         //신청허락된 동행인들 ISOK=TRUE
         List<ApplyingResponseDTO> myApplyingMemberList=recruitService.selectMyApplyingMember(authentication);
         model.addAttribute("myMemberDTO", myApplyingMemberList);
-
         return "myRecruit_test";
     }
 
@@ -84,6 +87,12 @@ public class ManageRecruitController {
         return "redirect:/manage/myParticipate";
     }
 
+    @PostMapping("/applyIsNo")
+    public String applydel(Long rid,Long aid){
+        recruitService.applydel(aid,rid);
+        return "redirect:/manage/myParticipate";
+    }
+
     @GetMapping("/pastParticipate")
     public String pastList(Model model, Authentication authentication){
         List<PastAppliedDTO> pastApplyList=recruitService.selectPastApply(authentication);
@@ -97,7 +106,7 @@ public class ManageRecruitController {
         List<PastAppliedDTO> appliedReview=recruitService.selectAppliedReview(authentication, rid);
         model.addAttribute("appliedNickname", appliedReview);
 
-        return "user/createReview";
+        return "user/Review";
     }
 
     @PostMapping("/createReview")

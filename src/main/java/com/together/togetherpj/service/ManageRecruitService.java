@@ -169,5 +169,8 @@ public class ManageRecruitService {
         applying.setOk(true);
     }
 
+    public void applydel(Long applierId,Long recruitId){
+        repository.deleteById(new ApplyingId(applierId,recruitId));
+    };
 
 }

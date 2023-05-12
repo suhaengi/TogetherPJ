@@ -96,5 +96,10 @@ public class RecruitController {
     redirectAttributes.addAttribute("bno",bno);
       return "redirect:/recruit/view";
   }
+  @PostMapping("/delete")
+  public String delete(Long bno){
+    recruitService.delete(bno);
+      return "redirect:/";
+  }
 
 }

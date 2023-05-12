@@ -103,11 +103,19 @@ public class ProfileController {
     }
 
 
-    @GetMapping({"/othersProfile"})
+    @PostMapping({"/othersProfile"})
     public String read(String email, Model model) throws IOException {
         ProfileDto dto = profileService.readOne(email);
         model.addAttribute("dto", dto);
         return "user/othersProfile";
     }
 
+
+   /* @GetMapping("/mypage")
+    public String getMyReview(Authentication authentication, Model model){
+        List<ReviewResponseDTO> list=recruitService.selectMyReview(authentication);
+        model.addAttribute("myReviewList", list);
+
+        return "member/mypage";
+    }*/
 }
