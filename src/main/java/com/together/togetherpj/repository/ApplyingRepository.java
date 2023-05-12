@@ -39,7 +39,7 @@ public interface ApplyingRepository extends JpaRepository<Applying, ApplyingId> 
     List<ApplyingResponseDTO> myApplyingApplier(@Param("m_id")Long id);
 
     //내가 모집장인 현재 동행그룹 동행인들 리스트
-    @Query("select a.applier.nickname as nickname, a.recruit.id as rid from  Recruit r, Applying a " +
+    @Query("select a.applier.nickname as nickname, a.recruit.id as rid, a.applier.id as aid from  Recruit r, Applying a " +
             "where a.recruit.id=r.id and r.recruitWriter.id=:m_id " +
             " and r.state='RECRUITING' and not a.applier.id=:m_id and a.isOk=true")
     List<ApplyingResponseDTO> myApplyingMember(@Param("m_id")Long id);
