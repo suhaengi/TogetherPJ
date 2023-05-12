@@ -325,3 +325,55 @@
 
 </body>
 </html>
+
+<table style="width: 100%; border-collapse: separate; border-spacing: 0 30px">
+
+    <tr th:each="titleDto:${myApplyTitleDTO}">
+
+        <td>
+            <div style= "height: 100%; width: 100%; border:6px solid gold;">
+                <div>
+                    [[${titleDto.getTitle()}]]
+                    <form th:action="@{/manage/changeState}" method="post">
+                        <input type="hidden"   th:name="rid" th:value="${titleDto.getRid()}">
+                        <input type="submit" value="동행모집완료">
+                    </form>
+                </div>
+                <div style="border: 1px solid red; float: left; width: 50%;">
+                    신청인 리스트<br>
+                    <table>
+                        <tr th:each="applierDto:${myApplierDTO}">
+                            <div th:if="${applierDto.getRid()==titleDto.getRid()}" >
+                                <td>
+                                    [[${applierDto.getNickname()}]]
+                                    <form th:action="@{/manage/applyIsOk}" method="post">
+                                        <input type="hidden"   th:name="rid" th:value="${titleDto.getRid()}">
+                                        <input type="hidden"   th:name="aid" th:value="${applierDto.getAid()}">
+                                        <input type="submit" value="수락">
+                                    </form>
+                                </td>
+                            </div>
+                        </tr>
+                    </table>
+                </div>
+                <div style="border: 1px solid blue; float: left; width: 50%;">
+                    동행인 리스트<br>
+                    <table>
+                        <tr th:each="memberDto:${myMemberDTO}">
+                            <div th:if="${memberDto.getRid()==titleDto.getRid()}" >
+                                <td>
+                                    [[${memberDto.getNickname()}]]
+                                </td>
+                            </div>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+        </td>
+
+    </tr>
+
+</table>
+
+
