@@ -44,8 +44,10 @@ public class RecruitService {
   private final ImgService imgService;
   private final AmazonS3Client amazonS3Client;
 
+  @Transactional
   public ViewForm readOne(Long bno) throws IOException {
     Recruit recruit = recruitRepository.findById(bno).orElseThrow();
+    recruit.setViewcount(recruit.getViewcount() + 1L);
     Member member = recruit.getRecruitWriter();
     ViewForm viewForm = ViewForm.builder()
             .bno(bno)
