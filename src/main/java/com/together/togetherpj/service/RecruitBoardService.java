@@ -35,19 +35,22 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
                 .startdate(board.getStartdate())
                 .enddate(board.getEnddate())
                 .viewcount(board.getViewcount())
+                .curNum(board.getCurNum())
+                .perNum(board.getPerNum())
                 .build();
         boardDtoList.add(boardDto);
     }
     return boardDtoList;
   }
 
+  @Transactional
   public List<RecruitBoardDto> searchPosts(String keyword){
     List<Recruit> boards = recruitRepository.findByTitleContaining(keyword);
     List<RecruitBoardDto> boardDtoList = new ArrayList<>();
 
     if(boards.isEmpty()) return boardDtoList;
 
-    for(Recruit board: boards){
+    for(Recruit board : boards){
         boardDtoList.add(this.convertEntityToDto(board));
     }
 
@@ -61,6 +64,8 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
             .startdate(board.getStartdate())
             .enddate(board.getEnddate())
             .viewcount(board.getViewcount())
+            .curNum(board.getCurNum())
+            .perNum(board.getPerNum())
             .build();
   }
 }

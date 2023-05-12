@@ -32,6 +32,7 @@ public class ProfileService {
         Member member = memberRepository.findByEmail(email).orElseThrow();
 
         ProfileDto profileDto= ProfileDto.builder()
+                .email(email)
                 .nickname(member.getNickname())
                 .intro(member.getIntro())
                 .gender(member.getGender())

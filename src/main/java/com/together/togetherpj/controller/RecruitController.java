@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.io.FileInputStream;
@@ -89,5 +90,11 @@ public class RecruitController {
     return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
   }
 
+  @PostMapping("/modify")
+  public String modify(Long bno,RecruitWriteFormDto view,RedirectAttributes redirectAttributes){
+      recruitService.change(bno,view);
+    redirectAttributes.addAttribute("bno",bno);
+      return "redirect:/recruit/view";
+  }
 
 }

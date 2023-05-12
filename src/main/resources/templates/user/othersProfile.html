@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/sb-and-logis-layout}"
+      lang="en">
+<meta charset="UTF-8">
+<div layout:fragment="content">
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
@@ -58,62 +63,56 @@
                         </div>
                         <div class="d-md-flex align-items-center">
                             <div class="d-sm-flex align-items-center">
-                                <div
-                                        class="rounded-circle bg-size-cover bg-position-center flex-shrink-0"
-                                        style="
-                        width: 80px;
-                        height: 80px;
-                        background-image: url(../../static/images/profile.PNG);
-                      "
-                                ></div>
-                                <div class="pt-3 pt-sm-0 ps-sm-3">
-                                    <h3 class="h5 mb-lg-0">
-                                        닉네임
-                                    </h3>
+                                <!--보여지는 프로필 이미지-->
+                                <div class="d-md-flex align-items-center">
+                                    <img id="imgId" th:src="@{/member/image?email={param1} (param1=${dto.email})}"
+                                         width="300" height="300" style="border-radius: 50%"
+                                         th:onerror="this.src='/assets/img/profilenone.png'"
+                                    />
                                 </div>
-
                             </div>
-
                         </div>
 
                         <div class="row py-4 mb-2 mb-sm-3">
                             <div class="col-md-6 mb-4 mb-md-0">
                                 <table class="table mb-0">
                                     <tr>
+                                        <td class="border-0 text-muted py-1 px-0">닉네임</td>
+                                        <td class="border-0 text-dark fw-medium py-1 ps-3">
+                                            [[ ${dto.nickname} ]]
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="border-0 text-muted py-1 px-0">성별</td>
+                                        <td class="border-0 text-dark fw-medium py-1 ps-3">
+                                            [[ ${dto.gender} ]]
+                                        </td>
+                                    </tr>
+
+                                    <tr>
                                         <td class="border-0 text-muted py-1 px-0">소개글</td>
                                         <td class="border-0 text-dark fw-medium py-1 ps-3">
-                                            안녕하세요:)
+                                            [[ ${dto.intro} ]]
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="border-0 text-muted py-1 px-0">SNS계정</td>
-                                        <td class="border-0 text-dark fw-medium py-1 ps-3">
-                                            asdf@asdf
-                                        </td>
-                                    </tr>
+
                                     <tr>
                                         <td class="border-0 text-muted py-1 px-0">가입일</td>
                                         <td class="border-0 text-dark fw-medium py-1 ps-3">
-                                            2022.03.02
+                                            [[ ${dto.regDate} ]]
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="border-0 text-muted py-1 px-0">좋아요 수</td>
+                                        <td class="border-0 text-dark fw-medium py-1 ps-3">
+                                            [[ ${dto.like} ]]
                                         </td>
                                     </tr>
                                 </table>
                             </div>
-                            <div class="col-md-6 d-md-flex justify-content-end">
-                                <div
-                                        class="w-100 border rounded-3 p-4"
-                                        style="max-width: 140px"
-                                >
-                                    <h4 class="h5 lh-base mb-0">좋아요</h4>
-                                    <h6 class="fs-sm text-muted mb-0">50</h6>
-                                </div>
-                            </div>
                         </div>
-                        <form action="chat.html">
-                            <div class="button">
-                                <button>대화 신청</button><br>
-                            </div>
-                        </form>
                     </div>
                 </section>
 

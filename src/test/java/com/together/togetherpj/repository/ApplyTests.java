@@ -173,9 +173,6 @@ public class ApplyTests {
        log.info(recruit.getCity());
     }
 
-
-
-
     @Test
     @Transactional
     public void save(){
@@ -205,7 +202,6 @@ public class ApplyTests {
 
         return applying;
     }
-
 
     private Recruit createRecruit(RecruitWriteFormDto writeFormDto, Member writer){
         return Recruit.builder()
