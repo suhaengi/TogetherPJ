@@ -34,8 +34,10 @@ public class RecruitService {
   private final MemberRepository memberRepository;
   private final ApplyingRepository applyingRepository;
 
+  @Transactional
   public ViewForm readOne(Long bno) throws IOException {
     Recruit recruit = recruitRepository.findById(bno).orElseThrow();
+    recruit.setViewcount(recruit.getViewcount() + 1L);
     Member member = recruit.getRecruitWriter();
     ViewForm viewForm = ViewForm.builder()
             .bno(bno)
