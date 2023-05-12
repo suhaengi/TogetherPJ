@@ -42,7 +42,6 @@ public class ManageRecruitController {
         //신청허락된 동행인들 ISOK=TRUE
         List<ApplyingResponseDTO> myApplyingMemberList=recruitService.selectMyApplyingMember(authentication);
         model.addAttribute("myMemberDTO", myApplyingMemberList);
-
         return "myRecruit_test";
     }
 
@@ -87,7 +86,7 @@ public class ManageRecruitController {
     @PostMapping("/applyIsNo")
     public String applydel(Long rid,Long aid){
         recruitService.applydel(aid,rid);
-        return "user/pastParticipate";
+        return "redirect:/manage/myParticipate";
     }
 
     @GetMapping("/pastParticipate")

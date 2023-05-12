@@ -103,7 +103,7 @@ public class ProfileController {
     }
 
 
-    @GetMapping({"/othersProfile"})
+    @PostMapping({"/othersProfile"})
     public String read(String email, Model model) throws IOException {
         ProfileDto dto = profileService.readOne(email);
         model.addAttribute("dto", dto);
