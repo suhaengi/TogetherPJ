@@ -30,6 +30,7 @@ import java.util.List;
 @RequestMapping("/member")
 @Slf4j
 @RequiredArgsConstructor
+
 public class ProfileController {
     private final ProfileService profileService;
     private final ManageRecruitService recruitService;
@@ -59,6 +60,8 @@ public class ProfileController {
         return "member/editProfile";
     }
 
+
+    @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
     @PostMapping("/editProfile")
     public String modify(Authentication authentication, ProfileDto profileDto){
         log.info("PROFILE CONTROLLER - POST EDITPROFILE");
@@ -67,6 +70,7 @@ public class ProfileController {
         return "redirect:/member/mypage";
     }
 
+    @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
     @PostMapping("/changePw")
     public String changePw(Authentication authentication, @Valid PwForm pwForm){
         log.info("PROFILE CONTROLLER - POST changePw");
@@ -74,13 +78,22 @@ public class ProfileController {
         return "redirect:/member/mypage";
     }
 
-    @PostMapping("/image")
-    public String imageUpload(@RequestPart(value = "imgFile") MultipartFile imgFile, Authentication authentication)
-            throws IOException {
-        profileService.saveImg(authentication,imgFile);
-
-        return "redirect:/member/mypage";
+    @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
+    @PostMapping({"/othersProfile"})
+    public String read(String email, Model model) throws IOException {
+        ProfileDto dto = profileService.readOne(email);
+        model.addAttribute("dto", dto);
+        return "user/othersProfile";
     }
+
+
+//    @PostMapping("/image")
+//    public String imageUpload(@RequestPart(value = "imgFile",required = false) MultipartFile imgFile, Authentication authentication)
+//            throws IOException {
+//        profileService.saveImg(authentication,imgFile,"profile");
+//
+//        return "redirect:/member/mypage";
+//    }
 
 //    @GetMapping("/image")
 //    public ResponseEntity<?> getProfileImg (Authentication authentication) throws IOException {
@@ -92,6 +105,9 @@ public class ProfileController {
 //        inputStream.close();
 //        return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
 //    }
+
+
+/*
     @GetMapping("/image")
     public ResponseEntity<?> getProfileImg (String email) throws IOException {
         ProfileDto profileDto = profileService.readOne(email);
@@ -102,13 +118,18 @@ public class ProfileController {
         return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
     }
 
+        @GetMapping("/image")
+    public ResponseEntity<?> getProfileImg (String email) throws IOException {
 
-    @PostMapping({"/othersProfile"})
-    public String read(String email, Model model) throws IOException {
-        ProfileDto dto = profileService.readOne(email);
-        model.addAttribute("dto", dto);
-        return "user/othersProfile";
+        ProfileDto profileDto = profileService.readOne(email);
+        InputStream inputStream = new FileInputStream(profileDto.getProfileImgPath());
+
+        byte[] imageByteArray = IOUtils.toByteArray(inputStream);
+        inputStream.close();
+        return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
     }
+*/
+
 
 
    /* @GetMapping("/mypage")

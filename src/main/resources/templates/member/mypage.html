@@ -41,7 +41,7 @@
               <!--보여지는 프로필 이미지-->
                 <div class="d-md-flex align-items-center">
 
-                  <img id="imgId" th:src="@{/member/image?email={param1} (param1=${profileDTO.email})}"
+                  <img id="imgId" th:src=${profileDTO.profileImgPath}
                      width="300" height="300" style="border-radius: 50%"
                        th:onerror="this.src='/assets/img/profilenone.png'"
                   />
