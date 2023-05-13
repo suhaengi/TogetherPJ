@@ -145,8 +145,7 @@ public class ManageRecruitService {
     }
 
     //리뷰보여주기
-    public List<ReviewResponseDTO> selectMyReview(Authentication authentication){
-        String email=authentication.getName();
+    public List<ReviewResponseDTO> selectMyReview(String email){
         Member member=memberRepository.findByEmail(email).orElseThrow(()->{
             throw new UsernameNotFoundException("아이디 비번 잘못됐습니다");
         });
