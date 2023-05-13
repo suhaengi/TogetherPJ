@@ -20,10 +20,10 @@
                     지금 바로 동행을 찾아보세요!
                 </p>
 
-                <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
-                      data-aos-delay="200">
-                    <input type="text" class="form-control" placeholder="Keyword or City">
-                    <button type="submit" class="btn btn-primary">Search</button>
+                <form action="/board/search" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
+                      data-aos-delay="200" method="GET">
+                    <input name="keyword" type="text" class="form-control" placeholder="keyword">
+                    <button class="btn btn-primary">Search</button>
                 </form>
 
                 <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
