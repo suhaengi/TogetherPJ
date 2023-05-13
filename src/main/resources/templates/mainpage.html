@@ -70,10 +70,11 @@
         <div class="card m-2" style="width: 15rem">
             <!--보여지는 이미지-->
             <div class="d-md-flex align-items-center">
-                <img id="imgId" th:src="@{/recruit/image?bno={param1} (param1=${item.id})}" class="card-img-top"
+                <img id="imgId" th:src=${item.imgPath}
                      width="200" height="200"
                      th:onerror="this.src='/assets/img/noimage.png'"
                 />
+
             </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -231,6 +232,7 @@
     <script src="/assets/js/vendors/increment-value.js"></script>
 
 </th:block>
+</main>
 </body>
 
 </html>

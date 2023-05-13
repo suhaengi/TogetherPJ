@@ -83,4 +83,10 @@ public class MainController {
 
     return "recruit";
   }
+
+  @GetMapping("/development")
+  public String develPage(Model model) {
+
+    return "development/development";
+  }
 }
