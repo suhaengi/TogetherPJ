@@ -3,10 +3,11 @@ package com.together.togetherpj.dto;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.lang.Nullable;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
+import java.time.LocalDate;
 
 @Getter @Setter @ToString
 public class RecruitWriteFormDto {
