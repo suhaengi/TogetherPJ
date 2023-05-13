@@ -85,7 +85,7 @@
                         <form role="form" method="post" th:action="@{/recruit/apply}">
                             <input type="hidden" name=bno th:value="${dto.bno}">
                             <div class="row pt-sm-2 pt-lg-0">
-                                <div th:if="${user != dto.writerId}">
+                                <div th:if="${user != dto.writerId} and ${#strings.equals(dto.state,'RECRUITING')}">
                                     <button class="btn-primary" type="submit">동행 신청하기</button>
                                 </div>
                             </div>
