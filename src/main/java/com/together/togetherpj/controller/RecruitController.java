@@ -6,6 +6,7 @@ import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.dto.ProfileDto;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
 import com.together.togetherpj.dto.ViewForm;
+import com.together.togetherpj.img.ImgService;
 import com.together.togetherpj.repository.RecruitRepository;
 import com.together.togetherpj.service.MemberService;
 import com.together.togetherpj.service.RecruitService;
@@ -40,15 +41,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RecruitController {
   private final RecruitService recruitService;
-  private final MemberService memberService;
-  private final PasswordEncoder passwordEncoder;
+  private final ImgService imgService;
 
+  //게시글 작성페이지
   @GetMapping("/write-form")
   public String register(Model model) {
     model.addAttribute("writeFormDto", new RecruitWriteFormDto());
     return "recruit/write-form";
   }
 
+  //게시글 저장
   @PostMapping("/save")
   public String recruitSave(@Valid RecruitWriteFormDto writeFormDto,
       BindingResult bindingResult, Authentication authentication, Model model) {
@@ -67,12 +69,15 @@ public class RecruitController {
     return "redirect:/";
   }
 
+
+  //게시글 보기, 수정 페이지
   @GetMapping({"/view", "/modify"})
   public void read(Long bno, Model model) throws IOException {
     ViewForm dto = recruitService.readOne(bno);
     model.addAttribute("dto", dto);
   }
 
+  //동행 신청하기 버튼
   @PostMapping("/apply")
   public String applying(Authentication authentication,Long bno){
     String email = authentication.getName();
@@ -80,7 +85,8 @@ public class RecruitController {
     return "redirect:/";
   }
 
- @GetMapping("/image")
+  //이미지 불러오기
+/* @GetMapping("/image")
   public ResponseEntity<?> getProfileImg (Long bno) throws IOException {
     ViewForm dto = recruitService.readOne(bno);
 
@@ -88,13 +94,21 @@ public class RecruitController {
     byte[] imageByteArray = IOUtils.toByteArray(inputStream);
     inputStream.close();
     return new ResponseEntity<>(imageByteArray, HttpStatus.OK);
-  }
+  }*/
 
+  //게시글 수정
   @PostMapping("/modify")
   public String modify(Long bno,RecruitWriteFormDto view,RedirectAttributes redirectAttributes){
       recruitService.change(bno,view);
     redirectAttributes.addAttribute("bno",bno);
       return "redirect:/recruit/view";
+  }
+  
+  //게시글 삭제
+  @PostMapping("/delete")
+  public String delete(Long bno){
+    recruitService.delete(bno);
+      return "redirect:/";
   }
 
 }

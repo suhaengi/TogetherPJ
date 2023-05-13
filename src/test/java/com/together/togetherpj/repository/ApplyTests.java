@@ -6,10 +6,7 @@ import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.domain.Review;
 import com.together.togetherpj.domain.id.ApplyingId;
-import com.together.togetherpj.dto.MyApplyResponseDTO;
-import com.together.togetherpj.dto.PastAppliedDTO;
-import com.together.togetherpj.dto.RecruitWriteFormDto;
-import com.together.togetherpj.dto.ReviewFormDTO;
+import com.together.togetherpj.dto.*;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -47,6 +44,8 @@ public class ApplyTests {
     @Autowired
     private ModelMapper modelMapper;
 
+
+
     @Test
     public void testApplyRecruit(){
         //ArrayList<ExDTO> list=applyingRepository.selectApplyingMember(1L);
@@ -66,7 +65,7 @@ public class ApplyTests {
 
     @Test
     public void testMyApply(){
-        List<Applying> list=applyingRepository.myApplyingMember(4L);
+        List<ApplyingResponseDTO> list=applyingRepository.myApplyingTitle(1L);
 
        /* List<MyApplyResponseDTO> dtoList=list.stream().map(applying-> modelMapper
                 .map(applying, MyApplyResponseDTO.class)).collect(Collectors.toList());*/
@@ -75,6 +74,7 @@ public class ApplyTests {
         //System.out.println("++++++++++++++++++++++"+list.get(0).getApplier());
     }
 
+
     @Test
     public void testPastApply(){
         applyingRepository.pastApply(4L).forEach(c -> {
@@ -82,6 +82,25 @@ public class ApplyTests {
             log.info(c.getNickname());
             log.info(c.getEnddate());
             log.info(c.getId());
+        });
+    }
+
+    @Test
+    public void testMyApplyingTitle(){
+        applyingRepository.myApplyingTitle(1L).forEach(c -> {
+
+            log.info(c.getTitle());
+
+        });
+    }
+
+    @Test
+    public void testMyApplyingMemberOrApplier(){
+        applyingRepository.myApplyingMember(1L).forEach(c -> {
+
+            log.info(c.getNickname());
+            log.info(c.getRid());
+
         });
     }
 
@@ -99,6 +118,8 @@ public class ApplyTests {
        /* Review review=createReview()
         reviewRepository.save()*/
     }
+
+
 
     @Test
     void createReview(){

@@ -20,35 +20,27 @@
                     지금 바로 동행을 찾아보세요!
                 </p>
 
-                <form action="#" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
-                      data-aos-delay="200">
-                    <input type="text" class="form-control" placeholder="Keyword or City">
-                    <button type="submit" class="btn btn-primary">Search</button>
+
+                <form action="/board/search" class="form-search d-flex align-items-stretch mb-3" data-aos="fade-up"
+                          data-aos-delay="200" method="GET">
+                    <input name="keyword" type="text" class="form-control" placeholder="keyword">
+                    <button class="btn btn-primary">Search</button>
                 </form>
 
                 <div class="row gy-4" data-aos="fade-up" data-aos-delay="400">
 
                     <div class="col-lg-3 col-6">
                         <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
-                    class="purecounter"></span>
-                            <p>여행자</p>
                         </div>
                     </div><!-- End Stats Item -->
 
                     <div class="col-lg-3 col-6">
                         <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
-                    class="purecounter"></span>
-                            <p>동행 구인글</p>
                         </div>
                     </div><!-- End Stats Item -->
 
                     <div class="col-lg-3 col-6">
                         <div class="stats-item text-center w-100 h-100">
-              <span data-purecounter-start="0" data-purecounter-end="1453" data-purecounter-duration="1"
-                    class="purecounter"></span>
-                            <p>커뮤니티 글</p>
                         </div>
                     </div><!-- End Stats Item -->
 
@@ -70,10 +62,11 @@
         <div class="card m-2" style="width: 15rem">
             <!--보여지는 이미지-->
             <div class="d-md-flex align-items-center">
-                <img id="imgId" th:src="@{/recruit/image?bno={param1} (param1=${item.id})}" class="card-img-top"
+                <img id="imgId" th:src=${item.imgPath}
                      width="200" height="200"
                      th:onerror="this.src='/assets/img/noimage.png'"
                 />
+
             </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between">
@@ -165,9 +158,10 @@
     </section>&lt;!&ndash; End Features Section &ndash;&gt;
 
 </main>
-<!-- ================== End main =================================== -->
+-->
 
-<a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i></a>
 
 <div id="preloader"></div>
 
@@ -231,6 +225,7 @@
     <script src="/assets/js/vendors/increment-value.js"></script>
 
 </th:block>
+</main>
 </body>
 
 </html>

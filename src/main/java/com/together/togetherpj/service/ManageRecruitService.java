@@ -1,15 +1,13 @@
 package com.together.togetherpj.service;
 
+import com.together.togetherpj.constant.State;
 import com.together.togetherpj.domain.Applying;
 import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.domain.Review;
 import com.together.togetherpj.domain.id.ApplyingId;
 import com.together.togetherpj.domain.id.ReviewId;
-import com.together.togetherpj.dto.ApplyingResponseDTO;
-import com.together.togetherpj.dto.MyApplyResponseDTO;
-import com.together.togetherpj.dto.PastAppliedDTO;
-import com.together.togetherpj.dto.ReviewFormDTO;
+import com.together.togetherpj.dto.*;
 import com.together.togetherpj.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -33,6 +30,7 @@ public class ManageRecruitService {
     private final MemberRepository memberRepository;
     private final RecruitRepository recruitRepository;
     private final ReviewRepository reviewRepository;
+
 
     //내가 참여하는 동행게시글 내역
     public List<ApplyingResponseDTO> selectApplying(Authentication authentication){
@@ -53,19 +51,45 @@ public class ManageRecruitService {
         return list;
     }
     //내가 모집장인 현재 동행게시글 내역
-    public List<MyApplyResponseDTO> selectMyApply(Authentication authentication){
+    public List<ApplyingResponseDTO> selectMyApplyingTitle(Authentication authentication){
         String email = authentication.getName();
         Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
             throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
         });
 
-        List<Applying> list=repository.myApplyingMember(member.getId());
-        List<MyApplyResponseDTO> dtoList=list.stream().map(applying-> modelMapper
-                .map(applying, MyApplyResponseDTO.class)).collect(Collectors.toList());
+        List<ApplyingResponseDTO> list=repository.myApplyingTitle(member.getId());
+       /* List<MyApplyResponseDTO> dtoList=list.stream().map(applying-> modelMapper
+                .map(applying, MyApplyResponseDTO.class)).collect(Collectors.toList());*/
 
-        return dtoList;
+        return list;
+    }
+    //내가 모집장인 현재 동행게시글 참여자들
+    public List<ApplyingResponseDTO> selectMyApplyingApplier(Authentication authentication){
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });
+
+        List<ApplyingResponseDTO> list=repository.myApplyingApplier(member.getId());
+       /* List<MyApplyResponseDTO> dtoList=list.stream().map(applying-> modelMapper
+                .map(applying, MyApplyResponseDTO.class)).collect(Collectors.toList());*/
+
+        return list;
     }
 
+    //내가 모집장인 현재 동행게시글 멤버들
+    public List<ApplyingResponseDTO> selectMyApplyingMember(Authentication authentication){
+        String email = authentication.getName();
+        Member member = memberRepository.findByEmail(email).orElseThrow(() ->{
+            throw new UsernameNotFoundException("아이디 혹은 비밀번호가 잘못됐습니다.");
+        });
+
+        List<ApplyingResponseDTO> list=repository.myApplyingMember(member.getId());
+       /* List<MyApplyResponseDTO> dtoList=list.stream().map(applying-> modelMapper
+                .map(applying, MyApplyResponseDTO.class)).collect(Collectors.toList());*/
+
+        return list;
+    }
     //모집 완료된 동행게시글 내역
     public List<PastAppliedDTO> selectPastApply(Authentication authentication){
         String email = authentication.getName();
@@ -88,6 +112,7 @@ public class ManageRecruitService {
         return list;
     }
 
+    //리뷰쓰기
     public void postReview(Authentication authentication, ReviewFormDTO reviewFormDTO) {
         String email=authentication.getName();
 
@@ -100,10 +125,13 @@ public class ManageRecruitService {
 
         //작성당하는사람
         Member reviewed=memberRepository.findById(reviewFormDTO.getReviewedId()).orElseThrow(IllegalStateException::new);
-
+        if(reviewFormDTO.isLike()){
+            reviewed.setLike(reviewed.getLike()+1);
+        }
 
         Applying applying1=repository.findById(new ApplyingId(reviewFormDTO.getReviewedId(),reviewFormDTO.getRid()))
                 .orElseThrow(IllegalStateException::new);
+
 
 
         Review review= Review.builder()
@@ -116,5 +144,35 @@ public class ManageRecruitService {
         reviewRepository.save(review);
     }
 
+    //리뷰보여주기
+    public List<ReviewResponseDTO> selectMyReview(Authentication authentication){
+        String email=authentication.getName();
+        Member member=memberRepository.findByEmail(email).orElseThrow(()->{
+            throw new UsernameNotFoundException("아이디 비번 잘못됐습니다");
+        });
+        List<ReviewResponseDTO> list=reviewRepository.getMyReview(member.getId());
+
+        return list;
+    }
+
+    public void changeState(Authentication authentication, ApplyingRequestDTO applyingRequestDTO ){
+        Recruit recruit=recruitRepository.findById(applyingRequestDTO.getRid()).orElseThrow(()->{
+            throw new UsernameNotFoundException("게시글 아님");
+        });
+        recruit.setState(State.FINISHED);
+    }
+
+    public void changeApplyIsOk(Authentication authentication, ApplyingRequestDTO applyingRequestDTO){
+        Applying applying=repository.findById(new ApplyingId(applyingRequestDTO.getAid(),
+                applyingRequestDTO.getRid())).orElseThrow(()->{
+            throw new UsernameNotFoundException("게시글 아님");
+        });
+
+        applying.setOk(true);
+    }
+
+    public void applydel(Long applierId,Long recruitId){
+        repository.deleteById(new ApplyingId(applierId,recruitId));
+    };
 
 }

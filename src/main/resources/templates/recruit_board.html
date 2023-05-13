@@ -82,6 +82,11 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
               </tr>
             </tbody>
           </table>
+          <div>
+            <span th:each="pageNum : ${pageList}" th:inline="text">
+              <a th:href="@{'/board/recruitBoard?page=' + ${pageNum}}">[[${pageNum}]]</a>
+            </span>
+          </div>
           <div class="buttonC">
             <button class="w-btn" type="button"
                     onclick="location.href='../recruit/write-form' "
