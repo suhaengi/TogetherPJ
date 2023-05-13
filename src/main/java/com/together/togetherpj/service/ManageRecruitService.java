@@ -125,7 +125,9 @@ public class ManageRecruitService {
 
         //작성당하는사람
         Member reviewed=memberRepository.findById(reviewFormDTO.getReviewedId()).orElseThrow(IllegalStateException::new);
-
+        if(reviewFormDTO.isLike()){
+            reviewed.setLike(reviewed.getLike()+1);
+        }
 
         Applying applying1=repository.findById(new ApplyingId(reviewFormDTO.getReviewedId(),reviewFormDTO.getRid()))
                 .orElseThrow(IllegalStateException::new);

@@ -33,13 +33,15 @@ public interface ApplyingRepository extends JpaRepository<Applying, ApplyingId> 
     List<ApplyingResponseDTO> myApplyingTitle(@Param("m_id")Long id);
 
     //내가 모집장인 현재 동행그룹 참여자들 리스트
-    @Query("select a.applier.nickname as nickname, a.recruit.id as rid, a.applier.id as aid from  Recruit r, Applying a " +
+    @Query("select a.applier.nickname as nickname, a.recruit.id as rid, a.applier.id as aid" +
+            " ,a.applier.email as email from  Recruit r, Applying a " +
             "where a.recruit.id=r.id and r.recruitWriter.id=:m_id " +
             " and r.state='RECRUITING' and not a.applier.id=:m_id and a.isOk=false")
     List<ApplyingResponseDTO> myApplyingApplier(@Param("m_id")Long id);
 
     //내가 모집장인 현재 동행그룹 동행인들 리스트
-    @Query("select a.applier.nickname as nickname, a.recruit.id as rid, a.applier.id as aid from  Recruit r, Applying a " +
+    @Query("select a.applier.nickname as nickname, a.recruit.id as rid, a.applier.id as aid," +
+            "a.applier.email as email from  Recruit r, Applying a " +
             "where a.recruit.id=r.id and r.recruitWriter.id=:m_id " +
             " and r.state='RECRUITING' and not a.applier.id=:m_id and a.isOk=true")
     List<ApplyingResponseDTO> myApplyingMember(@Param("m_id")Long id);
@@ -70,7 +72,8 @@ public interface ApplyingRepository extends JpaRepository<Applying, ApplyingId> 
     @Query(nativeQuery = true, value =
             "select m.m_nick as nickname, m.m_id as reviewedId, r.c_id as id from recruit r, member m, applying a where " +
             " a.c_id=r.c_id  and a.c_applier_id=m.m_id and r.c_state='FINISHED' and" +
-            "                    r.c_id=:r_id and not m.m_id=:m_id ")
+            "                    r.c_id=:r_id and not m.m_id=:m_id and a.c_applier_id not in" +
+                    "(select re.reviewed_memberid from review re where re.c_id=:r_id and re.reviewer_id=:m_id)")
     List<PastAppliedDTO> pastAppliedReview(@Param("r_id")Long rid, @Param("m_id")Long mid);
 
 

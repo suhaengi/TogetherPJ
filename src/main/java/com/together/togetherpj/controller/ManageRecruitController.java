@@ -5,6 +5,7 @@ import com.together.togetherpj.domain.id.ApplyingId;
 import com.together.togetherpj.dto.*;
 import com.together.togetherpj.repository.ApplyingRepository;
 import com.together.togetherpj.service.ManageRecruitService;
+import com.together.togetherpj.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,6 +32,7 @@ public class ManageRecruitController {
 
     private final PasswordEncoder passwordEncoder;
     private final ManageRecruitService recruitService;
+
 
 
     //내가 참여하는 현재진행중인 동행목록
@@ -112,7 +115,7 @@ public class ManageRecruitController {
     @PostMapping("/createReview")
     public String  createPostReview(@Valid ReviewFormDTO reviewFormDto,
                                   BindingResult bindingResult,
-                                  Authentication authentication,
+                                  Authentication authentication,@RequestParam(value = "like",required = false)boolean like,
                                   Model model){
 
         if (bindingResult.hasErrors()) {
@@ -121,8 +124,10 @@ public class ManageRecruitController {
         }
 
         try {
-            reviewFormDto.setRid(reviewFormDto.getRid());
+
+            reviewFormDto.setLike(like);
             recruitService.postReview(authentication, reviewFormDto);
+            log.info("+++++++++++++++++++++++++++");
         } catch (IllegalStateException e) {
             model.addAttribute("errorMessage", e.getMessage());
             return "user/createReview";
