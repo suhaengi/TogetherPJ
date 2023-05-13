@@ -2,6 +2,7 @@ package com.together.togetherpj.service;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.together.togetherpj.constant.State;
@@ -78,13 +79,7 @@ public class RecruitService {
 
     MultipartFile imgFile = dto.getImgFile();
     try{
-      if(imgFile != null){
-        UUID uuid = UUID.randomUUID();
-        String fileName = uuid + "_" + imgFile.getOriginalFilename();
-        File bgi=  new File(uploadPath,fileName);
-        imgFile.transferTo(bgi);
-        recruit.setImgName(fileName);
-        recruit.setImgPath(uploadPath+"/"+fileName);}
+      upload(imgFile, "/recruit",recruit);
     }catch(IOException e){
     }
   recruitRepository.save(recruit);
@@ -128,6 +123,12 @@ public class RecruitService {
   public void upload(MultipartFile imgFile, String dirName,Recruit recruit) throws IOException {
     String uploadImageUrl;
 
+    if(recruit.getImgName() !=null ){
+      String originalname = recruit.getImgName();
+      amazonS3Client.deleteObject(new DeleteObjectRequest(bucket+dirName,originalname));
+    }
+
+
     String fileName = createFileName(imgFile.getOriginalFilename());
     ObjectMetadata objectMetadata = new ObjectMetadata();
     objectMetadata.setContentLength(imgFile.getSize());
@@ -148,11 +149,6 @@ public class RecruitService {
   private String createFileName(String fileName) {
     return UUID.randomUUID().toString().concat(fileName);
   }
-
-
-
-
-
 
 
 
@@ -197,7 +193,7 @@ public class RecruitService {
   }*/
 
   public List<Recruit> getLatestRecruits() {
-    return recruitRepository.findTop16ByOrderByModDateDesc();
+    return recruitRepository.findTop10ByOrderByIdDesc();
   }
 
 }

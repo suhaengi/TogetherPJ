@@ -145,8 +145,7 @@ public class ManageRecruitService {
     }
 
     //리뷰보여주기
-    public List<ReviewResponseDTO> selectMyReview(Authentication authentication){
-        String email=authentication.getName();
+    public List<ReviewResponseDTO> selectMyReview(String email){
         Member member=memberRepository.findByEmail(email).orElseThrow(()->{
             throw new UsernameNotFoundException("아이디 비번 잘못됐습니다");
         });
@@ -168,11 +167,22 @@ public class ManageRecruitService {
             throw new UsernameNotFoundException("게시글 아님");
         });
 
+
         applying.setOk(true);
+        Recruit recruit = recruitRepository.findById(applyingRequestDTO.getRid()).get();
+        recruit.setCurNum(recruit.getCurNum()+1L);
+
     }
 
-    public void applydel(Long applierId,Long recruitId){
+    public void applyNo(Long applierId, Long recruitId){
         repository.deleteById(new ApplyingId(applierId,recruitId));
+    };
+
+    public void applyDel(Long applierId, Long recruitId){
+        repository.deleteById(new ApplyingId(applierId,recruitId));
+
+        Recruit recruit = recruitRepository.findById(recruitId).get();
+        recruit.setCurNum(recruit.getCurNum()-1L);
     };
 
 }
