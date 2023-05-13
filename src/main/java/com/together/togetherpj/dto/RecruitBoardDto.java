@@ -16,6 +16,8 @@ public class RecruitBoardDto {
     private long viewcount;
     private long curNum;//현재인원
     private long perNum;//모집인원
+    //private String writerNick; //작성자 닉네임
+    private String writer;
 
     public Recruit toEntity(){
         Recruit build = Recruit.builder()
@@ -32,7 +34,7 @@ public class RecruitBoardDto {
     }
 
     @Builder
-    public RecruitBoardDto(Long id, String title, LocalDate startdate, LocalDate enddate, long viewcount, long curNum, long perNum){
+    public RecruitBoardDto(Long id, String title, LocalDate startdate, LocalDate enddate, long viewcount, long curNum, long perNum ){
         this.id = id;
         this.title = title;
         this.startdate = startdate;
@@ -40,5 +42,6 @@ public class RecruitBoardDto {
         this.viewcount = viewcount;
         this.curNum = curNum;
         this.perNum = perNum;
+
     }
 }

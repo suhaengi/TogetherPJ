@@ -43,6 +43,7 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
                 .viewcount(board.getViewcount())
                 .curNum(board.getCurNum())
                 .perNum(board.getPerNum())
+                //.writerNick(board.getWriterNick())
                 .build();
         boardDtoList.add(boardDto);
     }
@@ -72,6 +73,7 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
             .viewcount(board.getViewcount())
             .curNum(board.getCurNum())
             .perNum(board.getPerNum())
+            //.writerNick(board.getWriterNick())
             .build();
   }
 

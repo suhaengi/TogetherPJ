@@ -62,8 +62,8 @@ public class Recruit extends BaseEntity{
     @JoinColumn(name="C_WRITER_ID")
     private Member recruitWriter;
     
-   /* //작성자닉네임
-    @Column(name="C_NICK", nullable = false)
+    //작성자닉네임
+/*    @Column(name="C_NICK", nullable = false)
     private String writerNick;*/
 
     //동행그룹과의관계
@@ -93,5 +93,6 @@ public class Recruit extends BaseEntity{
         this.viewcount = viewcount;
         this.curNum = curNum;
         this.perNum = perNum;
+        //this.writerNick = writerNick;
     }
 }
