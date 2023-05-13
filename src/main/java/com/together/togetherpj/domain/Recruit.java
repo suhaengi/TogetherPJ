@@ -4,6 +4,8 @@ import com.together.togetherpj.constant.State;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.List;
@@ -44,9 +46,11 @@ public class Recruit extends BaseEntity{
     @ColumnDefault("1")
     private long curNum;
 
+    @FutureOrPresent
     @Column(name="C_TRAVEL_START", nullable = false)
     private LocalDate startdate;
 
+    @FutureOrPresent
     @Column(name="C_TRAVEL_END", nullable = false)
     private LocalDate enddate;
 

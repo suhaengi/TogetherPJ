@@ -35,7 +35,7 @@ public class Member extends BaseEntity {
   private String phone;
   @Column(name = "M_EMAIL", nullable = false, length = 30, unique = true)
   private String email;
-
+  @Past
   @Column(name = "M_BIRTH", nullable = false)
   private LocalDate birth;
   @Column(name = "M_NICK", nullable = false, length = 20, unique = true)

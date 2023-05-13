@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,7 +16,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-@RestController
+@Controller
 @Slf4j
 @RequiredArgsConstructor
 public class ImgController {
@@ -23,8 +24,9 @@ public class ImgController {
 
     //프로필 이미지 등록..
     @PostMapping("/member/image")
-    public void uploadImg(@RequestPart(value = "imgFile",required = false) MultipartFile img, Authentication authentication) throws IOException {
+    public String uploadImg(@RequestPart(value = "imgFile",required = false) MultipartFile img, Authentication authentication) throws IOException {
         imgService.upload(img, "/profile",authentication);
+        return "redirect:/member/mypage";
     }
 
     //게시글 이미지 등록..
