@@ -8,6 +8,9 @@ public interface ApplyingResponseDTO {
     String getTitle();
     //@Value("#{target.nickname}")
     String getNickname();
+    String getEmail();
+    String getRid();
+    Long getAid();
 
 
 

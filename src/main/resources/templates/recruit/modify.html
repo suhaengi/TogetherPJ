@@ -96,9 +96,10 @@
                     <div class="d-md-flex align-items-center">
                         <div>
                             <label>현재 배경사진</label>
-                            <img id="imgId" th:src="@{/recruit/image?bno={param1} (param1=${dto.bno})}"
-                             width="200" height="200"
-                             th:onerror="this.src='/assets/img/noimage.png'"/>
+                            <img id="imgId" th:src=${dto.imgPath}
+                                 width="200" height="200"
+                                 th:onerror="this.src='/assets/img/noimage.png'"
+                            />
                         </div>
                         <div>
                             <label th for="imgFile">배경사진 변경</label>
