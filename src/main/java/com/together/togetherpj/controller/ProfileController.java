@@ -42,7 +42,7 @@ public class ProfileController {
         String email = authentication.getName();
         ProfileDto profileDto = profileService.readOne(email);
 
-        List<ReviewResponseDTO> list=recruitService.selectMyReview(authentication);
+        List<ReviewResponseDTO> list=recruitService.selectMyReview(email);
         model.addAttribute("myReviewList", list);
 
         model.addAttribute("profileDTO",profileDto);
@@ -82,6 +82,8 @@ public class ProfileController {
     @PostMapping({"/othersProfile"})
     public String read(String email, Model model) throws IOException {
         ProfileDto dto = profileService.readOne(email);
+        List<ReviewResponseDTO> list=recruitService.selectMyReview(email);
+        model.addAttribute("myReviewList", list);
         model.addAttribute("dto", dto);
         return "user/othersProfile";
     }
