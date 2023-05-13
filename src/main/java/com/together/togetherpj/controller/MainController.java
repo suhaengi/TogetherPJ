@@ -83,4 +83,9 @@ public class MainController {
 
     return "recruit";
   }
+
+  @GetMapping("/developer")
+  public String developer(){
+    return "development/development";
+  }
 }
