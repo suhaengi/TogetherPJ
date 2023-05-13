@@ -2,6 +2,7 @@ package com.together.togetherpj.img;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.together.togetherpj.domain.Member;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URLDecoder;
 import java.util.UUID;
 
 @Transactional
@@ -37,6 +39,10 @@ public class ImgService {
         Member member = memberRepository.findByEmail(email).orElseThrow();
 
         String uploadImageUrl;
+        if(member.getProfileImgPath() !=null ){
+            String originalname = member.getProfileImgName();
+            amazonS3Client.deleteObject(new DeleteObjectRequest(bucket+dirName,originalname));
+        }
 
         String fileName = createFileName(imgFile.getOriginalFilename());
         ObjectMetadata objectMetadata = new ObjectMetadata();
