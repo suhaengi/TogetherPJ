@@ -65,6 +65,7 @@
                 <img id="imgId" th:src=${item.imgPath}
                      width="200" height="200"
                      th:onerror="this.src='/assets/img/noimage.png'"
+                     style="margin: 0 auto;"
                 />
 
             </div>
@@ -170,14 +171,15 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1rem;
-        max-width: 2200px;
+        gap: 3rem;
+        max-width: 1500px;
+/*        max-width: 2400px;*/
         margin-left: auto;
         margin-right: auto;
     }
 
     .card {
-        width: calc((100% - 9rem) / 8);
+        width: calc((100% - 4rem) / 5);
         /* your other card styles */
     }
 
