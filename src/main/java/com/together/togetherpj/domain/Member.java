@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +35,7 @@ public class Member extends BaseEntity {
   private String phone;
   @Column(name = "M_EMAIL", nullable = false, length = 30, unique = true)
   private String email;
+
   @Column(name = "M_BIRTH", nullable = false)
   private LocalDate birth;
   @Column(name = "M_NICK", nullable = false, length = 20, unique = true)
