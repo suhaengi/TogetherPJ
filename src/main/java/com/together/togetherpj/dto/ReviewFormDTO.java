@@ -13,9 +13,13 @@ public class ReviewFormDTO {
     @NotEmpty
     private String comment;
 
-    Long rid;
+    private Long rid;
 
-    Long reviewedId;
+    private Long reviewedId;
+
+    private boolean like;
+
+
 
 
 

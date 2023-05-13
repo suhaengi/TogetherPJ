@@ -1,5 +1,9 @@
 package com.together.togetherpj.service;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.together.togetherpj.constant.State;
 import com.together.togetherpj.domain.Applying;
 import com.together.togetherpj.domain.Member;
@@ -7,6 +11,7 @@ import com.together.togetherpj.domain.Recruit;
 import com.together.togetherpj.domain.id.ApplyingId;
 import com.together.togetherpj.dto.RecruitWriteFormDto;
 import com.together.togetherpj.dto.ViewForm;
+import com.together.togetherpj.img.ImgService;
 import com.together.togetherpj.repository.ApplyingRepository;
 import com.together.togetherpj.repository.MemberRepository;
 import com.together.togetherpj.repository.RecruitRepository;
@@ -16,10 +21,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +41,8 @@ public class RecruitService {
   private final RecruitRepository recruitRepository;
   private final MemberRepository memberRepository;
   private final ApplyingRepository applyingRepository;
+  private final ImgService imgService;
+  private final AmazonS3Client amazonS3Client;
 
   @Transactional
   public ViewForm readOne(Long bno) throws IOException {
@@ -105,16 +115,46 @@ public class RecruitService {
 
     try{
         if(imgFile != null){
-          UUID uuid = UUID.randomUUID();
-          String fileName = uuid + "_" + imgFile.getOriginalFilename();
-          File bgi=  new File(uploadPath,fileName);
-          imgFile.transferTo(bgi);
-          recruit.setImgName(fileName);
-          recruit.setImgPath(uploadPath+"/"+fileName);}
+          upload(imgFile, "/recruit",recruit);
+         }
     }catch(IOException e){
     }
 
   }
+
+  @Value("${cloud.aws.s3.bucket}")
+  private String bucket;
+  // MultipartFile을 전달받아 File로 전환한 후 upload로 전달
+  public void upload(MultipartFile imgFile, String dirName,Recruit recruit) throws IOException {
+    String uploadImageUrl;
+
+    String fileName = createFileName(imgFile.getOriginalFilename());
+    ObjectMetadata objectMetadata = new ObjectMetadata();
+    objectMetadata.setContentLength(imgFile.getSize());
+    objectMetadata.setContentType(imgFile.getContentType());
+
+    try (InputStream inputStream = imgFile.getInputStream()) {
+      amazonS3Client.putObject(new PutObjectRequest(bucket + dirName, fileName, inputStream, objectMetadata)
+              .withCannedAcl(CannedAccessControlList.PublicRead));
+      uploadImageUrl = amazonS3Client.getUrl(bucket + dirName, fileName).toString(); //업로드 후 url 반환
+    } catch (IOException e) {
+      throw new IllegalArgumentException("이미지 업로드 에러");
+    }
+    recruit.setImgName(fileName);
+    recruit.setImgPath(uploadImageUrl);
+  }
+
+  // 이미지파일명 중복 방지
+  private String createFileName(String fileName) {
+    return UUID.randomUUID().toString().concat(fileName);
+  }
+
+
+
+
+
+
+
 
   private Applying createWriterApplying(Member writer, Recruit recruit) {
     return Applying.builder()
