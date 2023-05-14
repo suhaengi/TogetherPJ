@@ -7,11 +7,12 @@
 <div layout:fragment="content">
 
     <div class="breadcrumbs">
-        <div class="page-header d-flex align-items-center">
+        <div class="page-header d-flex align-items-center"
+             th:style="'background-image:url('+ @{/assets/img/together.jpg} +');'">
             <div class="container position-relative">
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-6 text-center">
-                        <h2>내 동행 관리</h2>
+                        <h2>동행 관리</h2>
                     </div>
                 </div>
             </div>
@@ -20,16 +21,14 @@
             <div class="container">
                 <ol>
                     <li><a href="/">Home</a></li>
-                    <li>동행게시판</li>
+                    <li>동행 관리</li>
                 </ol>
             </div>
         </nav>
     </div>
 
     <div class="container">
-        <div class="intro">
-            <h2>내 동행 관리</h2>
-        </div>
+
     </div>
 
     <main id="main">
