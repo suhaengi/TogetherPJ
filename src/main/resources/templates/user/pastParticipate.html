@@ -8,11 +8,12 @@
 <div layout:fragment="content">
 
   <div class="breadcrumbs">
-    <div class="page-header d-flex align-items-center">
+    <div class="page-header d-flex align-items-center"
+         th:style="'background-image:url('+ @{/assets/img/together.jpg} +');'">
       <div class="container position-relative">
         <div class="row d-flex justify-content-center">
           <div class="col-lg-6 text-center">
-            <h2>내 동행 관리</h2>
+            <h2>동행 관리</h2>
           </div>
         </div>
       </div>
@@ -21,7 +22,7 @@
       <div class="container">
         <ol>
           <li><a href="/">Home</a></li>
-          <li>동행게시판</li>
+          <li>지난 동행 관리</li>
         </ol>
       </div>
     </nav>
@@ -33,7 +34,7 @@
           <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
             <div class="card-body">
               <div class="container" data-aos="fade-up">
-                <p><b>내 동행 완료한 내역</b></p>
+                <p><b>동행 완료한 내역</b></p>
               </div>
             <table class="table" height="200">
               <thead>
