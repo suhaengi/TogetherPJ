@@ -89,8 +89,8 @@ public class MainController {
     return "development/development";
   }
 
-  @GetMapping("/map")
+  @GetMapping("/map/kakaomap")
   public String showMap() {
-    return "map/testmap";
+    return "map/kakaomap";
   }
 }
