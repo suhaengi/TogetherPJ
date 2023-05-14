@@ -88,4 +88,9 @@ public class MainController {
   public String developer(){
     return "development/development";
   }
+
+  @GetMapping("/map")
+  public String showMap() {
+    return "map/testmap";
+  }
 }
