@@ -108,7 +108,49 @@
                             <button type="submit" class="btn btn-primary" style="">삭제하기</button>
                         </form>
                     </div>
+
+                    <div>
+                        <table class="table" style="width: 100%; ">
+                            <thead style="font-size: large">
+                            <th WIDTH="25%">댓글 작성자</th>
+                            <th WIDTH="50%">내용</th>
+                            <th width="25%">작성일 </th>
+                            </thead>
+                            <tbody>
+                            <tr th:each="commentDto:${commentDto}">
+                                <td>
+                                    [[${commentDto.getNickname()}]]
+                                </td>
+                                <td>
+                                    [[${commentDto.getContent()}]]
+                                </td>
+                                <td>
+                                    [[${commentDto.getModdate()}]]
+                                </td>
+                                <!--<td th:text="${#temporals.format(commentDto.getModdate(),'yyyy-MM-dd HH:mm:ss')}">
+                                </td>-->
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+                    <div>
+                        <form role="form" method="post" th:action="@{/recruit/createComment}">
+                            <input type="hidden"   th:name="bno" th:value="${dto.bno}">
+                            <p><textarea cols="100" rows="5" name="reply"></textarea></p>
+                            <input id="sub" type="submit" value="작성완료">
+                            <!--<input type="button" id="cancel"  value="취소" onclick="location.href='/manage/pastParticipate'";>-->
+                        </form>
+                    </div>
+
                 </div>
+
+
+
+
             </section>
         </div>
     </div>
