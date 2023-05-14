@@ -1,13 +1,8 @@
 package com.together.togetherpj.controller;
 
-import com.together.togetherpj.domain.Applying;
-import com.together.togetherpj.domain.id.ApplyingId;
 import com.together.togetherpj.dto.*;
-import com.together.togetherpj.repository.ApplyingRepository;
 import com.together.togetherpj.service.ManageRecruitService;
-import com.together.togetherpj.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,11 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -75,10 +68,7 @@ public class ManageRecruitController {
             , @Valid ApplyingRequestDTO applyingRequestDTO){
 
         try {
-            log.info("---------------------------");
-            log.info(applyingRequestDTO.getRid().toString());
-            log.info(applyingRequestDTO.getAid().toString());
-            log.info("++++++++++++++");
+
             applyingRequestDTO.setRid(applyingRequestDTO.getRid());
             applyingRequestDTO.setAid(applyingRequestDTO.getAid());
             recruitService.changeApplyIsOk(authentication, applyingRequestDTO);
@@ -90,9 +80,17 @@ public class ManageRecruitController {
         return "redirect:/manage/myParticipate";
     }
 
+    //동행거절
     @PostMapping("/applyIsNo")
     public String applydel(Long rid,Long aid){
-        recruitService.applydel(aid,rid);
+        recruitService.applyNo(aid,rid);
+        return "redirect:/manage/myParticipate";
+    }
+
+    //동행 받았는데 다시 취소시키기
+    @PostMapping("/applyDel")
+    public String apply(Long rid,Long aid){
+        recruitService.applyDel(aid,rid);
         return "redirect:/manage/myParticipate";
     }
 
