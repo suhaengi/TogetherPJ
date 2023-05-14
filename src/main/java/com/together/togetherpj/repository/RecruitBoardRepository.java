@@ -12,7 +12,7 @@ import java.util.List;
 @Repository
 public interface RecruitBoardRepository extends JpaRepository<Recruit, Long> {
     //리스트페이지 검색기능
-    List<Recruit> findByTitleContaining(String keyword);
+    List<Recruit> findByTitleContainingOrCityContaining(String keyword1, String keyword2);
 
     //viewcount 기능
     @Modifying

@@ -86,7 +86,12 @@ public class RecruitController {
   //동행 신청하기 버튼
   @PostMapping("/apply")
   public String applying(Authentication authentication,Long bno){
+    if(authentication == null){
+      return "redirect:/member/login";
+    }
+
     String email = authentication.getName();
+
     recruitService.Applying(email,bno);
     return "redirect:/";
   }

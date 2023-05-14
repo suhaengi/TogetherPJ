@@ -51,7 +51,7 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
 
   @Transactional
   public List<RecruitBoardDto> searchPosts(String keyword){
-    List<Recruit> boards = recruitRepository.findByTitleContaining(keyword);
+    List<Recruit> boards = recruitRepository.findByTitleContainingOrCityContaining(keyword, keyword);
     List<RecruitBoardDto> boardDtoList = new ArrayList<>();
 
     if(boards.isEmpty()) return boardDtoList;
@@ -79,7 +79,7 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
     @Transactional
     public List<RecruitBoardDto> getBoardList(Integer pageNum){
     Page<Recruit> page = recruitRepository
-            .findAll(PageRequest.of(pageNum-1,PAGE_POST_COUNT, Sort.by(Sort.Direction.ASC, "id")));
+            .findAll(PageRequest.of(pageNum-1,PAGE_POST_COUNT, Sort.by(Sort.Direction.DESC, "id")));
 
     List<Recruit> boards = page.getContent();
     List<RecruitBoardDto> boardDtoList = new ArrayList<>();

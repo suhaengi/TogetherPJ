@@ -63,7 +63,7 @@ public class ProfileController {
 
     @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
     @PostMapping("/editProfile")
-    public String modify(Authentication authentication, ProfileDto profileDto){
+    public String modify(Authentication authentication, @Valid ProfileDto profileDto){
         log.info("PROFILE CONTROLLER - POST EDITPROFILE");
         profileService.change(authentication,profileDto);
 
@@ -78,9 +78,13 @@ public class ProfileController {
         return "redirect:/member/mypage";
     }
 
-    @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
+//    @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
     @PostMapping({"/othersProfile"})
-    public String read(String email, Model model) throws IOException {
+    public String read(String email, Authentication authentication, Model model) throws IOException {
+        if(authentication == null){
+            return "redirect:/member/login";
+        }
+
         ProfileDto dto = profileService.readOne(email);
         List<ReviewResponseDTO> list=recruitService.selectMyReview(email);
         model.addAttribute("myReviewList", list);
