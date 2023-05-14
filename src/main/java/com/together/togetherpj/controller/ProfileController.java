@@ -63,7 +63,7 @@ public class ProfileController {
 
     @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
     @PostMapping("/editProfile")
-    public String modify(Authentication authentication, ProfileDto profileDto){
+    public String modify(Authentication authentication, @Valid ProfileDto profileDto){
         log.info("PROFILE CONTROLLER - POST EDITPROFILE");
         profileService.change(authentication,profileDto);
 
