@@ -193,7 +193,7 @@ public class RecruitService {
   }*/
 
   public List<Recruit> getLatestRecruits() {
-    return recruitRepository.findTop16ByOrderByModDateDesc();
+    return recruitRepository.findTop10ByOrderByIdDesc();
   }
 
 }

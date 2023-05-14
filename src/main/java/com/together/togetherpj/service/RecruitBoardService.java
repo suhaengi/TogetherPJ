@@ -52,7 +52,7 @@ public RecruitBoardService(RecruitBoardRepository recruitBoardRepository){
 
   @Transactional
   public List<RecruitBoardDto> searchPosts(String keyword){
-    List<Recruit> boards = recruitRepository.findByTitleContaining(keyword);
+    List<Recruit> boards = recruitRepository.findByTitleContainingOrCityContaining(keyword, keyword);
     List<RecruitBoardDto> boardDtoList = new ArrayList<>();
 
     if(boards.isEmpty()) return boardDtoList;
