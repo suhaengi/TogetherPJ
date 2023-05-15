@@ -75,6 +75,14 @@ public class ProfileService {
         member.setPassword(passwordEncoder.encode(pwForm.getPassword()));
     }
 
+    //회원 탈퇴
+    public void deletemember(String email){
+        Member member = memberRepository.findByEmail(email).orElseThrow();
+        Long id = member.getId();
+        memberRepository.deleteById(id);
+
+    }
+
 /*    //이미지 업로드할 때
     @Value("c://upload")
     private String uploadPath;

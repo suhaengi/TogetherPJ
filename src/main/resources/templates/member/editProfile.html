@@ -101,10 +101,13 @@
                             </div>
                         </form>
                     </div>
-               </section>
 
-               <!-- <button class="btn-delete" style="inline-size: auto" id="btn-delete">회원 탈퇴</button>-->
-
+                </section>
+                <section class="card border-1 py-1 p-md-2 p-xl-3 p-xxl-4 mb-4">
+                <form role="form" method="post" th:action="@{/member/delete}">
+                    <button class="btn-delete" style="inline-size: auto" id="btn-delete">회원 탈퇴</button>
+                </form>
+                </section>
             </div>
         </div>
     </main>

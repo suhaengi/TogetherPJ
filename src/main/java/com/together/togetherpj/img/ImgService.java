@@ -33,29 +33,37 @@ public class ImgService {
 
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-    // MultipartFile을 전달받아 File로 전환한 후 upload로 전달
     public void upload(MultipartFile imgFile, String dirName, Authentication authentication) throws IOException {
         String email = authentication.getName();
         Member member = memberRepository.findByEmail(email).orElseThrow();
-
         String uploadImageUrl;
+
+        //만약 프로필이미지가 이미 존재한다면 존재하는 것을 삭제하고 등록
+        // (서버 저장소에 불필요한 용량차지 방지)
         if(member.getProfileImgPath() !=null ){
             String originalname = member.getProfileImgName();
             amazonS3Client.deleteObject(new DeleteObjectRequest(bucket+dirName,originalname));
         }
 
-        String fileName = createFileName(imgFile.getOriginalFilename());
+        //파일 이름이 중복되지 않도록 UUID이용
+        String fileName = UUID.randomUUID().toString().concat(imgFile.getOriginalFilename());
+
+        //InputStream을 통해 Byte만이 전달 되기 때문에,해당 파일에 대한 정보가 없음.
+        //따라서 ObjectMetadata에 파일에 대한 정보를 추가하여 매개변수로 같이 전달
         ObjectMetadata objectMetadata = new ObjectMetadata();
         objectMetadata.setContentLength(imgFile.getSize());
         objectMetadata.setContentType(imgFile.getContentType());
 
+        //버킷이름, 폴더명, 파일명, InputStream, objectMetadata 정보를 이용하여 서버저장소에 파일 저장
         try (InputStream inputStream = imgFile.getInputStream()) {
             amazonS3Client.putObject(new PutObjectRequest(bucket + dirName, fileName, inputStream, objectMetadata)
                     .withCannedAcl(CannedAccessControlList.PublicRead));
             uploadImageUrl = amazonS3Client.getUrl(bucket + dirName, fileName).toString(); //업로드 후 url 반환
         } catch (IOException e) {
-            throw new IllegalArgumentException("이미지 업로드 에러");
+            throw new IllegalArgumentException("업로드 에러");
         }
+        
+        //저장 후 member에 파일명과 경로 저장
         member.setProfileImgName(fileName);
         member.setProfileImgPath(uploadImageUrl);
     }
