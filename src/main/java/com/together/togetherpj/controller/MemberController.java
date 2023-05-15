@@ -35,19 +35,13 @@ public class MemberController {
       @Valid MemberRegisterFormDto registerFormDto,
       BindingResult bindingResult,
       Model model) {
-    log.info("member controller register");
     if (bindingResult.hasErrors()) {
-      log.info("there are something errors");
-      log.info("bindingResult error:{}", bindingResult);
       return "member/register-form";
     }
 
-    log.info("member controller binding check");
     try {
       memberService.saveMember(registerFormDto);
-      log.info("member controller member saved");
     } catch (IllegalStateException e) {
-      log.info("member controller catch error");
       model.addAttribute("errorMessage", e.getMessage());
       return "member/register-form";
     }
