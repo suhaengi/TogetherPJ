@@ -1,5 +1,6 @@
 package com.together.togetherpj.dto;
 
+import com.together.togetherpj.domain.Member;
 import com.together.togetherpj.domain.Recruit;
 import lombok.Builder;
 import lombok.Data;

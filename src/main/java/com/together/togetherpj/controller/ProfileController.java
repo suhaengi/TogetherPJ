@@ -78,8 +78,7 @@ public class ProfileController {
         return "redirect:/member/mypage";
     }
 
-//    @PreAuthorize("isAuthenticated()")  //로그인한 사용자만 조회할 수 있도록
-    @PostMapping({"/othersProfile"})
+    @PostMapping("/othersProfile")
     public String read(String email, Authentication authentication, Model model) throws IOException {
         if(authentication == null){
             return "redirect:/member/login";
@@ -92,6 +91,12 @@ public class ProfileController {
         return "user/othersProfile";
     }
 
+    @PostMapping("/delete")
+    public String deletemember(Authentication authentication) {
+        String email = authentication.getName();
+        profileService.deletemember(email);
+        return "/";
+    }
 
 //    @PostMapping("/image")
 //    public String imageUpload(@RequestPart(value = "imgFile",required = false) MultipartFile imgFile, Authentication authentication)

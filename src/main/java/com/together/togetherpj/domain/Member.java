@@ -89,5 +89,7 @@ public class Member extends BaseEntity {
     return member;
 
   }
+
+
 }
 

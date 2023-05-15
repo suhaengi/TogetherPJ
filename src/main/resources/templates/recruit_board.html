@@ -25,8 +25,8 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
         <nav>
           <div class="container">
             <ol>
-              <li><a href="mainpage.html">Home</a></li>
-              <li><a href="recruit_board.html"></a>동행 게시판</li>
+              <li><a href="/">Home</a></li>
+              <li>동행게시판</li>
             </ol>
           </div>
         </nav>
@@ -36,7 +36,7 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
       <section class="sample-page">
         <div class="container" data-aos="fade-up">
           <p><b>동행자를 찾아보세요!</b></p>
-          <br />
+          <br/>
           <div id="wrap">
             <form action="/board/search" method="GET">
               <div class="search">
@@ -45,10 +45,11 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
               </div>
             </form>
           </div>
+          <br/>
+
           <table class="table">
             <thead>
               <tr>
-                <th>번호</th>
                 <th>제목</th>
                 <th>출발날짜</th>
                 <th>도착날짜</th>
@@ -58,9 +59,6 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
             </thead>
             <tbody>
               <tr th:each="board: ${boardList}">
-                <td>
-                  <span th:text="${board.id}"></span>
-                </td>
                 <td>
                   <a th:href="@{'/recruit/view?bno=' + ${board.id}}">
                     <span th:text="${board.title}"></span>
@@ -81,11 +79,13 @@ layout:decorate="~{layouts/sb-and-logis-layout}"
               </tr>
             </tbody>
           </table>
-          <div>
+
+          <div style="text-align: center">
             <span th:each="pageNum : ${pageList}" th:inline="text">
               <a th:href="@{'/board/recruitBoard?page=' + ${pageNum}}">[[${pageNum}]]</a>
             </span>
           </div>
+
           <div class="buttonC">
             <button class="w-btn" type="button"
                     onclick="location.href='../recruit/write-form' "

@@ -167,7 +167,6 @@ public class ManageRecruitService {
             throw new UsernameNotFoundException("게시글 아님");
         });
 
-
         applying.setOk(true);
         Recruit recruit = recruitRepository.findById(applyingRequestDTO.getRid()).get();
         recruit.setCurNum(recruit.getCurNum()+1L);
