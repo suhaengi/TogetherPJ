@@ -8,47 +8,54 @@ DROP TABLE `member` CASCADE;
 -- CREATE
 
 create table member (
-                        m_id bigint not null auto_increment,
-                        m_name varchar(10) not null,
-                        m_email varchar(30) not null,
-                        m_gender varchar(10) not null,
-                        m_img longblob,
-                        m_joindate date,
-                        m_like bigint default 0,
-                        m_nick varchar(20) not null,
-                        m_pw varchar(100) not null,
-                        m_phone varchar(11) not null,
-                        m_role varchar(255),
-                        m_social bit default 0,
-                        m_birth date,
-                        primary key (m_id)
+                        m_id             bigint auto_increment
+                            primary key,
+                        moddate          datetime(6)         not null,
+                        regdate          datetime(6)         not null,
+                        m_name           varchar(10)         not null,
+                        m_birth          date                not null,
+                        m_email          varchar(30)         not null,
+                        m_gender         varchar(10)         not null,
+                        intro            varchar(255)        null,
+                        m_like           bigint default 0    not null,
+                        m_nick           varchar(20)         not null,
+                        m_pw             varchar(100)        not null,
+                        m_phone          varchar(11)         not null,
+                        profile_img_name varchar(255)        null,
+                        profile_img_path varchar(255)        null,
+                        m_role           varchar(255)        not null,
+                        m_social         bit    default b'0' not null,
 ) engine=InnoDB;
 
 create table recruit (
-                         c_id bigint not null auto_increment,
-                         moddate datetime(6),
-                         regdate datetime(6),
-                         c_city varchar(30) not null,
-                         c_content varchar(1000) not null,
-                         c_cur_num bigint default 1 not null,
-                         c_travel_end datetime(6) not null,
-                         c_per_num bigint not null,
-                         c_travel_start datetime(6) not null,
-                         c_state varchar(20) not null,
-                         c_title varchar(30) not null,
-                         c_viewcount bigint default 0 not null,
-                         c_writer_id bigint,
-                         primary key (c_id)
+                         c_id           bigint auto_increment
+                             primary key,
+                         moddate        datetime(6)      not null,
+                         regdate        datetime(6)      not null,
+                         c_city         varchar(30)      not null,
+                         c_content      longtext         not null,
+                         c_cur_num      bigint default 1 not null,
+                         c_travel_end   date             not null,
+                         img_name       varchar(255)     null,
+                         img_path       varchar(255)     null,
+                         c_per_num      bigint           not null,
+                         tourspot       varchar(10)      null,
+                         c_travel_start date             not null,
+                         c_state        varchar(20)      not null,
+                         c_title        varchar(30)      not null,
+                         c_viewcount    bigint default 1 not null,
+                         c_writer_id    bigint           not null,
 ) engine=InnoDB;
 
-create table comment (
-                         cc_writer_id bigint not null,
-                         cc_id bigint not null,
-                         moddate datetime(6),
-                         regdate datetime(6),
-                         cc_content varchar(500) not null,
-                         c_id bigint,
-                         primary key (cc_writer_id, cc_id)
+create table comment
+(
+    cc_id        bigint auto_increment
+        primary key,
+    moddate      datetime     not null,
+    regdate      datetime     not null,
+    cc_content   varchar(500) not null,
+    cc_writer_id bigint       not null,
+    c_id         bigint       not null
 ) engine=InnoDB;
 
 create table applying (
@@ -59,15 +66,14 @@ create table applying (
 ) engine=InnoDB;
 
 create table review (
-                        reviewer_id bigint not null,
-                        review_comment varchar(100) not null,
-                        review_like bit default 0,
-                        reviewed_memberid bigint not null,
-                        c_id bigint not null,
+                        reviewer_id       bigint       not null,
+                        review_comment    varchar(100) not null,
+                        reviewed_memberid bigint       not null,
+                        c_id              bigint       not null,
                         primary key (reviewed_memberid, c_id, reviewer_id)
 ) engine=InnoDB;
 
--- ALTER
+-- UK, FK
 
 -- MEMBER
 alter table member
