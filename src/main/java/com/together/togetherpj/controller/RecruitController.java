@@ -46,7 +46,11 @@ public class RecruitController {
 
   //게시글 작성페이지
   @GetMapping("/write-form")
-  public String register(Model model) {
+  public String register(Authentication authentication, Model model) {
+    if(authentication == null){
+      return "redirect:/member/login";
+    }
+
     model.addAttribute("writeFormDto", new RecruitWriteFormDto());
     return "recruit/write-form";
   }
